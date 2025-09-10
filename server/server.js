@@ -8,11 +8,7 @@ const { sendContactNotification } = require('./utils/emailService');
 dotenv.config();
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/wexably', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
-
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/wexably');
 mongoose.connection.on('connected', () => {
   console.log('Connected to MongoDB');
 });
@@ -25,7 +21,19 @@ mongoose.connection.on('error', (error) => {
 const app = express();
 
 // Middleware
-app.use(cors());
+const allowedOrigins = [process.env.CLIENT_URL, 'http://localhost:3000']; // Add your Netlify URL and localhost
+app.use(cors({
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps, Postman)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) === -1) {
+      const msg = 'The CORS policy for this site does not allow access from the specified origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  }
+}));
+
 app.use(express.json());
 
 // Routes
