@@ -9,6 +9,8 @@
   backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   transition: all 0.3s ease;
+  height: auto;
+  min-height: auto;
 }
 
 .header.scrolled {
@@ -24,6 +26,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  height: 100%;
 }
 
 .logo a {
@@ -81,6 +84,7 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
+  font-size: 0.9rem;
 }
 
 .cta-button a {
@@ -169,5 +173,27 @@
 
   .header-container {
     padding: 0 1rem;
+  }
+  
+  .header {
+    padding: 0.5rem 0;
+  }
+  
+  .header.scrolled {
+    padding: 0.5rem 0;
+  }
+  
+  .logo a {
+    font-size: 1.5rem;
+  }
+  
+  .mobile-cta {
+    padding: 0.5rem 1rem !important;
+    font-size: 0.9rem;
+  }
+  
+  .cta-button {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
   }
 }

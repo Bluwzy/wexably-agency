@@ -8,16 +8,16 @@ const Testimonials = () => {
 
   const testimonials = [
     {
-      quote: "Wexably transformed our online presence. Our website is not only beautiful but finally generates real leads every week.",
-      author: "Sarah K.",
-      company: "Toronto Dental Clinic",
-      results: "+40% lead conversion rate"
+      quote: "Wexably didn't just build us a website; they built us a secure booking system that we don't have to worry about. Our leads from the site have increased by 40% and it's always up. For a limo company, that's everything.",
+      author: "Michael Chen",
+      company: "Owner, Airport Limo Toronto",
+      results: "+40% leads from website"
     },
     {
-      quote: "The security and speed improvements were noticeable immediately. Our customers feel safe shopping with us now.",
-      author: "Michael B.",
-      company: "Oakville Roofing Co.",
-      results: "2.5x faster load time"
+      quote: "I thought our old site was fine until Wexably showed us how vulnerable it was. Their team was professional and now I can honestly tell my customers their data is safe with us. The peace of mind is worth every penny.",
+      author: "Sarah Davis",
+      company: "Director, Lasani Enterprise",
+      results: "100% secure customer data"
     },
     {
       quote: "As a small business owner, I was overwhelmed by tech. Ali made it simple and delivered beyond our expectations.",

@@ -9,22 +9,22 @@ const Services = () => {
 
   const services = [
     {
-      icon: '⚡',
-      title: 'Lightning Fast Websites',
-      description: 'We build performant websites with blazing fast load times that reduce bounce rates and improve conversions.',
-      features: ['Next.js Optimization', 'CDN Integration', 'Image Optimization', 'Lazy Loading']
-    },
-    {
       icon: '🛡️',
-      title: 'Enterprise-Grade Security',
-      description: 'Protect your business and customer data with comprehensive security solutions and best practices.',
-      features: ['SSL Encryption', 'DDoS Protection', 'Regular Audits', 'Secure Authentication']
+      title: 'Hacker-Proof Websites',
+      description: 'Beyond just great design. We build on secure, modern code with SSL, firewalls, and proactive monitoring to protect your business and customer data from day one.',
+      features: ['SSL Encryption', 'Firewall Protection', 'Proactive Monitoring', 'Secure Hosting']
     },
     {
       icon: '📈',
-      title: 'Data-Driven Marketing',
-      description: 'Advanced analytics and SEO strategies to maximize your online visibility and conversion rates.',
-      features: ['SEO Optimization', 'Conversion Tracking', 'A/B Testing', 'Performance Analytics']
+      title: 'Lead-Generation Machines',
+      description: 'Websites that work 24/7. Optimized for local SEO and designed to convert visitors into calls, quotes, and bookings for your service business.',
+      features: ['Local SEO', 'Conversion Optimization', 'Contact Forms', 'Booking Systems']
+    },
+    {
+      icon: '🔧',
+      title: 'Stress-Free Maintenance',
+      description: 'Sleep easy knowing your website is always online, always fast, and always secure with our monthly care plans. We handle the tech, you run your business.',
+      features: ['24/7 Monitoring', 'Regular Updates', 'Performance Optimization', 'Backups']
     }
   ];
 

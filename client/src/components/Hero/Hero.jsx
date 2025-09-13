@@ -75,15 +75,14 @@ const Hero = () => {
           className="hero-title"
           variants={itemVariants}
         >
-          <span className="title-line">Stop Losing</span>
-          <span className="title-accent">Customers Online</span>
+          The Secure Growth Partner for <span className="gradient-text">GTA Businesses</span>
         </motion.h1>
         
         <motion.p 
           className="hero-subtitle"
           variants={itemVariants}
         >
-          We engineer <span className="highlight">secure, high-converting digital experiences</span> that transform visitors into loyal customers.
+          We build fast, secure websites and marketing engines for Toronto-area plumbers, roofers, and dentists—so you can generate leads confidently without worrying about hackers, downtime, or missed opportunities.
         </motion.p>
 
         <motion.div 
@@ -100,7 +99,7 @@ const Hero = () => {
             transition={{ type: "spring", stiffness: 400, damping: 17 }}
           >
             <Link to="/contact" className="cta-link">
-              <span>Get Your Free Audit</span>
+              <span>Get Your Free Security Audit</span>
               <div className="cta-icon">
                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -120,8 +119,8 @@ const Hero = () => {
             whileTap={{ scale: 0.98 }}
             transition={{ type: "spring", stiffness: 400, damping: 17 }}
           >
-            <Link to="/portfolio" className="cta-link">
-              <span>View Our Work</span>
+            <Link to="/services" className="cta-link">
+              <span>See Our Packages</span>
               <div className="arrow-icon">
                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -132,11 +131,13 @@ const Hero = () => {
         </motion.div>
       </motion.div>
 
+      {/* Scroll indicator positioned with adequate spacing */}
       <motion.div 
         className="scroll-indicator"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5, duration: 1 }}
+        style={{ marginTop: '2rem' }} // Added margin to separate from CTA buttons
       >
         <div className="scroll-text">Explore</div>
         <div className="scroll-line"></div>
