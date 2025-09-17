@@ -32,7 +32,6 @@ const CountUp = ({ end, duration = 2 }) => {
 
 const ServicesPage = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.3 });
 
   // State for scroll position (for parallax effects)
   const [scrollY, setScrollY] = useState(0);
@@ -143,7 +142,7 @@ const ServicesPage = () => {
       services: [
         { name: "Essential Maintenance", price: "$249/mo", desc: "Basic updates, backups, and monitoring" },
         { name: "Pro Security", price: "$399/mo", desc: "Advanced security with malware protection" },
-        { name: "Enterprise Protection", price: "$699/mo", desc: "Comprehensive security and performance optimization" },
+        { name: "Enterprise Protection", price: "$699/m极", desc: "Comprehensive security and performance optimization" },
         { name: "One-Time Security Audit", price: "$497", desc: "Comprehensive website security assessment" }
       ]
     }
@@ -155,8 +154,7 @@ const ServicesPage = () => {
     { value: 42, label: "Average Client Growth", suffix: "%" },
     { value: 24, label: "Hour Support Response", suffix: "h" },
     { value: 100, label: "Security Compliance", suffix: "%" },
-    { value: 30, label: "Average Project Timeline", suffix: "days" },
-    { value: 128, label: "5-Star Reviews", suffix: "+" }
+    { value: 30, label: "Average Project Timeline", suffix: "days" }
   ];
 
   const containerVariants = {
@@ -271,16 +269,18 @@ const ServicesPage = () => {
         <div className={styles.sectionContainer}>
           <motion.h2 
             initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
+            viewport={{ once: true, amount: 0.3 }}
           >
             Our <span className={styles.gradientText}>Featured Solutions</span>
           </motion.h2>
           <motion.p 
             className={styles.sectionIntro}
             initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
+            viewport={{ once: true, amount: 0.3 }}
           >
             Designed specifically for GTA businesses who value security and results
           </motion.p>
@@ -289,8 +289,9 @@ const ServicesPage = () => {
           <motion.div 
             className={styles.billingToggle}
             initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : {}}
+            whileInView={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.4 }}
+            viewport={{ once: true, amount: 0.3 }}
           >
             <span className={billingCycle === 'monthly' ? styles.active : ''} 
                   onClick={() => setBillingCycle('monthly')}>Monthly</span>
@@ -305,7 +306,8 @@ const ServicesPage = () => {
             className={styles.servicesGrid}
             variants={containerVariants}
             initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
           >
             {services.map((service, index) => (
               <motion.div 
@@ -322,8 +324,9 @@ const ServicesPage = () => {
                   <motion.div 
                     className={styles.popularBadge}
                     initial={{ scale: 0, rotate: -180 }}
-                    animate={{ scale: 1, rotate: 0 }}
+                    whileInView={{ scale: 1, rotate: 0 }}
                     transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
+                    viewport={{ once: true, amount: 0.3 }}
                   >
                     Most Popular
                   </motion.div>
@@ -331,8 +334,9 @@ const ServicesPage = () => {
                 <motion.div 
                   className={styles.serviceIcon}
                   initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
+                  whileInView={{ scale: 1 }}
                   transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
+                  viewport={{ once: true, amount: 0.3 }}
                   whileHover={{ rotate: 5, scale: 1.1 }}
                 >
                   {service.icon}
@@ -347,8 +351,9 @@ const ServicesPage = () => {
                     <motion.li 
                       key={i}
                       initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
+                      whileInView={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.4, delay: 0.1 * i }}
+                      viewport={{ once: true, amount: 0.3 }}
                       whileHover={{ x: 5 }}
                     >
                       {feature}
@@ -416,7 +421,7 @@ const ServicesPage = () => {
                       whileInView={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.5, delay: i * 0.1 }}
                       viewport={{ once: true, amount: 0.3 }}
-                      whileHover={{ 
+                      while极over={{ 
                         backgroundColor: "rgba(255, 255, 255, 0.05)",
                         transition: { duration: 0.2 }
                       }}
@@ -436,7 +441,7 @@ const ServicesPage = () => {
                           }}
                           whileTap={{ scale: 0.95 }}
                         >
-                          Inquire
+                          <Link to="/contact">Inquire</Link>
                         </motion.button>
                       </div>
                     </motion.div>

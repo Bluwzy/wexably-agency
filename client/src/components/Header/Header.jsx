@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Link } from 'react-router-dom'; // Import Link
 import './Header.css';
 
 const Header = () => {
@@ -59,7 +60,7 @@ const Header = () => {
           whileHover={{ scale: 1.05 }}
           transition={{ type: "spring", stiffness: 400, damping: 10 }}
         >
-          <a href="/">Wexably</a>
+          <Link to="/">Wexably</Link> {/* Changed to Link */}
         </motion.div>
 
         {/* Desktop Navigation */}
@@ -73,12 +74,12 @@ const Header = () => {
                 animate="visible"
                 transition={{ delay: index * 0.1 }}
               >
-                <a 
-                  href={item.path}
+                <Link 
+                  to={item.path}
                   className="nav-link"
                 >
                   {item.name}
-                </a>
+                </Link> {/* Changed to Link */}
               </motion.li>
             ))}
           </ul>
@@ -92,7 +93,7 @@ const Header = () => {
           }}
           whileTap={{ scale: 0.95 }}
         >
-          <a href="/contact">Get Started</a>
+          <Link to="/contact">Get Started</Link> {/* Changed to Link */}
         </motion.button>
 
         {/* Mobile Menu Button */}
@@ -124,12 +125,12 @@ const Header = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
                 >
-                  <a 
-                    href={item.path}
+                  <Link 
+                    to={item.path}
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     {item.name}
-                  </a>
+                  </Link> {/* Changed to Link */}
                 </motion.li>
               ))}
               <motion.li
@@ -137,13 +138,13 @@ const Header = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: menuItems.length * 0.1 }}
               >
-                <a 
-                  href="/contact" 
+                <Link 
+                  to="/contact" 
                   className="mobile-cta"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   Get Started
-                </a>
+                </Link> {/* Changed to Link */}
               </motion.li>
             </ul>
           </motion.div>

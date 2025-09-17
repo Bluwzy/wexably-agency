@@ -1,91 +1,154 @@
-// components/PortfolioShowcase/PortfolioShowcase.jsx
 import React from 'react';
+import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import './PortfolioShowcase.css';
 
 const PortfolioShowcase = () => {
-  const projects = [
+  const featuredClients = [
     {
-      title: "Lasani Enterprise",
-      description: "A modern, responsive website for a stone fabrication and installation company, showcasing their premium work and generating high-quality leads.",
-      category: "Stone Fabrication",
-      url: "https://lasanienterprise.com/",
-      features: ["Responsive Design", "Project Gallery", "Lead Generation Forms", "SEO Optimized"],
-      result: "40% increase in lead generation"
+      id: 1,
+      name: "Lasani Enterprise",
+      industry: "Stone Fabrication",
+      result: "40% increase in lead generation",
+      logo: "LE",
+      color: "#3B82F6"
     },
     {
-      title: "Airport Limo Toronto",
-      description: "A sleek booking platform for luxury transportation services, focusing on user experience and conversion rate optimization.",
-      category: "Transportation",
-      url: "https://airportlimo-torontoservices.ca/",
-      features: ["Online Booking System", "Mobile Optimization", "Payment Integration", "Service Gallery"],
-      result: "25% higher conversion rate"
+      id: 2,
+      name: "Airport Limo Toronto",
+      industry: "Luxury Transportation",
+      result: "25% higher conversion rate",
+      logo: "ALT",
+      color: "#8B5CF6"
+    },
+    {
+      id: 3,
+      name: "Riyadh Construction",
+      industry: "Construction",
+      result: "30% faster response time",
+      logo: "RCG",
+      color: "#10B981"
+    },
+    {
+      id: 4,
+      name: "Jeddah Properties",
+      industry: "Real Estate",
+      result: "28% more qualified leads",
+      logo: "JLP",
+      color: "#F59E0B"
     }
+  ];
+
+  const stats = [
+    { value: "25+", label: "Projects Completed" },
+    { value: "15+", label: "Industries Served" },
+    { value: "6", label: "Countries" },
+    { value: "100%", label: "Client Satisfaction" }
   ];
 
   return (
     <section className="portfolio-showcase">
       <div className="container">
-        <h2>Featured Work</h2>
-        <p className="subtitle">
-          While we've worked with various clients, these projects showcase our range of expertise in creating 
-          conversion-focused websites for local businesses.
-        </p>
-        
-        <div className="projects-grid">
-          {projects.map((project, index) => (
-            <div key={index} className="project-card">
-              <div className="project-header">
-                <h3>{project.title}</h3>
-                <span className="project-category">{project.category}</span>
+        <motion.div 
+          className="portfolio-header"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          viewport={{ once: true, amount: 0.5 }}
+        >
+          <motion.h2 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+            viewport={{ once: true, amount: 0.5 }}
+          >
+            Trusted by <span className="gradient-text">Industry Leaders</span>
+          </motion.h2>
+          <motion.p 
+            className="subtitle"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.7, delay: 0.4 }}
+            viewport={{ once: true, amount: 0.5 }}
+          >
+            We've helped businesses across various industries achieve remarkable results with our secure growth solutions
+          </motion.p>
+        </motion.div>
+
+        {/* Client Logos Grid */}
+        <motion.div 
+          className="clients-grid"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.7, delay: 0.6 }}
+          viewport={{ once: true, amount: 0.3 }}
+        >
+          {featuredClients.map((client, index) => (
+            <motion.div 
+              key={client.id}
+              className="client-item"
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              viewport={{ once: true, amount: 0.3 }}
+              whileHover={{ y: -5 }}
+            >
+              <div className="client-logo" style={{ background: client.color }}>
+                {client.logo}
               </div>
-              
-              <div className="project-image">
-                {/* Placeholder that mentions the actual site */}
-                <div className="website-preview">
-                  <div className="browser-bar">
-                    <div className="browser-dots">
-                      <span></span>
-                      <span></span>
-                      <span></span>
-                    </div>
-                    <div className="browser-url">{project.url}</div>
-                  </div>
-                  <div className="website-placeholder">
-                    Live Website: {project.url}
-                  </div>
-                </div>
+              <div className="client-info">
+                <h4>{client.name}</h4>
+                <p className="client-industry">{client.industry}</p>
+                <p className="client-result">{client.result}</p>
               </div>
-              
-              <div className="project-details">
-                <p>{project.description}</p>
-                
-                <div className="project-features">
-                  <h4>Key Features:</h4>
-                  <ul>
-                    {project.features.map((feature, i) => (
-                      <li key={i}>{feature}</li>
-                    ))}
-                  </ul>
-                </div>
-                
-                <div className="project-result">
-                  <strong>Result:</strong> {project.result}
-                </div>
-                
-                <div className="project-links">
-                  <a href={project.url} target="_blank" rel="noopener noreferrer" className="view-site-link">
-                    Visit Live Site ↗
-                  </a>
-                </div>
-              </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
-        
-        <div className="portfolio-cta">
-          <p>Ready to create your success story?</p>
-          <a href="/contact" className="cta-button">Start Your Project</a>
-        </div>
+        </motion.div>
+
+        {/* Stats Section */}
+        <motion.div 
+          className="stats-section"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.8 }}
+          viewport={{ once: true, amount: 0.5 }}
+        >
+          <div className="stats-grid">
+            {stats.map((stat, index) => (
+              <motion.div 
+                key={index}
+                className="stat-item"
+                initial={{ opacity: 0, scale: 0 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, delay: index * 0.1 + 0.8 }}
+                viewport={{ once: true, amount: 0.5 }}
+              >
+                <h3>{stat.value}</h3>
+                <p>{stat.label}</p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* CTA Section */}
+        <motion.div 
+          className="portfolio-cta"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 1 }}
+          viewport={{ once: true, amount: 0.5 }}
+        >
+          <h3>See our complete portfolio</h3>
+          <p>Explore detailed case studies and see how we've helped businesses achieve secure growth</p>
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <Link to="/portfolio" className="cta-button">
+              View Full Portfolio
+            </Link>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );
