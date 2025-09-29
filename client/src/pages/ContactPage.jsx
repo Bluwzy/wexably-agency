@@ -17,6 +17,12 @@ const ContactPage = () => {
   const [touched, setTouched] = useState({});
   const [openFAQ, setOpenFAQ] = useState(null);
 
+  // 🚀 FIXED: Use your Netlify environment variable
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 
+    (process.env.NODE_ENV === 'production' 
+      ? 'https://api.wexably.com' 
+      : 'http://localhost:5000');
+
   // FAQ data
   const faqItems = [
     {
@@ -188,12 +194,9 @@ const ContactPage = () => {
     setSubmitStatus('');
     
     try {
-      const API_URL = process.env.NODE_ENV === 'production' 
-        ? process.env.REACT_APP_API_URL || 'https://your-production-api.com'
-        : 'http://localhost:5000';
-        
-      const response = await axios.post(`${API_URL}/api/contact`, finalFormData, {
-        timeout: 15000, // 15 second timeout
+      // 🚀 FIXED: Use the correct API_BASE_URL
+      const response = await axios.post(`${API_BASE_URL}/api/contact`, finalFormData, {
+        timeout: 15000,
         headers: {
           'Content-Type': 'application/json',
         }
@@ -226,7 +229,7 @@ const ContactPage = () => {
         }
       } else if (error.request) {
         // Network error
-        setSubmitMessage('Cannot connect to server. Please check your internet connection.');
+        setSubmitMessage(`Cannot connect to server. Please check if ${API_BASE_URL} is accessible.`);
       } else {
         // Other errors
         setSubmitMessage('An unexpected error occurred. Please try again.');
