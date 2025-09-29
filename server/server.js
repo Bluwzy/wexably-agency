@@ -4,7 +4,7 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
-const path = require('path'); // ADD THIS LINE
+const path = require('path');
 const { sendContactNotification } = require('./utils/emailService');
 
 // Load environment variables
@@ -26,6 +26,11 @@ mongoose.connection.on('error', (error) => {
 
 // Initialize Express app
 const app = express();
+
+// ========================
+// 🛡️ TRUST PROXY SETTING (ADD THIS)
+// ========================
+app.set('trust proxy', 1); // Fix for rate limiting behind proxies
 
 // ========================
 // 🛡️ PRACTICAL SECURITY MIDDLEWARE
@@ -309,12 +314,12 @@ app.use((error, req, res, next) => {
 });
 
 // ========================
-// GRACEFUL SHUTDOWN
+// GRACEFUL SHUTDOWN (FIXED)
 // ========================
 process.on('SIGTERM', () => {
   console.log('SIGTERM received. Starting graceful shutdown...');
   server.close(() => {
-    mongoose.connection.close(false, () => {
+    mongoose.connection.close(false).then(() => {
       console.log('MongoDB connection closed.');
       process.exit(0);
     });
@@ -324,7 +329,7 @@ process.on('SIGTERM', () => {
 process.on('SIGINT', () => {
   console.log('SIGINT received. Starting graceful shutdown...');
   server.close(() => {
-    mongoose.connection.close(false, () => {
+    mongoose.connection.close(false).then(() => {
       console.log('MongoDB connection closed.');
       process.exit(0);
     });
@@ -340,6 +345,7 @@ const server = app.listen(PORT, () => {
   console.log(`🌐 Environment: ${process.env.NODE_ENV || 'development'}`);
   console.log(`🔗 CORS enabled for: ${allowedOrigins.join(', ')}`);
   console.log(`🛡️  Security: Rate limiting, CORS, Input sanitization, Secure headers`);
+  console.log(`🔧 Trust proxy: Enabled for rate limiting`);
   if (process.env.NODE_ENV === 'production') {
     console.log('📁 Serving React build files for client-side routing');
   }
