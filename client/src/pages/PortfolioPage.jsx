@@ -10,12 +10,12 @@ const PortfolioPage = () => {
     {
       id: 1,
       title: "Lasani Enterprise",
-      description: "Complete digital transformation for a premium stone fabrication company, resulting in a 40% increase in qualified leads.",
+      description: "Complete digital transformation for an international trade and distribution company, resulting in a 40% increase in qualified leads and enhanced security for global operations.",
       category: "web-development",
-      industry: "Stone Fabrication",
-      image: "/api/placeholder/400/250",
-      results: ["40% increase in lead generation", "25% faster load times", "Mobile conversion rate improved by 35%"],
-      tags: ["React", "Node.js", "MongoDB", "Security Hardening", "SEO"],
+      industry: "International Trade & Distribution",
+      image: "/images/portfolio/lasani-enterprise-thumbnail.jpg",
+      results: ["40% increase in qualified leads", "35% faster page load times", "100% security compliance", "25% reduced bounce rate"],
+      tags: ["WordPress", "Custom Theme", "Security Hardening", "International SEO", "Multilingual Ready"],
       link: "/portfolio/lasani-enterprise"
     },
     {

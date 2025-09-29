@@ -1,10 +1,15 @@
 import React, { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { useInView } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import './FinalCta.css';
 
 const FinalCta = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.3 });
+  const isInView = useInView(ref, { 
+  once: true, 
+  amount: 0.1, // Reduced from 0.3 to 0.1 for mobile
+  rootMargin: '-50px 0px -50px 0px' // Added root margin
+});
 
   return (
     <section className="final-cta-section" ref={ref}>
@@ -17,77 +22,38 @@ const FinalCta = () => {
       </div>
       
       <div className="container">
-        <motion.h2 
-          className="section-title"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
-        >
+        <h2 className={`section-title fade-in-up ${isInView ? 'visible' : ''}`}>
           Ready to <span className="gradient-text">Transform</span> Your Business?
-        </motion.h2>
+        </h2>
         
-        <motion.p 
-          className="section-subtitle"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, delay: 0.2 }}
-        >
+        <p className={`section-subtitle fade-in-up ${isInView ? 'visible' : ''}`}>
           Let's build something amazing together. Get in touch today for a free consultation and project estimate.
-        </motion.p>
+        </p>
 
-        <motion.div 
-          className="cta-buttons"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, delay: 0.4 }}
-        >
-          <motion.a 
-            href="/contact" 
-            className="cta-button primary"
-            whileHover={{ 
-              scale: 1.05,
-              boxShadow: "0 10px 30px rgba(37, 99, 235, 0.4)"
-            }}
-            whileTap={{ scale: 0.98 }}
-            transition={{ type: "spring", stiffness: 400, damping: 17 }}
-          >
+        <div className={`cta-buttons fade-in-up ${isInView ? 'visible' : ''}`}>
+          <Link to="/contact" className="cta-button primary" aria-label="Start Your Project">
             Start Your Project
-          </motion.a>
+          </Link>
           
-          <motion.a 
-            href="/portfolio" 
-            className="cta-button secondary"
-            whileHover={{ 
-              scale: 1.05,
-              backgroundColor: "rgba(255, 255, 255, 0.1)",
-              borderColor: "rgba(255, 255, 255, 0.8)"
-            }}
-            whileTap={{ scale: 0.98 }}
-            transition={{ type: "spring", stiffness: 400, damping: 17 }}
-          >
+          <Link to="/portfolio" className="cta-button secondary" aria-label="View Our Work">
             View Our Work
-          </motion.a>
-        </motion.div>
+          </Link>
+        </div>
 
-        <motion.div 
-          className="cta-guarantee"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, delay: 0.6 }}
-        >
+        <div className={`cta-guarantee fade-in-up ${isInView ? 'visible' : ''}`}>
           <div className="guarantee-item">
-            <div className="guarantee-icon">✅</div>
+            <div className="guarantee-icon" aria-hidden="true">✅</div>
             <span>No obligation, 30-minute consultation</span>
           </div>
           <div className="guarantee-item">
-            <div className="guarantee-icon">✅</div>
+            <div className="guarantee-icon" aria-hidden="true">✅</div>
             <span>Free website audit and competitive analysis</span>
           </div>
           <div className="guarantee-item">
-            <div className="guarantee-icon">✅</div>
+            <div className="guarantee-icon" aria-hidden="true">✅</div>
             <span>Transparent, fixed-price quotes</span>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

@@ -1,14 +1,21 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef, useMemo } from 'react';
+import { useInView } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import './PortfolioShowcase.css';
 
 const PortfolioShowcase = () => {
-  const featuredClients = [
+  const ref = useRef(null);
+  const isInView = useInView(ref, { 
+  once: true, 
+  amount: 0.1, // Reduced from 0.3 to 0.1 for mobile
+  rootMargin: '-50px 0px -50px 0px' // Added root margin
+});
+
+  const featuredClients = useMemo(() => [
     {
       id: 1,
       name: "Lasani Enterprise",
-      industry: "Stone Fabrication",
+      industry: "International Trade & Distribution",
       result: "40% increase in lead generation",
       logo: "LE",
       color: "#3B82F6"
@@ -37,62 +44,28 @@ const PortfolioShowcase = () => {
       logo: "JLP",
       color: "#F59E0B"
     }
-  ];
+  ], []);
 
-  const stats = [
+  const stats = useMemo(() => [
     { value: "25+", label: "Projects Completed" },
     { value: "15+", label: "Industries Served" },
     { value: "6", label: "Countries" },
     { value: "100%", label: "Client Satisfaction" }
-  ];
+  ], []);
 
   return (
-    <section className="portfolio-showcase">
+    <section className="portfolio-showcase" ref={ref}>
       <div className="container">
-        <motion.div 
-          className="portfolio-header"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          viewport={{ once: true, amount: 0.5 }}
-        >
-          <motion.h2 
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            viewport={{ once: true, amount: 0.5 }}
-          >
-            Trusted by <span className="gradient-text">Industry Leaders</span>
-          </motion.h2>
-          <motion.p 
-            className="subtitle"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.7, delay: 0.4 }}
-            viewport={{ once: true, amount: 0.5 }}
-          >
+        <div className={`portfolio-header fade-in-up ${isInView ? 'visible' : ''}`}>
+          <h2>Trusted by <span className="gradient-text">Industry Leaders</span></h2>
+          <p className="subtitle">
             We've helped businesses across various industries achieve remarkable results with our secure growth solutions
-          </motion.p>
-        </motion.div>
+          </p>
+        </div>
 
-        {/* Client Logos Grid */}
-        <motion.div 
-          className="clients-grid"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.7, delay: 0.6 }}
-          viewport={{ once: true, amount: 0.3 }}
-        >
+        <div className={`clients-grid stagger-children ${isInView ? 'visible' : ''}`}>
           {featuredClients.map((client, index) => (
-            <motion.div 
-              key={client.id}
-              className="client-item"
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true, amount: 0.3 }}
-              whileHover={{ y: -5 }}
-            >
+            <div key={client.id} className="client-item">
               <div className="client-logo" style={{ background: client.color }}>
                 {client.logo}
               </div>
@@ -101,54 +74,28 @@ const PortfolioShowcase = () => {
                 <p className="client-industry">{client.industry}</p>
                 <p className="client-result">{client.result}</p>
               </div>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
 
-        {/* Stats Section */}
-        <motion.div 
-          className="stats-section"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.8 }}
-          viewport={{ once: true, amount: 0.5 }}
-        >
+        <div className={`stats-section fade-in-up ${isInView ? 'visible' : ''}`}>
           <div className="stats-grid">
             {stats.map((stat, index) => (
-              <motion.div 
-                key={index}
-                className="stat-item"
-                initial={{ opacity: 0, scale: 0 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: index * 0.1 + 0.8 }}
-                viewport={{ once: true, amount: 0.5 }}
-              >
+              <div key={`stat-${index}`} className="stat-item">
                 <h3>{stat.value}</h3>
                 <p>{stat.label}</p>
-              </motion.div>
+              </div>
             ))}
           </div>
-        </motion.div>
+        </div>
 
-        {/* CTA Section */}
-        <motion.div 
-          className="portfolio-cta"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 1 }}
-          viewport={{ once: true, amount: 0.5 }}
-        >
+        <div className={`portfolio-cta fade-in-up ${isInView ? 'visible' : ''}`}>
           <h3>See our complete portfolio</h3>
           <p>Explore detailed case studies and see how we've helped businesses achieve secure growth</p>
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <Link to="/portfolio" className="cta-button">
-              View Full Portfolio
-            </Link>
-          </motion.div>
-        </motion.div>
+          <Link to="/portfolio" className="cta-button">
+            View Full Portfolio
+          </Link>
+        </div>
       </div>
     </section>
   );

@@ -1,8 +1,9 @@
 .about-section {
-  padding: 8rem 0;
+  padding: 6rem 0;
   position: relative;
   background: linear-gradient(to bottom, #0f172a, #0a0a18);
   overflow: hidden;
+  width: 100%;
 }
 
 .section-background {
@@ -36,133 +37,420 @@
   z-index: 2;
 }
 
-.about-content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-  align-items: center;
+.about-header {
+  text-align: center;
+  margin-bottom: 4rem;
 }
 
-.about-text .section-title {
-  font-size: clamp(2rem, 5vw, 3rem);
+.section-title {
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
   font-weight: 800;
   margin-bottom: 1.5rem;
   color: white;
-  text-align: left;
 }
 
-.about-text p {
-  font-size: 1.1rem;
-  line-height: 1.6;
+.section-subtitle {
+  font-size: 1.25rem;
   color: #d1d5db;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6, #06b6d4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Team Slideshow Styles - SIMPLIFIED */
+.team-slideshow {
+  position: relative;
+  max-width: 1000px;
+  margin: 0 auto 4rem;
+  padding: 2rem 0;
+}
+
+.slider-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+  z-index: 10;
+  position: relative;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.dot.active {
+  background: #3b82f6;
+  transform: scale(1.2);
+}
+
+.dot:hover {
+  background: rgba(59, 130, 246, 0.6);
+}
+
+.slideshow-container {
+  position: relative;
+  min-height: 500px;
+  border-radius: 20px;
+}
+
+/* SIMPLIFIED SLIDE STYLES - No complex transforms */
+.slide {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.slide:not(.active) {
+  display: none;
+}
+
+.slide.active {
+  display: block;
+  opacity: 1;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.team-member-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 3rem;
+  display: flex;
+  gap: 3rem;
+  align-items: center;
+  min-height: 450px;
+}
+
+.member-image-section {
+  flex: 0 0 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.image-container {
+  position: relative;
   margin-bottom: 1.5rem;
 }
 
-.about-text strong {
+.main-image {
+  width: 200px;
+  height: 200px;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #d1d5db;
+  font-weight: 600;
+  font-size: 3rem;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 1rem;
+}
+
+.member-badge {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.experience-badge {
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  color: white;
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.member-info {
+  text-align: center;
+}
+
+.member-name {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: white;
+}
+
+.member-title {
+  font-size: 1.1rem;
   color: #3b82f6;
+  margin-bottom: 0.5rem;
   font-weight: 600;
 }
 
-.expertise-list {
+.member-location {
+  font-size: 0.9rem;
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+}
+
+.member-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.member-description {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #d1d5db;
+  margin: 0;
+}
+
+.expertise-section h4 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: white;
+}
+
+.expertise-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
-  margin-top: 2rem;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
 }
 
 .expertise-item {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.5rem;
   color: #d1d5db;
-  font-weight: 500;
+  font-size: 0.95rem;
 }
 
 .expertise-icon {
   color: #3b82f6;
   font-weight: bold;
+  font-size: 1.1rem;
 }
 
-.about-image {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.image-container {
-  position: relative;
-  width: 100%;
-  max-width: 400px;
-}
-
-.main-image {
-  width: 100%;
-  height: 400px;
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
-  border-radius: 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #d1d5db;
-  font-weight: 600;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-}
-
-.floating-element {
+/* Navigation Arrows */
+.nav-arrow {
   position: absolute;
-  font-size: 1.5rem;
-  animation: float-element 6s ease-in-out infinite;
-}
-
-.element-1 {
-  top: -20px;
-  right: -20px;
-  animation-delay: 0s;
-}
-
-.element-2 {
-  bottom: 30px;
-  left: -30px;
-  animation-delay: 2s;
-}
-
-.element-3 {
   top: 50%;
-  right: -30px;
-  animation-delay: 4s;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 10;
 }
 
-@keyframes float-element {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-20px) rotate(10deg); }
+.nav-arrow:hover {
+  background: rgba(59, 130, 246, 0.3);
+  transform: translateY(-50%) scale(1.1);
 }
 
+.nav-arrow svg {
+  width: 24px;
+  height: 24px;
+}
+
+.prev-arrow {
+  left: -25px;
+}
+
+.next-arrow {
+  right: -25px;
+}
+
+/* Company Description */
+.company-description {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.company-description h3 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: white;
+}
+
+.company-description p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #d1d5db;
+  margin-bottom: 2.5rem;
+}
+
+.company-stats {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat-number {
+  font-size: 2.5rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+/* Responsive Design */
 @media (max-width: 968px) {
-  .about-content {
-    grid-template-columns: 1fr;
-    gap: 3rem;
-  }
-  
-  .expertise-list {
-    grid-template-columns: 1fr;
-  }
-  
-  .about-text .section-title {
+  .team-member-card {
+    flex-direction: column;
     text-align: center;
+    padding: 2rem;
+    gap: 2rem;
+    min-height: auto;
   }
   
-  .about-text {
-    text-align: center;
+  .member-image-section {
+    flex: none;
   }
   
-  .expertise-item {
-    justify-content: center;
+  .expertise-grid {
+    grid-template-columns: 1fr;
   }
 }
 
 @media (max-width: 768px) {
+  .about-section {
+    padding: 4rem 0;
+  }
+  
+  .team-slideshow {
+    margin-bottom: 2rem;
+  }
+  
+  .team-member-card {
+    padding: 1.5rem;
+  }
+  
   .main-image {
-    height: 300px;
+    width: 150px;
+    height: 150px;
+    font-size: 2.5rem;
+  }
+  
+  .member-name {
+    font-size: 1.5rem;
+  }
+  
+  .nav-arrow {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .prev-arrow {
+    left: 10px;
+  }
+  
+  .next-arrow {
+    right: 10px;
+  }
+  
+  .company-stats {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .company-description {
+    padding: 2rem 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-section .container {
+    padding: 0 1rem;
+  }
+  
+  .team-member-card {
+    padding: 1rem;
+  }
+  
+  .main-image {
+    width: 120px;
+    height: 120px;
+    font-size: 2rem;
+  }
+  
+  .member-name {
+    font-size: 1.3rem;
+  }
+  
+  .member-description {
+    font-size: 1rem;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .slide {
+    transition: none;
+  }
+  
+  .nav-arrow:hover {
+    transform: translateY(-50%);
+  }
+  
+  .dot {
+    transition: none;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 1; }
+    to { opacity: 1; }
   }
 }

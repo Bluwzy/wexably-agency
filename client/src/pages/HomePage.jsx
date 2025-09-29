@@ -11,7 +11,7 @@ import './HomePage.css';
 
 const HomePage = () => {
   return (
-    <main className="homepage">
+    <main className="homepage performance-optimized">
       <Hero />
       <Services />
       <Process />

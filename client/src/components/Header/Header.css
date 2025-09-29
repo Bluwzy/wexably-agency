@@ -9,14 +9,18 @@
   backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   transition: all 0.3s ease;
-  height: auto;
-  min-height: auto;
+  height: 80px;
+  min-height: 80px;
 }
 
 .header.scrolled {
-  background: rgba(10, 10, 24, 0.9);
+  background: rgba(10, 10, 24, 0.95);
   padding: 0.75rem 0;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.header.loading {
+  opacity: 0.9;
 }
 
 .header-container {
@@ -27,6 +31,7 @@
   align-items: center;
   justify-content: space-between;
   height: 100%;
+  position: relative;
 }
 
 .logo a {
@@ -38,6 +43,11 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  transition: all 0.3s ease;
+}
+
+.logo a:hover {
+  filter: brightness(1.2);
 }
 
 .desktop-nav ul {
@@ -54,6 +64,7 @@
   font-weight: 500;
   position: relative;
   transition: all 0.3s ease;
+  padding: 0.5rem 0;
 }
 
 .nav-link::after {
@@ -85,11 +96,30 @@
   cursor: pointer;
   transition: all 0.3s ease;
   font-size: 0.9rem;
+  position: relative;
+  overflow: hidden;
 }
 
 .cta-button a {
   color: white;
   text-decoration: none;
+  position: relative;
+  z-index: 1;
+}
+
+.cta-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.cta-button:hover::before {
+  left: 100%;
 }
 
 .mobile-menu-button {
@@ -99,6 +129,8 @@
   border: none;
   cursor: pointer;
   padding: 0.5rem;
+  position: relative;
+  z-index: 1001;
 }
 
 .mobile-menu-button span {
@@ -110,11 +142,27 @@
   transform-origin: center;
 }
 
+.mobile-menu-button.open span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.mobile-menu-button.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.mobile-menu-button.open span:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -6px);
+}
+
 .mobile-nav {
-  background: rgba(10, 10, 24, 0.95);
-  backdrop-filter: blur(10px);
+  background: rgba(10, 10, 24, 0.98);
+  backdrop-filter: blur(20px);
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   overflow: hidden;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
 }
 
 .mobile-nav ul {
@@ -134,10 +182,12 @@
   display: block;
   padding: 0.5rem 0;
   transition: all 0.3s ease;
+  font-size: 1.1rem;
 }
 
 .mobile-nav a:hover {
   color: white;
+  transform: translateX(5px);
 }
 
 .mobile-cta {
@@ -147,21 +197,45 @@
   border-radius: 50px;
   text-align: center;
   margin-top: 1rem !important;
+  font-weight: 600 !important;
 }
 
-/* Mobile menu animation when open */
-.mobile-menu-button.open span:nth-child(1) {
-  transform: rotate(45deg) translate(5px, 5px);
+.mobile-cta:hover {
+  transform: translateX(0) !important;
+  box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
 }
 
-.mobile-menu-button.open span:nth-child(2) {
-  opacity: 0;
+/* Header Loading Indicator */
+.header-loading-indicator {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.1);
+  transform-origin: left;
 }
 
-.mobile-menu-button.open span:nth-child(3) {
-  transform: rotate(-45deg) translate(7px, -6px);
+.loading-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+  width: 100%;
+  animation: loadingProgress 2s ease-in-out infinite;
 }
 
+@keyframes loadingProgress {
+  0% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Mobile Responsive */
 @media (max-width: 768px) {
   .desktop-nav, .cta-button {
     display: none;
@@ -177,6 +251,8 @@
   
   .header {
     padding: 0.5rem 0;
+    height: 70px;
+    min-height: 70px;
   }
   
   .header.scrolled {
@@ -187,13 +263,66 @@
     font-size: 1.5rem;
   }
   
+  .mobile-nav {
+    position: fixed;
+    top: 70px;
+    height: calc(100vh - 70px);
+    overflow-y: auto;
+  }
+  
+  .mobile-nav ul {
+    padding: 2rem 1.5rem;
+  }
+  
+  .mobile-nav li {
+    margin: 1.5rem 0;
+  }
+  
   .mobile-cta {
-    padding: 0.5rem 1rem !important;
-    font-size: 0.9rem;
+    padding: 1rem 1.5rem !important;
+    font-size: 1rem;
+    margin-top: 2rem !important;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .header {
+    transition: none;
+  }
+  
+  .nav-link::after {
+    transition: none;
   }
   
   .cta-button {
-    padding: 0.5rem 1rem;
-    font-size: 0.8rem;
+    transition: none;
+  }
+  
+  .mobile-nav a {
+    transition: none;
+  }
+  
+  .loading-bar {
+    animation: none;
+    width: 100%;
+    transform: none;
+  }
+}
+
+/* High contrast support */
+@media (prefers-contrast: high) {
+  .header {
+    background: #0a0a18;
+    border-bottom: 2px solid white;
+  }
+  
+  .header.scrolled {
+    background: #0a0a18;
+    border-bottom: 2px solid #3b82f6;
+  }
+  
+  .nav-link {
+    color: white;
   }
 }

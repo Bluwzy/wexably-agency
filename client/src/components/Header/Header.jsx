@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link } from 'react-router-dom'; // Import Link
+import { Link } from 'react-router-dom';
 import './Header.css';
 
 const Header = () => {
@@ -16,29 +16,44 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Efficient preloading map
+  const preloadMap = {
+    home: () => import('../../pages/HomePage'),
+    services: () => import('../../pages/ServicesPage'),
+    portfolio: () => import('../../pages/PortfolioPage'),
+    contact: () => import('../../pages/ContactPage'),
+    'lasani-enterprise': () => import('../../CaseStudies/LasaniEnterprise/LasaniEnterpriseCaseStudy')
+  };
+
+  const preloadComponent = (componentName) => {
+    const preloadFn = preloadMap[componentName];
+    if (preloadFn) {
+      preloadFn().catch(error => console.warn(`Preload failed for ${componentName}:`, error));
+    }
+  };
+
+  const handleNavigation = (path, name) => {
+    setIsMobileMenuOpen(false);
+    preloadComponent(name.toLowerCase().replace(' ', '-'));
+  };
+
   const menuItems = [
-    { name: 'Home', path: '/' },
-    { name: 'Services', path: '/services' },
-    { name: 'Portfolio', path: '/portfolio' },
-    { name: 'Contact', path: '/contact' }
+    { name: 'Home', path: '/', preloadKey: 'home' },
+    { name: 'Services', path: '/services', preloadKey: 'services' },
+    { name: 'Portfolio', path: '/portfolio', preloadKey: 'portfolio' },
+    { name: 'Contact', path: '/contact', preloadKey: 'contact' }
   ];
 
   const mobileMenuVariants = {
     hidden: { 
       opacity: 0,
       height: 0,
-      transition: {
-        duration: 0.3,
-        ease: "easeInOut"
-      }
+      transition: { duration: 0.3, ease: "easeInOut" }
     },
     visible: {
       opacity: 1,
       height: "auto",
-      transition: {
-        duration: 0.3,
-        ease: "easeInOut"
-      }
+      transition: { duration: 0.3, ease: "easeInOut" }
     }
   };
 
@@ -60,7 +75,9 @@ const Header = () => {
           whileHover={{ scale: 1.05 }}
           transition={{ type: "spring", stiffness: 400, damping: 10 }}
         >
-          <Link to="/">Wexably</Link> {/* Changed to Link */}
+          <Link to="/" onClick={() => handleNavigation('/', 'home')}>
+            Wexably
+          </Link>
         </motion.div>
 
         {/* Desktop Navigation */}
@@ -77,9 +94,11 @@ const Header = () => {
                 <Link 
                   to={item.path}
                   className="nav-link"
+                  onMouseEnter={() => preloadComponent(item.preloadKey)}
+                  onClick={() => handleNavigation(item.path, item.name)}
                 >
                   {item.name}
-                </Link> {/* Changed to Link */}
+                </Link>
               </motion.li>
             ))}
           </ul>
@@ -92,14 +111,18 @@ const Header = () => {
             boxShadow: "0 5px 15px rgba(37, 99, 235, 0.3)"
           }}
           whileTap={{ scale: 0.95 }}
+          onMouseEnter={() => preloadComponent('contact')}
         >
-          <Link to="/contact">Get Started</Link> {/* Changed to Link */}
+          <Link to="/contact" onClick={() => handleNavigation('/contact', 'contact')}>
+            Get Started
+          </Link>
         </motion.button>
 
         {/* Mobile Menu Button */}
         <button 
-          className="mobile-menu-button"
+          className={`mobile-menu-button ${isMobileMenuOpen ? 'open' : ''}`}
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label="Toggle mobile menu"
         >
           <span></span>
           <span></span>
@@ -127,10 +150,10 @@ const Header = () => {
                 >
                   <Link 
                     to={item.path}
-                    onClick={() => setIsMobileMenuOpen(false)}
+                    onClick={() => handleNavigation(item.path, item.name)}
                   >
                     {item.name}
-                  </Link> {/* Changed to Link */}
+                  </Link>
                 </motion.li>
               ))}
               <motion.li
@@ -141,10 +164,10 @@ const Header = () => {
                 <Link 
                   to="/contact" 
                   className="mobile-cta"
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  onClick={() => handleNavigation('/contact', 'contact')}
                 >
                   Get Started
-                </Link> {/* Changed to Link */}
+                </Link>
               </motion.li>
             </ul>
           </motion.div>

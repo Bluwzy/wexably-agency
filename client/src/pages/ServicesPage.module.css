@@ -153,8 +153,8 @@
 .statsGrid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 2rem;
-  max-width: 1200px;
+  gap: 1.5rem;
+  max-width: 1000px;
   margin: 0 auto;
   justify-items: center;
 }
@@ -167,12 +167,12 @@
   text-align: center;
   transition: all 0.3s ease;
   width: 100%;
-  max-width: 220px;
+  max-width: 100%;
 }
 
 .statCard:hover {
   border-color: rgba(255, 255, 255, 0.2);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 极.2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
 .statNumber {
@@ -210,6 +210,34 @@
   color: #d1d5db;
   font-size: 1.1rem;
   margin-bottom: 3rem;
+}
+
+/* Billing type badges */
+.billingBadge {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  z-index: 10;
+}
+
+.billingBadge.oneTime {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+}
+
+.billingBadge.monthly {
+  background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+  color: white;
+}
+
+/* For one-time projects, hide the billing toggle */
+.noToggle {
+  opacity: 0.5;
+  pointer-events: none;
 }
 
 /* Billing Toggle */
@@ -281,6 +309,7 @@
   border-radius: 1rem;
   padding: 2.5rem 2rem;
   position: relative;
+  padding-top: 3.5rem;
   transition: all 0.3s ease;
   color: white;
 }
@@ -301,10 +330,11 @@
   right: 2rem;
   background: linear-gradient(135deg, #3b82f6, #8b5cf6);
   color: white;
-  padding: 0.5极 1rem;
+  padding: 0.5rem 1rem;
   border-radius: 20px;
   font-size: 0.8rem;
   font-weight: 600;
+  z-index: 10;
 }
 
 .serviceIcon {
@@ -387,7 +417,7 @@
   color: white;
   width: 100%;
   position: relative;
-  z极dex: 2;
+  z-index: 2;
 }
 
 .allServices h2 {
@@ -490,7 +520,7 @@
 .servicePrice span {
   font-weight: 600;
   color: #10b981;
-  font-size: 极.1rem;
+  font-size: 1.1rem;
 }
 
 .inquireButton {
@@ -618,7 +648,7 @@
   color: white;
   border: none;
   padding: 1rem 2rem;
-  border-radius: 50极;
+  border-radius: 50px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -655,9 +685,10 @@ html {
 }
 
 /* Responsive Design */
-@media (max-width: 1200px) {
+@media (max-width: 1024px) {
   .statsGrid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
   }
 }
 
@@ -676,6 +707,7 @@ html {
   
   .statsGrid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
   }
   
   .servicesGrid, .processSteps {

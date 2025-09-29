@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import styles from './ServicesPage.module.css';
@@ -32,38 +32,46 @@ const CountUp = ({ end, duration = 2 }) => {
 
 const ServicesPage = () => {
   const ref = useRef(null);
-
-  // State for scroll position (for parallax effects)
+  const isInView = useInView(ref, { once: true, amount: 0.1 });
+  
+  const [billingCycle, setBillingCycle] = useState('monthly');
   const [scrollY, setScrollY] = useState(0);
   
-  // State for billing cycle toggle
-  const [billingCycle, setBillingCycle] = useState('monthly');
-  
+  // Throttle scroll events
   useEffect(() => {
+    let ticking = false;
+    
     const handleScroll = () => {
-      setScrollY(window.scrollY);
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          setScrollY(window.scrollY);
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
     
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   // Calculate annual prices (15% discount)
   const calculateAnnualPrice = (monthlyPrice) => {
     const numericPrice = parseInt(monthlyPrice.replace(/[^0-9]/g, ''));
-    const annualPrice = numericPrice * 12 * 0.85; // 15% discount
+    const annualPrice = numericPrice * 12 * 0.85;
     return `$${Math.round(annualPrice)}/year`;
   };
 
-  const services = [
+  // Featured services data
+  const services = useMemo(() => [
     {
       title: "Secure Foundation Website",
       description: "A custom, secure 5-page website designed to convert visitors into customers with enterprise-grade security built in from day one.",
-      monthlyPrice: "$2,997",
-      annualPrice: calculateAnnualPrice("$2,997"),
+      price: "$2,997",
+      billingType: "one-time",
       features: [
         "5 custom-designed pages",
-        "Mobile-responsive design",
+        "Mobile-responsive design", 
         "SEO optimization",
         "SSL Security Certificate",
         "Firewall Protection",
@@ -76,14 +84,15 @@ const ServicesPage = () => {
       icon: "🛡️"
     },
     {
-      title: "Growth Engine Pro",
+      title: "Growth Engine Pro", 
       description: "Complete digital marketing solution with content creation, SEO, social media management, and performance tracking.",
       monthlyPrice: "$1,997/mo",
       annualPrice: calculateAnnualPrice("$1,997"),
+      billingType: "monthly",
       features: [
         "15 social media posts per month",
         "Monthly professional content creation",
-        "Community engagement & management",
+        "Community engagement & management", 
         "Monthly performance analytics reports",
         "Google Analytics & Search Console setup",
         "Monthly strategy consultation",
@@ -97,14 +106,15 @@ const ServicesPage = () => {
     {
       title: "Guardian Security & Maintenance",
       description: "Comprehensive website maintenance, security monitoring, and performance optimization to keep your site safe and fast.",
-      monthlyPrice: "$399/mo",
+      monthlyPrice: "$399/mo", 
       annualPrice: calculateAnnualPrice("$399"),
+      billingType: "monthly",
       features: [
         "24/7 security monitoring",
         "Daily automated backups",
         "Software & plugin updates",
         "Priority technical support",
-        "Malware scanning & removal",
+        "Malware scanning & removal", 
         "Uptime monitoring",
         "Performance optimization",
         "Monthly security reports"
@@ -113,9 +123,10 @@ const ServicesPage = () => {
       popular: false,
       icon: "🔒"
     }
-  ];
+  ], []);
 
-  const allServices = [
+  // All services data
+  const allServices = useMemo(() => [
     {
       category: "Web Development",
       icon: "💻",
@@ -141,22 +152,33 @@ const ServicesPage = () => {
       icon: "🛡️",
       services: [
         { name: "Essential Maintenance", price: "$249/mo", desc: "Basic updates, backups, and monitoring" },
-        { name: "Pro Security", price: "$399/mo", desc: "Advanced security with malware protection" },
-        { name: "Enterprise Protection", price: "$699/m极", desc: "Comprehensive security and performance optimization" },
+        { name: "Advanced Monitoring", price: "$499/mo", desc: "24/7 security monitoring and performance optimization" },
+        { name: "Enterprise Protection", price: "$699/mo", desc: "Comprehensive security and performance optimization" },
         { name: "One-Time Security Audit", price: "$497", desc: "Comprehensive website security assessment" }
       ]
     }
-  ];
+  ], []);
 
-  // Enhanced statistics data
-  const statsData = [
+  // Statistics data
+  const statsData = useMemo(() => [
     { value: 97, label: "Client Retention Rate", suffix: "%" },
     { value: 42, label: "Average Client Growth", suffix: "%" },
     { value: 24, label: "Hour Support Response", suffix: "h" },
     { value: 100, label: "Security Compliance", suffix: "%" },
-    { value: 30, label: "Average Project Timeline", suffix: "days" }
-  ];
+    { value: 30, label: "Average Project Timeline", suffix: "days" },
+  ], []);
 
+  // Process steps
+  const processSteps = useMemo(() => [
+    { number: 1, title: "Discovery & Strategy", desc: "We learn about your business, goals, and security needs to create a customized plan." },
+    { number: 2, title: "Design & Development", desc: "We build your secure website with modern technologies and best practices." },
+    { number: 3, title: "Testing & Launch", desc: "We thoroughly test for security vulnerabilities before launching your site." },
+    { number: 4, title: "Growth & Maintenance", desc: "We continue to support, monitor, and optimize your digital presence." }
+  ], []);
+
+  const hasMonthlyServices = services.some(service => service.billingType === "monthly");
+
+  // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -179,7 +201,7 @@ const ServicesPage = () => {
     }
   };
 
-  // Parallax effect for background elements
+  // Parallax effect
   const parallaxStyle = {
     transform: `translateY(${scrollY * 0.5}px)`
   };
@@ -208,9 +230,9 @@ const ServicesPage = () => {
           className={styles.heroContent}
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          transition={{ duration: 0.8 }}
         >
-          <motion.h1 
+          <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
@@ -229,7 +251,7 @@ const ServicesPage = () => {
         </motion.div>
       </section>
 
-      {/* Enhanced Statistics Section */}
+      {/* Statistics Section */}
       <section className={styles.statsSection}>
         <div className={styles.sectionContainer}>
           <motion.h2 
@@ -249,10 +271,6 @@ const ServicesPage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: index * 0.1 }}
                 viewport={{ once: true, amount: 0.5 }}
-                whileHover={{ 
-                  y: -5,
-                  transition: { duration: 0.2 }
-                }}
               >
                 <div className={styles.statNumber}>
                   <CountUp end={stat.value} />{stat.suffix}
@@ -275,6 +293,7 @@ const ServicesPage = () => {
           >
             Our <span className={styles.gradientText}>Featured Solutions</span>
           </motion.h2>
+          
           <motion.p 
             className={styles.sectionIntro}
             initial={{ opacity: 0, y: 30 }}
@@ -285,22 +304,34 @@ const ServicesPage = () => {
             Designed specifically for GTA businesses who value security and results
           </motion.p>
 
-          {/* Billing Cycle Toggle */}
-          <motion.div 
-            className={styles.billingToggle}
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            viewport={{ once: true, amount: 0.3 }}
-          >
-            <span className={billingCycle === 'monthly' ? styles.active : ''} 
-                  onClick={() => setBillingCycle('monthly')}>Monthly</span>
-            <div className={styles.toggleSwitch} onClick={() => setBillingCycle(billingCycle === 'monthly' ? 'annual' : 'monthly')}>
-              <div className={`${styles.toggleKnob} ${billingCycle === 'annual' ? styles.annual : ''}`}></div>
-            </div>
-            <span className={billingCycle === 'annual' ? styles.active : ''}
-                  onClick={() => setBillingCycle('annual')}>Annual (Save 15%)</span>
-          </motion.div>
+          {hasMonthlyServices && (
+            <motion.div 
+              className={styles.billingToggle}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              viewport={{ once: true, amount: 0.3 }}
+            >
+              <span 
+                className={billingCycle === 'monthly' ? styles.active : ''}
+                onClick={() => setBillingCycle('monthly')}
+              >
+                Monthly
+              </span>
+              <div 
+                className={styles.toggleSwitch} 
+                onClick={() => setBillingCycle(billingCycle === 'monthly' ? 'annual' : 'monthly')}
+              >
+                <div className={`${styles.toggleKnob} ${billingCycle === 'annual' ? styles.annual : ''}`}></div>
+              </div>
+              <span 
+                className={billingCycle === 'annual' ? styles.active : ''}
+                onClick={() => setBillingCycle('annual')}
+              >
+                Annual (Save 15%)
+              </span>
+            </motion.div>
+          )}
           
           <motion.div 
             className={styles.servicesGrid}
@@ -311,61 +342,41 @@ const ServicesPage = () => {
           >
             {services.map((service, index) => (
               <motion.div 
-                key={index} 
+                key={index}
                 className={`${styles.serviceCard} ${service.popular ? styles.popular : ''}`}
                 variants={itemVariants}
-                whileHover={{ 
-                  y: -10,
-                  transition: { duration: 0.3, ease: "easeOut" }
-                }}
-                whileTap={{ scale: 0.98 }}
+                whileHover={{ y: -10 }}
               >
                 {service.popular && (
-                  <motion.div 
-                    className={styles.popularBadge}
-                    initial={{ scale: 0, rotate: -180 }}
-                    whileInView={{ scale: 1, rotate: 0 }}
-                    transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
-                    viewport={{ once: true, amount: 0.3 }}
-                  >
-                    Most Popular
-                  </motion.div>
+                  <div className={styles.popularBadge}>Most Popular</div>
                 )}
-                <motion.div 
-                  className={styles.serviceIcon}
-                  initial={{ scale: 0 }}
-                  whileInView={{ scale: 1 }}
-                  transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
-                  viewport={{ once: true, amount: 0.3 }}
-                  whileHover={{ rotate: 5, scale: 1.1 }}
-                >
-                  {service.icon}
-                </motion.div>
+                
+                <div className={`${styles.billingBadge} ${service.billingType === "one-time" ? styles.oneTime : styles.monthly}`}>
+                  {service.billingType === "one-time" ? "One-Time Project" : "Ongoing Retainer"}
+                </div>
+                
+                <div className={styles.serviceIcon}>{service.icon}</div>
                 <h3>{service.title}</h3>
                 <p className={styles.description}>{service.description}</p>
+                
                 <p className={styles.price}>
-                  {billingCycle === 'monthly' ? service.monthlyPrice : service.annualPrice}
+                  {service.billingType === "one-time" 
+                    ? service.price 
+                    : billingCycle === 'monthly' 
+                      ? service.monthlyPrice 
+                      : service.annualPrice
+                  }
                 </p>
+                
                 <ul className={styles.features}>
                   {service.features.map((feature, i) => (
-                    <motion.li 
-                      key={i}
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.4, delay: 0.1 * i }}
-                      viewport={{ once: true, amount: 0.3 }}
-                      whileHover={{ x: 5 }}
-                    >
-                      {feature}
-                    </motion.li>
+                    <li key={i}>{feature}</li>
                   ))}
                 </ul>
+                
                 <motion.button 
                   className={styles.ctaButton}
-                  whileHover={{ 
-                    scale: 1.05,
-                    boxShadow: "0 10px 25px rgba(37, 99, 235, 0.3)"
-                  }}
+                  whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
                   <Link to="/contact">{service.cta}</Link>
@@ -387,6 +398,7 @@ const ServicesPage = () => {
           >
             Complete <span className={styles.gradientText}>Service Menu</span>
           </motion.h2>
+          
           <motion.p 
             className={styles.sectionDescription}
             initial={{ opacity: 0 }}
@@ -421,11 +433,6 @@ const ServicesPage = () => {
                       whileInView={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.5, delay: i * 0.1 }}
                       viewport={{ once: true, amount: 0.3 }}
-                      while极over={{ 
-                        backgroundColor: "rgba(255, 255, 255, 0.05)",
-                        transition: { duration: 0.2 }
-                      }}
-                      whileTap={{ scale: 0.98 }}
                     >
                       <div className={styles.serviceInfo}>
                         <h4>{service.name}</h4>
@@ -435,10 +442,7 @@ const ServicesPage = () => {
                         <span>{service.price}</span>
                         <motion.button 
                           className={styles.inquireButton}
-                          whileHover={{ 
-                            backgroundColor: "rgba(59, 130, 246, 0.1)",
-                            scale: 1.05
-                          }}
+                          whileHover={{ scale: 1.05 }}
                           whileTap={{ scale: 0.95 }}
                         >
                           <Link to="/contact">Inquire</Link>
@@ -464,13 +468,9 @@ const ServicesPage = () => {
           >
             Our <span className={styles.gradientText}>Process</span>
           </motion.h2>
+          
           <div className={styles.processSteps}>
-            {[
-              { number: 1, title: "Discovery & Strategy", desc: "We learn about your business, goals, and security needs to create a customized plan." },
-              { number: 2, title: "Design & Development", desc: "We build your secure website with modern technologies and best practices." },
-              { number: 3, title: "Testing & Launch", desc: "We thoroughly test for security vulnerabilities before launching your site." },
-              { number: 4, title: "Growth & Maintenance", desc: "We continue to support, monitor, and optimize your digital presence." }
-            ].map((step, index) => (
+            {processSteps.map((step, index) => (
               <motion.div 
                 key={index} 
                 className={styles.processStep}
@@ -478,22 +478,8 @@ const ServicesPage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: index * 0.2 }}
                 viewport={{ once: true, amount: 0.3 }}
-                whileHover={{ 
-                  y: -10,
-                  transition: { duration: 0.3 }
-                }}
-                whileTap={{ scale: 0.98 }}
               >
-                <motion.div 
-                  className={styles.stepNumber}
-                  initial={{ scale: 0, rotate: -180 }}
-                  whileInView={{ scale: 1, rotate: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  viewport={{ once: true, amount: 0.3 }}
-                  whileHover={{ rotate: 5, scale: 1.1 }}
-                >
-                  {step.number}
-                </motion.div>
+                <div className={styles.stepNumber}>{step.number}</div>
                 <h3>{step.title}</h3>
                 <p>{step.desc}</p>
               </motion.div>
@@ -517,20 +503,14 @@ const ServicesPage = () => {
             <div className={styles.ctaButtons}>
               <motion.button 
                 className={styles.primaryCta}
-                whileHover={{ 
-                  scale: 1.05,
-                  boxShadow: "0 10px 25px rgba(37, 99, 235, 0.4)"
-                }}
+                whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
                 <Link to="/contact">Book Free Consultation</Link>
               </motion.button>
               <motion.button 
                 className={styles.secondaryCta}
-                whileHover={{ 
-                  scale: 1.05,
-                  backgroundColor: "rgba(255, 255, 255, 0.1)"
-                }}
+                whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
                 <Link to="/portfolio">View Our Work</Link>

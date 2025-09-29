@@ -1,12 +1,16 @@
-import React, { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import React, { useRef, useMemo } from 'react';
+import { useInView } from 'framer-motion';
 import './Process.css';
 
 const Process = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.3 });
+  const isInView = useInView(ref, { 
+  once: true, 
+  amount: 0.1, // Reduced from 0.3 to 0.1 for mobile
+  rootMargin: '-50px 0px -50px 0px' // Added root margin
+});
 
-  const steps = [
+  const steps = useMemo(() => [
     {
       number: "01",
       title: "Discovery & Strategy",
@@ -25,29 +29,7 @@ const Process = () => {
       description: "We deploy your site and implement marketing strategies to drive traffic and generate leads.",
       icon: "🚀"
     }
-  ];
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { y: 30, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.7,
-        ease: "easeOut"
-      }
-    }
-  };
+  ], []);
 
   return (
     <section className="process-section" ref={ref}>
@@ -56,48 +38,25 @@ const Process = () => {
       </div>
       
       <div className="container">
-        <motion.h2 
-          className="section-title"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
-        >
+        <h2 className={`section-title fade-in-up ${isInView ? 'visible' : ''}`}>
           Our <span className="gradient-text">3-Step Process</span>
-        </motion.h2>
+        </h2>
         
-        <motion.p 
-          className="section-subtitle"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, delay: 0.2 }}
-        >
+        <p className={`section-subtitle fade-in-up ${isInView ? 'visible' : ''}`}>
           From concept to conversion, we make it seamless and stress-free.
-        </motion.p>
+        </p>
 
-        <motion.div 
-          className="process-steps"
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-        >
+        <div className={`process-steps stagger-children ${isInView ? 'visible' : ''}`}>
           {steps.map((step, index) => (
-            <motion.div 
-              key={index} 
-              className="process-step"
-              variants={itemVariants}
-              whileHover={{ 
-                y: -10,
-                transition: { duration: 0.3 }
-              }}
-            >
+            <div key={index} className="process-step">
               <div className="step-number">{step.number}</div>
               <div className="step-icon">{step.icon}</div>
               <h3 className="step-title">{step.title}</h3>
               <p className="step-description">{step.description}</p>
               <div className="step-connector"></div>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

@@ -1,12 +1,16 @@
-import React, { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import React, { useRef, useMemo } from 'react';
+import { useInView } from 'framer-motion';
 import './Testimonials.css';
 
 const Testimonials = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.3 });
+  const isInView = useInView(ref, { 
+  once: true, 
+  amount: 0.1, // Reduced from 0.3 to 0.1 for mobile
+  rootMargin: '-50px 0px -50px 0px' // Added root margin
+});
 
-  const testimonials = [
+  const testimonials = useMemo(() => [
     {
       quote: "Wexably didn't just build us a website; they built us a secure booking system that we don't have to worry about. Our leads from the site have increased by 40% and it's always up. For a limo company, that's everything.",
       author: "Michael Chen",
@@ -25,29 +29,7 @@ const Testimonials = () => {
       company: "Mississauga Spa & Wellness",
       results: "3x ROI in first 6 months"
     }
-  ];
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { y: 30, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.7,
-        ease: "easeOut"
-      }
-    }
-  };
+  ], []);
 
   return (
     <section className="testimonials-section" ref={ref}>
@@ -56,40 +38,17 @@ const Testimonials = () => {
       </div>
       
       <div className="container">
-        <motion.h2 
-          className="section-title"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
-        >
+        <h2 className={`section-title fade-in-up ${isInView ? 'visible' : ''}`}>
           What Our <span className="gradient-text">Clients Say</span>
-        </motion.h2>
+        </h2>
         
-        <motion.p 
-          className="section-subtitle"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, delay: 0.2 }}
-        >
+        <p className={`section-subtitle fade-in-up ${isInView ? 'visible' : ''}`}>
           Don't just take our word for it. Here's what our clients have to say about their experience working with us.
-        </motion.p>
+        </p>
 
-        <motion.div 
-          className="testimonials-grid"
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-        >
+        <div className={`testimonials-grid stagger-children ${isInView ? 'visible' : ''}`}>
           {testimonials.map((testimonial, index) => (
-            <motion.div 
-              key={index} 
-              className="testimonial-card"
-              variants={itemVariants}
-              whileHover={{ 
-                y: -10,
-                transition: { duration: 0.3 }
-              }}
-            >
+            <div key={index} className="testimonial-card">
               <div className="quote-icon">"</div>
               <div className="testimonial-content">
                 <p className="testimonial-quote">{testimonial.quote}</p>
@@ -102,9 +61,9 @@ const Testimonials = () => {
                 </div>
               </div>
               <div className="card-hover-effect"></div>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

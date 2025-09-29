@@ -1,13 +1,17 @@
-import React, { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import React, { useRef, useMemo } from 'react';
+import { useInView } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import './Services.css';
 
 const Services = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.3 });
+  const isInView = useInView(ref, { 
+  once: true, 
+  amount: 0.1, // Reduced from 0.3 to 0.1 for mobile
+  rootMargin: '-50px 0px -50px 0px' // Added root margin
+});
 
-  const services = [
+  const services = useMemo(() => [
     {
       icon: '🛡️',
       title: 'Hacker-Proof Websites',
@@ -26,29 +30,7 @@ const Services = () => {
       description: 'Sleep easy knowing your website is always online, always fast, and always secure with our monthly care plans. We handle the tech, you run your business.',
       features: ['24/7 Monitoring', 'Regular Updates', 'Performance Optimization', 'Backups']
     }
-  ];
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { y: 30, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.7,
-        ease: "easeOut"
-      }
-    }
-  };
+  ], []);
 
   return (
     <section className="services-section" ref={ref}>
@@ -57,39 +39,19 @@ const Services = () => {
       </div>
       
       <div className="container">
-        <motion.h2 
-          className="section-title"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
-        >
+        <h2 className={`section-title fade-in-up ${isInView ? 'visible' : ''}`}>
           How We Drive Your <span className="gradient-text">Digital Growth</span>
-        </motion.h2>
+        </h2>
         
-        <motion.p 
-          className="section-subtitle"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, delay: 0.2 }}
-        >
+        <p className={`section-subtitle fade-in-up ${isInView ? 'visible' : ''}`}>
           We combine cutting-edge technology with strategic marketing to deliver exceptional results
-        </motion.p>
+        </p>
 
-        <motion.div 
-          className="services-grid"
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-        >
+        <div className={`services-grid stagger-children ${isInView ? 'visible' : ''}`}>
           {services.map((service, index) => (
-            <motion.div 
+            <div 
               key={index} 
               className="service-card"
-              variants={itemVariants}
-              whileHover={{ 
-                y: -10,
-                transition: { duration: 0.3 }
-              }}
             >
               <div className="service-icon-wrapper">
                 <div className="service-icon">{service.icon}</div>
@@ -117,9 +79,9 @@ const Services = () => {
               </div>
               
               <div className="card-hover-effect"></div>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

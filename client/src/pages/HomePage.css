@@ -1,10 +1,82 @@
-.homepage {
-  overflow-x: hidden;
+/* HomePage.css - Optimized for Performance and Mobile */
+@import '../styles/animations.css';
+
+/* ===== ROOT VARIABLES AND RESET ===== */
+:root {
+  --primary-blue: #2563eb;
+  --primary-purple: #7c3aed;
+  --accent-teal: #06b6d4;
+  --text-dark: #1f2937;
+  --text-light: #6b7280;
+  --text-lighter: #9ca3af;
+  --background-white: #ffffff;
+  --background-gray: #f9fafb;
+  --dark-bg: #0a0a18;
+  --darker-bg: #0f172a;
+  --section-padding: clamp(4rem, 8vw, 8rem);
+  --mobile-padding: clamp(2rem, 4vw, 3rem);
 }
 
-/* Global section styles */
+/* ===== BASE STYLES ===== */
+.homepage {
+  overflow-x: hidden;
+  position: relative;
+  width: 100%;
+  background: var(--dark-bg);
+  color: white;
+  /* Remove problematic transforms that cause jiggling */
+  transform: none;
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Ensure proper stacking context */
+.homepage > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== SECTION SPACING WITH PROPER SPECIFICITY ===== */
+.homepage .hero-section {
+  padding-top: 80px; /* Account for fixed header */
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+.homepage .services-section {
+  padding: var(--section-padding) 0;
+  background: linear-gradient(to bottom, var(--darker-bg), var(--dark-bg));
+}
+
+.homepage .process-section {
+  padding: var(--section-padding) 0;
+  background: var(--dark-bg);
+}
+
+.homepage .portfolio-showcase {
+  padding: var(--section-padding) 0;
+  background: var(--darker-bg);
+}
+
+.homepage .testimonials-section {
+  padding: var(--section-padding) 0;
+  background: linear-gradient(to bottom, var(--dark-bg), var(--darker-bg));
+}
+
+.homepage .about-section {
+  padding: var(--section-padding) 0;
+  background: var(--dark-bg);
+}
+
+.homepage .final-cta-section {
+  padding: var(--section-padding) 0;
+  background: linear-gradient(135deg, var(--dark-bg) 0%, #1a1a2e 50%, #16213e 100%);
+}
+
+/* ===== CONTAINER AND LAYOUT ===== */
 .container {
-  max-width: 1200px;
+  max-width: min(1200px, 90vw);
   margin: 0 auto;
   padding: 0 2rem;
 }
@@ -15,45 +87,444 @@
   text-align: center;
   margin-bottom: 1.5rem;
   color: white;
+  line-height: 1.1;
 }
 
 .section-subtitle {
-  font-size: 1.25rem;
+  font-size: clamp(1.1rem, 2.5vw, 1.25rem);
   text-align: center;
-  color: #d1d5db;
-  margin-bottom: 5rem;
-  max-width: 600px;
+  color: var(--text-lighter);
+  margin-bottom: clamp(3rem, 6vw, 5rem);
+  max-width: min(600px, 90%);
   margin-left: auto;
   margin-right: auto;
   line-height: 1.6;
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, #3b82f6, #8b5cf6, #06b6d4);
+  background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple), var(--accent-teal));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  background-size: 200% 200%;
+  animation: gradientShift 6s ease infinite;
 }
 
-/* Smooth scrolling for the entire page */
-html {
-  scroll-behavior: smooth;
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
 }
 
-/* Custom scrollbar */
+/* ===== PERFORMANCE OPTIMIZATIONS ===== */
+.performance-optimized {
+  /* Hardware acceleration for smooth animations */
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+  will-change: transform, opacity;
+}
+
+/* Prevent layout shifts */
+.homepage * {
+  box-sizing: border-box;
+}
+
+/* Smooth scrolling for desktop */
+@media (min-width: 769px) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* ===== CUSTOM SCROLLBAR ===== */
 ::-webkit-scrollbar {
   width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #0f172a;
+  background: var(--darker-bg);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  background: linear-gradient(135deg, #1d4ed8, #6d28d9);
+}
+
+/* ===== ACCESSIBILITY AND FOCUS STYLES ===== */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--primary-blue);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Selection styles */
+::selection {
+  background: rgba(37, 99, 235, 0.3);
+  color: white;
+}
+
+::-moz-selection {
+  background: rgba(37, 99, 235, 0.3);
+  color: white;
+}
+
+/* ===== ANIMATION UTILITIES ===== */
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.fade-in-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.stagger-children > * {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.stagger-children.visible > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger delays */
+.stagger-children.visible > *:nth-child(1) { transition-delay: 0.1s; }
+.stagger-children.visible > *:nth-child(2) { transition-delay: 0.2s; }
+.stagger-children.visible > *:nth-child(3) { transition-delay: 0.3s; }
+.stagger-children.visible > *:nth-child(4) { transition-delay: 0.4s; }
+.stagger-children.visible > *:nth-child(5) { transition-delay: 0.5s; }
+.stagger-children.visible > *:nth-child(6) { transition-delay: 0.6s; }
+
+/* ===== CRITICAL MOBILE OPTIMIZATIONS ===== */
+@media (max-width: 768px) {
+  .homepage {
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Mobile container padding */
+  .container {
+    padding: 0 1rem;
+  }
+
+  /* Mobile section spacing */
+  .homepage .hero-section {
+    padding-top: 70px;
+    min-height: calc(100vh - 70px);
+  }
+
+  .homepage .services-section,
+  .homepage .process-section,
+  .homepage .portfolio-showcase,
+  .homepage .testimonials-section,
+  .homepage .about-section,
+  .homepage .final-cta-section {
+    padding: var(--mobile-padding) 0;
+  }
+
+  /* Disable performance-heavy animations on mobile */
+  .particle,
+  .gradient-orbs .orb,
+  .floating-element,
+  .card-hover-effect {
+    animation: none !important;
+    transition: none !important;
+    opacity: 0.3; /* Reduce opacity instead of complete removal */
+  }
+
+  /* Ensure sections are properly visible */
+  section {
+    min-height: auto !important;
+    opacity: 1 !important;
+    display: block !important;
+    visibility: visible !important;
+  }
+
+  /* Keep essential animations but make them faster */
+  .fade-in-up {
+    transition-duration: 0.4s;
+  }
+
+  .fade-in-up.visible {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+
+  /* Reduce text sizes for mobile */
+  .section-title {
+    font-size: clamp(1.8rem, 6vw, 2.5rem);
+    margin-bottom: 1rem;
+  }
+
+  .section-subtitle {
+    font-size: clamp(1rem, 4vw, 1.1rem);
+    margin-bottom: 2rem;
+  }
+
+  /* Fix for mobile vibration issues */
+  [style*="transform"] {
+    transform: none !important;
+  }
+
+  /* Specific fixes for Framer Motion on mobile */
+  .motion-div {
+    transform: none !important;
+  }
+}
+
+/* ===== EXTRA SMALL DEVICES ===== */
+@media (max-width: 480px) {
+  .homepage {
+    overflow-x: hidden;
+  }
+
+  .container {
+    padding: 0 0.5rem;
+  }
+
+  .homepage section {
+    padding: 2rem 0 !important;
+  }
+
+  .section-title {
+    font-size: clamp(1.5rem, 7vw, 2rem);
+  }
+
+  .section-subtitle {
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+  }
+
+  /* Further reduce animations on very small screens */
+  .gradient-text {
+    animation: none;
+  }
+}
+
+/* ===== REDUCED MOTION SUPPORT ===== */
+@media (prefers-reduced-motion: reduce) {
+  .homepage * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .gradient-text {
+    animation: none !important;
+    background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
+  }
+
+  .fade-in-up,
+  .stagger-children > * {
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* ===== SAFARI/IOS SPECIFIC FIXES ===== */
+@supports (-webkit-touch-callout: none) {
+  .homepage {
+    -webkit-overflow-scrolling: touch;
+    height: 100%;
+    overflow-x: hidden;
+  }
+
+  /* Fix for Safari rendering issues */
+  section {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+
+  /* Safari-specific vibration fixes */
+  .hero-background,
+  .particles,
+  .gradient-orbs {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* ===== FIREFOX OPTIMIZATIONS ===== */
+@-moz-document url-prefix() {
+  .homepage {
+    scroll-behavior: smooth;
+  }
+
+  /* Firefox-specific performance optimizations */
+  .performance-optimized {
+    will-change: auto;
+  }
+}
+
+/* ===== HIGH CONTRAST MODE SUPPORT ===== */
+@media (prefers-contrast: high) {
+  .gradient-text {
+    background: none;
+    -webkit-text-fill-color: var(--primary-blue);
+    color: var(--primary-blue);
+  }
+
+  .section-subtitle {
+    color: white;
+  }
+}
+
+/* ===== DARK MODE ENHANCEMENTS ===== */
+@media (prefers-color-scheme: dark) {
+  .homepage {
+    background: #0a0a18;
+  }
+}
+
+/* ===== PRINT STYLES ===== */
+@media print {
+  .homepage {
+    background: white !important;
+    color: black !important;
+  }
+
+  .homepage .hero-section,
+  .homepage .services-section,
+  .homepage .process-section,
+  .homepage .portfolio-showcase,
+  .homepage .testimonials-section,
+  .homepage .about-section,
+  .homepage .final-cta-section {
+    padding: 2rem 0 !important;
+    background: white !important;
+  }
+
+  .gradient-text {
+    background: none !important;
+    -webkit-text-fill-color: black !important;
+    color: black !important;
+  }
+
+  /* Hide decorative elements for printing */
+  .particle,
+  .gradient-orbs,
+  .floating-element,
+  .card-hover-effect {
+    display: none !important;
+  }
+}
+
+/* ===== EMERGENCY VIBRATION FIXES ===== */
+/* If vibrations persist, use these as last resort */
+.no-vibration {
+  transform: translate3d(0, 0, 0) !important;
+  backface-visibility: hidden !important;
+  perspective: 1000px !important;
+}
+
+.anti-jiggle * {
+  animation-play-state: paused !important;
+}
+
+/* Specific fixes for known problematic elements */
+.hero-background,
+.particles-container,
+.gradient-orbs {
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* ===== LOADING STATE STYLES ===== */
+.homepage.loading {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.homepage.loaded {
+  opacity: 1;
+}
+
+/* ===== ERROR STATE STYLES ===== */
+.homepage.error {
+  position: relative;
+}
+
+.homepage.error::before {
+  content: '⚠️ Content failed to load. Please refresh the page.';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  padding: 2rem;
+  border-radius: 8px;
+  text-align: center;
+  z-index: 1000;
+}
+
+/* ===== PERFORMANCE MONITORING STYLES ===== */
+.performance-warning {
+  display: none;
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  background: rgba(245, 158, 11, 0.1);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  z-index: 10000;
+}
+
+@media (max-width: 768px) and (orientation: landscape) {
+  .performance-warning {
+    display: block;
+  }
+}
+
+/* ===== TOUCH DEVICE OPTIMIZATIONS ===== */
+@media (hover: none) and (pointer: coarse) {
+  /* Improve touch targets */
+  button, 
+  a, 
+  .clickable {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Disable hover effects on touch devices */
+  .card-hover-effect,
+  .hover-animation {
+    display: none;
+  }
+}
+
+/* ===== LARGE SCREEN OPTIMIZATIONS ===== */
+@media (min-width: 1440px) {
+  .container {
+    max-width: 1400px;
+  }
+
+  .section-title {
+    font-size: clamp(2.5rem, 4vw, 4rem);
+  }
+}
+
+/* ===== VERY LARGE SCREEN SUPPORT ===== */
+@media (min-width: 2000px) {
+  .homepage {
+    font-size: 110%;
+  }
+
+  .container {
+    max-width: 1800px;
+  }
 }
