@@ -32,7 +32,7 @@ const CountUp = ({ end, duration = 2 }) => {
 
 const ServicesPage = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.1 });
+  // const isInView = useInView(ref, { once: true, amount: 0.1 });
   
   const [billingCycle, setBillingCycle] = useState('monthly');
   const [scrollY, setScrollY] = useState(0);
