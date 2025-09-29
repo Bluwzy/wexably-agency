@@ -28,13 +28,11 @@ mongoose.connection.on('error', (error) => {
 const app = express();
 
 // ========================
-// 🛡️ TRUST PROXY SETTING (ADD THIS)
-// ========================
-app.set('trust proxy', 1); // Fix for rate limiting behind proxies
-
-// ========================
 // 🛡️ PRACTICAL SECURITY MIDDLEWARE
 // ========================
+
+// 🔧 ADD THIS: Configure Express to trust proxy (for Render)
+app.set('trust proxy', true);
 
 // 1. Safe Helmet configuration (won't break your app)
 app.use(helmet({
@@ -314,25 +312,25 @@ app.use((error, req, res, next) => {
 });
 
 // ========================
-// GRACEFUL SHUTDOWN (FIXED)
+// GRACEFUL SHUTDOWN
 // ========================
 process.on('SIGTERM', () => {
   console.log('SIGTERM received. Starting graceful shutdown...');
   server.close(() => {
-    mongoose.connection.close(false).then(() => {
-      console.log('MongoDB connection closed.');
-      process.exit(0);
-    });
+    // 🔧 FIXED: Remove callback from mongoose.connection.close()
+    mongoose.connection.close();
+    console.log('MongoDB connection closed.');
+    process.exit(0);
   });
 });
 
 process.on('SIGINT', () => {
   console.log('SIGINT received. Starting graceful shutdown...');
   server.close(() => {
-    mongoose.connection.close(false).then(() => {
-      console.log('MongoDB connection closed.');
-      process.exit(0);
-    });
+    // 🔧 FIXED: Remove callback from mongoose.connection.close()
+    mongoose.connection.close();
+    console.log('MongoDB connection closed.');
+    process.exit(0);
   });
 });
 
@@ -345,7 +343,7 @@ const server = app.listen(PORT, () => {
   console.log(`🌐 Environment: ${process.env.NODE_ENV || 'development'}`);
   console.log(`🔗 CORS enabled for: ${allowedOrigins.join(', ')}`);
   console.log(`🛡️  Security: Rate limiting, CORS, Input sanitization, Secure headers`);
-  console.log(`🔧 Trust proxy: Enabled for rate limiting`);
+  console.log(`🔧 Proxy trust: ${app.get('trust proxy')}`); // Add this line to verify
   if (process.env.NODE_ENV === 'production') {
     console.log('📁 Serving React build files for client-side routing');
   }
