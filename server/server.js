@@ -271,15 +271,15 @@ app.post('/api/contact', contactLimiter, async (req, res) => {
 // ========================
 
 // Serve static files from React build (for production)
-if (process.env.NODE_ENV === 'production') {
-  // Serve static files from the React build folder
-  app.use(express.static(path.join(__dirname, '../client/build')));
+// if (process.env.NODE_ENV === 'production') {
+//   // Serve static files from the React build folder
+//   app.use(express.static(path.join(__dirname, '../client/build')));
   
-  // Handle client-side routing - return all requests to React app
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
-  });
-} else {
+//   // Handle client-side routing - return all requests to React app
+//   app.get('*', (req, res) => {
+//     res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+//   });
+// } else {
   // Development - API 404 handler
   app.use('/api/{*path}', (req, res) => {
     res.status(404).json({ 
@@ -287,7 +287,7 @@ if (process.env.NODE_ENV === 'production') {
       error: 'API endpoint not found' 
     });
   });
-}
+// }
 
 // ========================
 // ERROR HANDLING
