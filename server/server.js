@@ -32,7 +32,7 @@ const app = express();
 // ========================
 
 // 🔧 ADD THIS: Configure Express to trust proxy (for Render)
-app.set('trust proxy', true);
+app.set('trust proxy', 1);
 
 // 1. Safe Helmet configuration (won't break your app)
 app.use(helmet({
@@ -73,10 +73,13 @@ const generalLimiter = rateLimit({
 
 // 4. CORS - PREVENTS UNAUTHORIZED DOMAIN ACCESS
 const allowedOrigins = [
-  process.env.CLIENT_URL, 
+  process.env.CLIENT_URL,
   'http://localhost:3000',
-  'https://wexably-agency.netlify.app'
+  'https://wexably-agency.netlify.app',
+  'https://wexably.com',
+  'https://www.wexably.com'
 ].filter(origin => origin);
+
 
 app.use(cors({
   origin: function (origin, callback) {
