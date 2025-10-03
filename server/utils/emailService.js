@@ -20,7 +20,7 @@ const sendContactNotification = async (formData) => {
     await transporter.verify();
     console.log('Brevo SMTP connection verified successfully');
 
-    // Define mail options (keep your existing HTML and text templates)
+    // --- Internal Notification (to you) ---
     const mailOptions = {
       from: process.env.FROM_EMAIL, // "Wexably Contact Form <hello@wexably.com>"
       to: process.env.TO_EMAIL, // "hello@wexably.com"
@@ -46,10 +46,42 @@ const sendContactNotification = async (formData) => {
       text: `New Contact Form Submission\n\nName: ${formData.name}\nEmail: ${formData.email}\nCompany: ${formData.company || 'Not provided'}\nMessage:\n${formData.message}`
     };
 
-    // Send email
+    // Send internal notification to you
     let info = await transporter.sendMail(mailOptions);
     console.log('✅ Email notification sent successfully via Brevo to:', mailOptions.to);
     console.log('📧 Brevo Message ID:', info.messageId);
+
+    // --- Auto-reply to client ---
+    await transporter.sendMail({
+      from: `"${process.env.AUTO_REPLY_NAME}" <${process.env.AUTO_REPLY_EMAIL}>`, // from .env
+      to: formData.email, // client’s email
+      subject: "We received your message at Wexably 🚀",
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; background: #f9f9f9; padding: 20px; border-radius: 10px; border: 1px solid #eee;">
+          <div style="text-align: center; margin-bottom: 20px;">
+            <h2 style="color: #2c3e50;">Wexably Agency</h2>
+          </div>
+          <p style="font-size: 16px; color: #333;">Hi <b>${formData.name}</b>,</p>
+          <p style="font-size: 15px; color: #555;">
+            Thanks for reaching out to <b>Wexably</b> 🚀.  
+            We’ve received your message and our team will get back to you within <b>24 hours</b>.
+          </p>
+          <p style="margin-top: 20px; font-size: 14px; color: #444;">Here’s a copy of your message for reference:</p>
+          <blockquote style="border-left: 4px solid #4CAF50; padding-left: 10px; color: #555; margin: 10px 0;">
+            ${formData.message}
+          </blockquote>
+          <br>
+          <p style="font-size: 15px; color: #333;">Best regards,</p>
+          <p style="font-weight: bold; font-size: 15px; color: #2c3e50;">Wexably Agency Team</p>
+          <hr style="margin: 25px 0; border: none; border-top: 1px solid #ddd;"/>
+          <p style="font-size: 12px; color: #999; text-align: center;">
+            This is an automated email from Wexably Agency. Please do not reply directly.  
+            Visit <a href="https://wexably.com" style="color: #4CAF50; text-decoration: none;">wexably.com</a> for more.
+          </p>
+        </div>
+      `
+    });
+    console.log(`✅ Auto-reply sent successfully to ${formData.email}`);
 
     return info;
 

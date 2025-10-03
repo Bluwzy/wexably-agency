@@ -13,8 +13,6 @@
   isolation: isolate;
   padding-top: 100px;
   box-sizing: border-box;
-  /* Critical vibration fixes */
-  transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
   perspective: 1000px;
   will-change: auto;
@@ -33,7 +31,6 @@
   width: 100%;
   height: 100%;
   z-index: -1;
-  /* Critical: Prevent layout shifts and vibrations */
   transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
   will-change: transform;
@@ -179,7 +176,6 @@
   max-width: 900px;
   padding: 0 2rem;
   margin-top: 0;
-  /* Prevent layout shifts */
   transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
 }
@@ -315,6 +311,18 @@
   transform: translate3d(0, 0, 0);
 }
 
+/* Emoji row for horizontal alignment */
+.emoji-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4em;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
 .scroll-indicator {
   position: relative;
   display: flex;
@@ -336,31 +344,12 @@
   transform: translate3d(0, 0, 0);
 }
 
+/* JIGGLE-FREE SCROLL LINE - Static version */
 .scroll-line {
   width: 2px;
   height: 40px;
   background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.8), transparent);
-  animation: scrollLine 2s infinite;
-  transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
-}
-
-@keyframes scrollLine {
-  0% { 
-    height: 0; 
-    opacity: 0; 
-    transform: translate3d(0, 0, 0);
-  }
-  50% { 
-    height: 40px; 
-    opacity: 1; 
-    transform: translate3d(0, 0, 0);
-  }
-  100% { 
-    height: 0; 
-    opacity: 0; 
-    transform: translate3d(0, 40px, 0);
-  }
+  /* Removed animation that caused jiggle */
 }
 
 .floating-elements {
@@ -431,7 +420,7 @@
   }
 }
 
-/* ===== CRITICAL MOBILE OPTIMIZATIONS ===== */
+/* Mobile optimizations */
 @media (max-width: 768px) {
   .hero {
     padding-top: 90px;
@@ -439,18 +428,15 @@
     transform: translate3d(0, 0, 0) !important;
   }
   
-  /* Slower particles on mobile for better performance */
   .particle {
     animation-duration: 20s !important;
     transform: translate3d(0, 0, 0);
   }
   
-  /* Less blur on mobile for performance */
   .gradient-orbs {
     filter: blur(20px);
   }
   
-  /* Hide third orb on mobile */
   .orb-3 {
     display: none;
   }
@@ -488,7 +474,6 @@
     transform: translate3d(0, 0, 0);
   }
   
-  /* Reduce floating elements on mobile */
   .floating-element {
     animation-duration: 30s !important;
   }
@@ -515,7 +500,6 @@
     margin-bottom: 1rem;
   }
   
-  /* Further reduce animations on very small screens */
   .particle {
     animation: none;
     opacity: 0.2;
@@ -526,32 +510,19 @@
   }
 }
 
-/* ===== DESKTOP-SPECIFIC VIBRATION FIXES ===== */
+/* Desktop hover effects */
 @media (min-width: 769px) {
-  .hero {
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-  }
-  
-  /* Ensure smooth scrolling on desktop */
-  .hero-content {
-    transform: translate3d(0, 0, 0);
-    backface-visibility: hidden;
-  }
-  
-  /* Stable hover effects */
   .primary-cta:hover, .secondary-cta:hover {
     transform: translate3d(0, -2px, 0);
     transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 }
 
-/* ===== REDUCED MOTION SUPPORT ===== */
+/* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
   .particle,
   .orb,
-  .floating-element,
-  .scroll-line {
+  .floating-element {
     animation: none !important;
   }
   
@@ -564,7 +535,6 @@
     animation: none !important;
   }
   
-  /* Keep essential transforms for layout stability */
   .hero,
   .hero-background,
   .particles,
@@ -573,7 +543,7 @@
   }
 }
 
-/* ===== SAFARI/IOS SPECIFIC FIXES ===== */
+/* Safari/iOS specific fixes */
 @supports (-webkit-touch-callout: none) {
   .hero {
     -webkit-overflow-scrolling: touch;
@@ -586,14 +556,13 @@
     transform: translate3d(0, 0, 0);
   }
   
-  /* Fix for Safari rendering issues */
   .particle {
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
   }
 }
 
-/* ===== FIREFOX SCROLLING OPTIMIZATIONS ===== */
+/* Firefox scrolling optimizations */
 @-moz-document url-prefix() {
   .hero {
     scroll-behavior: smooth;
@@ -604,8 +573,7 @@
   }
 }
 
-/* ===== EMERGENCY VIBRATION FIXES ===== */
-/* If vibrations persist, add these nuclear options as last resort */
+/* Emergency vibration fixes */
 .anti-vibration {
   transform: translate3d(0, 0, 0) !important;
   backface-visibility: hidden !important;

@@ -6,6 +6,7 @@ const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
 const path = require('path');
 const { sendContactNotification } = require('./utils/emailService');
+// const nodemailer = require('nodemailer'); // <-- LEGACY: kept commented (email handled in emailService)
 
 // Load environment variables
 dotenv.config();
@@ -234,16 +235,69 @@ app.post('/api/contact', contactLimiter, async (req, res) => {
       messageLength: message.length,
       isPotentialSpam
     });
-    
-    // Try to send email notification with timeout
+
+    // ========================
+    // 📨 SEND EMAILS
+    // ========================
+    // LEGACY: older inline flow kept below (commented)
+    // ------------------------------------------------
+    // try {
+    //   const emailPromise = sendContactNotification({ name, email, company, message });
+    //   const timeoutPromise = new Promise((_, reject) => 
+    //     setTimeout(() => reject(new Error('Email timeout')), 10000)
+    //   );
+    //   
+    //   await Promise.race([emailPromise, timeoutPromise]);
+    //   console.log('✅ Email notification sent successfully');
+    // } catch (emailError) {
+    //   console.error('❌ Failed to send email:', emailError.message);
+    //   // Don't fail the request if email fails
+    // }
+    //
+    // // Legacy inline auto-reply (kept for reference)
+    // try {
+    //   let transporter = nodemailer.createTransport({
+    //     host: process.env.SMTP_HOST,
+    //     port: process.env.SMTP_PORT,
+    //     secure: false,
+    //     auth: {
+    //       user: process.env.SMTP_USER,
+    //       pass: process.env.SMTP_PASS,
+    //     },
+    //   });
+    //
+    //   await transporter.sendMail({
+    //     from: '"Wexably Agency" <no-reply@wexably.com>',
+    //     to: email,
+    //     subject: "We received your message at Wexably 🚀",
+    //     html: `
+    //       <p>Hi ${name},</p>
+    //       <p>Thanks for reaching out to <b>Wexably</b>. We’ve received your message and our team will get back to you within 24 hours.</p>
+    //       <p>Here’s a copy of your message for reference:</p>
+    //       <blockquote>${message}</blockquote>
+    //       <br>
+    //       <p>Best regards,</p>
+    //       <p><b>Wexably Agency Team</b></p>
+    //     `
+    //   });
+    //
+    //   console.log(`✅ Auto-reply sent successfully to ${email}`);
+    // } catch (autoReplyError) {
+    //   console.error('❌ Failed to send auto-reply:', autoReplyError.message);
+    // }
+    // ------------------------------------------------
+    // NEW: centralized email handling (active)
     try {
+      // sendContactNotification now sends the admin notification AND the auto-reply
       const emailPromise = sendContactNotification({ name, email, company, message });
+
+      // Avoid blocking forever if SMTP is slow — 10s timeout
       const timeoutPromise = new Promise((_, reject) => 
         setTimeout(() => reject(new Error('Email timeout')), 10000)
       );
       
       await Promise.race([emailPromise, timeoutPromise]);
-      console.log('✅ Email notification sent successfully');
+      console.log('✅ Emails sent successfully (notification + auto-reply)');
     } catch (emailError) {
       console.error('❌ Failed to send email:', emailError.message);
       // Don't fail the request if email fails
