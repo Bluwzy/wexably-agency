@@ -2,30 +2,207 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="google-site-verification" content="Ofy9wGYXOknprO2T8GNWDW6sofWfZZTdQx6hnMK8tbg" />
-  <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#2563eb" />
   
-  <!-- Default Meta Tags (will be overridden by React Helmet) -->
-  <meta name="description" content="Wexably Agency - Secure Growth Partner for GTA Businesses. We build fast, secure websites for Toronto plumbers, roofers, and dentists." />
-  <meta name="keywords" content="web design Toronto, GTA website development, secure websites" />
+  <!-- FIXED: Proper default meta tags -->
+  <title>Wexably Agency - Secure Growth Partner for GTA Businesses</title>
+  <meta name="description" content="Professional website security and digital marketing for Toronto businesses. We build secure, fast websites that generate leads for plumbers, roofers, dentists, and service companies across the GTA." />
+  <meta name="keywords" content="website security Toronto, GTA web development, secure websites, digital marketing Toronto, website design GTA" />
+  <meta name="author" content="Wexably Agency" />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
   
-  <!-- Preconnect to external domains -->
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://wexably.com/" />
+  <meta property="og:title" content="Wexably Agency - Secure Growth Partner for GTA Businesses" />
+  <meta property="og:description" content="Professional website security and digital marketing for Toronto businesses. We build secure, fast websites that generate leads." />
+  <meta property="og:image" content="https://wexably.com/og-image.jpg" />
+  <meta property="og:site_name" content="Wexably Agency" />
+  <meta property="og:locale" content="en_CA" />
+  
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Wexably Agency - Secure Growth Partner for GTA Businesses" />
+  <meta name="twitter:description" content="Professional website security and digital marketing for Toronto businesses." />
+  <meta name="twitter:image" content="https://wexably.com/og-image.jpg" />
+  
+  <!-- Preconnect for performance -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   
-   <!-- Favicon Implementation -->
+  <!-- Favicons -->
   <link rel="icon" type="image/png" sizes="32x32" href="%PUBLIC_URL%/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="%PUBLIC_URL%/favicon-16x16.png">
   <link rel="shortcut icon" href="%PUBLIC_URL%/favicon-32x32.png">
   <link rel="apple-touch-icon" sizes="180x180" href="%PUBLIC_URL%/favicon-32x32.png">
-
   
-  <title>Wexably Agency - Secure Growth Partner for GTA Businesses</title>
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://wexably.com/" />
+  
+  <!-- JSON-LD Structured Data for Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": "https://wexably.com/#organization",
+    "name": "Wexably Agency",
+    "alternateName": "Wexably",
+    "url": "https://wexably.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://wexably.com/logo.png",
+      "width": 300,
+      "height": 80
+    },
+    "image": {
+      "@type": "ImageObject",
+      "url": "https://wexably.com/og-image.jpg",
+      "width": 1200,
+      "height": 630
+    },
+    "description": "Secure Growth Partner for GTA Businesses - Professional website security and digital marketing services",
+    "slogan": "Secure Growth Partner for GTA Businesses",
+    "foundingDate": "2022",
+    "founder": {
+      "@type": "Person",
+      "name": "Ali Arif",
+      "jobTitle": "Founder & CEO"
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Mississauga",
+      "addressRegion": "ON", 
+      "addressCountry": "CA"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 43.6532,
+      "longitude": -79.3832
+    },
+    "areaServed": {
+      "@type": "GeoCircle",
+      "geoMidpoint": {
+        "@type": "GeoCoordinates",
+        "latitude": 43.6532,
+        "longitude": -79.3832
+      },
+      "geoRadius": 50000
+    },
+    "serviceType": [
+      "Website Security",
+      "Web Development", 
+      "Digital Marketing",
+      "SEO Services",
+      "Cybersecurity Consulting"
+    ],
+    "priceRange": "$$",
+    "telephone": "+1-289-335-7376",
+    "email": "hello@wexably.com",
+    "sameAs": [
+      "https://www.linkedin.com/company/wexably-agency"
+    ],
+    "knowsAbout": [
+      "Website Security",
+      "Cybersecurity",
+      "Web Development",
+      "Digital Marketing",
+      "SEO",
+      "Toronto Business Solutions"
+    ]
+  }
+  </script>
+
+  <!-- Website Schema for Sitelinks -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": "https://wexably.com/#website",
+    "url": "https://wexably.com",
+    "name": "Wexably Agency",
+    "description": "Secure Growth Partner for GTA Businesses",
+    "publisher": {
+      "@type": "Organization",
+      "@id": "https://wexably.com/#organization"
+    },
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://wexably.com/search?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    },
+    "hasPart": [
+      {
+        "@type": "WebPage",
+        "@id": "https://wexably.com/#homepage",
+        "url": "https://wexably.com/",
+        "name": "Home",
+        "description": "Secure Growth Partner for GTA Businesses",
+        "inLanguage": "en-CA"
+      },
+      {
+        "@type": "WebPage", 
+        "@id": "https://wexably.com/services#servicespage",
+        "url": "https://wexably.com/services",
+        "name": "Services",
+        "description": "Website Security & Digital Marketing Services",
+        "inLanguage": "en-CA"
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://wexably.com/portfolio#portfoliopage", 
+        "url": "https://wexably.com/portfolio",
+        "name": "Portfolio",
+        "description": "Our Work & Case Studies",
+        "inLanguage": "en-CA"
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://wexably.com/contact#contactpage",
+        "url": "https://wexably.com/contact", 
+        "name": "Contact",
+        "description": "Get Your Free Security Audit",
+        "inLanguage": "en-CA"
+      }
+    ]
+  }
+  </script>
+
+  <!-- LocalBusiness Schema for Local SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "@id": "https://wexably.com/#localbusiness",
+    "name": "Wexably Agency",
+    "description": "Professional website security and digital marketing for Toronto businesses",
+    "url": "https://wexably.com",
+    "telephone": "+1-289-335-7376",
+    "email": "hello@wexably.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Mississauga",
+      "addressRegion": "ON",
+      "addressCountry": "CA"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 43.6532,
+      "longitude": -79.3832
+    },
+    "openingHours": "Mo-Fr 09:00-17:00",
+    "priceRange": "$$",
+    "paymentAccepted": "Credit Card, Bank Transfer, PayPal",
+    "currenciesAccepted": "CAD, USD"
+  }
+  </script>
 </head>
 <body>
-  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <noscript>
+    You need to enable JavaScript to run this app. 
+    Wexably Agency provides professional website security and digital marketing services for Toronto-area businesses.
+    Visit wexably.com for secure website solutions.
+  </noscript>
   <div id="root"></div>
 </body>
 </html>

@@ -13,13 +13,12 @@ import './HomePage.css';
 const HomePage = () => {
   return (
     <>
-          <SEO
+      <SEO
         title="Wexably Agency - Secure Growth Partner for GTA Businesses"
-        description="We build fast, secure websites and marketing engines for Toronto-area plumbers, roofers, and dentists—so you can generate leads confidently without worrying about hackers, downtime, or missed opportunities."
-        keywords="web design Toronto, GTA website development, secure websites, plumber websites, roofer websites, dentist websites, Toronto digital marketing, website security, lead generation"
+        description="Professional website security and digital marketing for Toronto businesses. We build secure, fast websites that generate leads for plumbers, roofers, dentists, and service companies across the GTA."
+        keywords="website security Toronto, GTA web development, secure websites, digital marketing Toronto, cybersecurity services, web design GTA"
         canonicalUrl="https://wexably.com/"
-        ogType="website"
-      />  
+      />
     <main className="homepage performance-optimized">
       <Hero />
       <Services />

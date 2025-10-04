@@ -70,12 +70,29 @@ const PortfolioPage = () => {
   return (
     <>
       <SEO
-        title="Our Work - Wexably Agency Portfolio | Toronto Web Design"
-        description="See our portfolio of secure, high-converting websites for Toronto businesses. Case studies and examples of our web design work for plumbers, roofers, and dentists across the GTA."
-        keywords="web design portfolio Toronto, GTA website examples, Toronto web development case studies, secure website portfolio, plumber website examples, roofer website design"
+        title="Portfolio - Our Work & Case Studies | Wexably Agency"
+        description="See our portfolio of secure websites and successful digital marketing campaigns for GTA businesses. Case studies showing increased leads and improved security."
+        keywords="web design portfolio Toronto, security case studies, GTA website examples, digital marketing results"
         canonicalUrl="https://wexably.com/portfolio"
-        ogType="website"
+        breadcrumbs={{
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://wexably.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Portfolio", 
+              "item": "https://wexably.com/portfolio"
+            }
+          ]
+        }}
       />
+
     <div className={styles.container}>
       {/* Hero Section */}
       <section className={styles.hero}>

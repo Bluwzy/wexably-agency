@@ -211,12 +211,29 @@ const ServicesPage = () => {
   return (
     <>
     <SEO
-        title="Web Design & Marketing Services - Wexably Agency Toronto"
-        description="Comprehensive web design, development, and digital marketing services for Toronto businesses. Secure websites, SEO optimization, and lead generation for plumbers, roofers, and dentists in the GTA."
-        keywords="web design services Toronto, GTA web development, Toronto SEO services, secure website development, digital marketing GTA, website maintenance Toronto"
-        canonicalUrl="https://wexably.com/services"
-        ogType="website"
-      />
+      title="Services - Website Security & Digital Marketing | Wexably Agency"
+      description="Professional website security, development, and digital marketing services for Toronto businesses. Secure hosting, SEO optimization, and lead generation solutions for the GTA."
+      keywords="website security services Toronto, web development GTA, digital marketing services, SEO Toronto, secure hosting"
+      canonicalUrl="https://wexably.com/services"
+      breadcrumbs={{
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://wexably.com/"
+          },
+          {
+            "@type": "ListItem", 
+            "position": 2,
+            "name": "Services",
+            "item": "https://wexably.com/services"
+          }
+        ]
+      }}
+    />
+
     <div className={styles.container}>
       {/* Hero Section */}
       <section className={styles.hero}>

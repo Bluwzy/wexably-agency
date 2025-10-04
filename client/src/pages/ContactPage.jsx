@@ -249,12 +249,29 @@ const ContactPage = () => {
   return (
     <>
       <SEO
-        title="Contact Wexably Agency - Get Your Free Security Audit"
-        description="Ready to grow your Toronto business with a secure, high-converting website? Contact Wexably Agency for a free security audit and consultation. Serving plumbers, roofers, and dentists across the GTA."
-        keywords="contact web design Toronto, free security audit, GTA web development consultation, Toronto website security, plumber website consultation"
+        title="Contact - Get Your Free Security Audit | Wexably Agency"
+        description="Contact Wexably Agency for professional website security consultation and digital marketing services in Toronto. Free security audit for GTA businesses."
+        keywords="contact web security Toronto, free security audit, GTA web development consultation, website security contact"
         canonicalUrl="https://wexably.com/contact"
-        ogType="website"
+        breadcrumbs={{
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://wexably.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Contact",
+              "item": "https://wexably.com/contact"
+            }
+          ]
+        }}
       />
+
     <div className={styles.container}>
       {/* Hero Section */}
       <section className={styles.hero}>
