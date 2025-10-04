@@ -1,3 +1,5 @@
+/* ===== IMPROVED HEADER CSS ===== */
+
 .header {
   position: fixed;
   top: 0;
@@ -34,8 +36,15 @@
   position: relative;
 }
 
+/* ===== IMPROVED LOGO STYLES ===== */
+.logo {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0; /* Prevent logo from shrinking */
+}
+
 .logo a {
-  font-size: 1.8rem;
+  font-size: 2rem; /* Larger base size */
   font-weight: 800;
   color: white;
   text-decoration: none;
@@ -43,11 +52,32 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  letter-spacing: -0.5px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  line-height: 1;
 }
 
 .logo a:hover {
   filter: brightness(1.2);
+  transform: scale(1.02);
+}
+
+/* Fallback for browsers that don't support background-clip */
+@supports not (-webkit-background-clip: text) {
+  .logo a {
+    color: #3b82f6;
+    -webkit-text-fill-color: initial;
+  }
+}
+
+/* ===== NAVIGATION STYLES ===== */
+.desktop-nav {
+  display: flex;
+  align-items: center;
 }
 
 .desktop-nav ul {
@@ -56,6 +86,7 @@
   gap: 2.5rem;
   margin: 0;
   padding: 0;
+  align-items: center;
 }
 
 .nav-link {
@@ -65,6 +96,7 @@
   position: relative;
   transition: all 0.3s ease;
   padding: 0.5rem 0;
+  white-space: nowrap;
 }
 
 .nav-link::after {
@@ -86,6 +118,7 @@
   width: 100%;
 }
 
+/* ===== CTA BUTTON - HIDDEN ON MOBILE ===== */
 .cta-button {
   background: linear-gradient(135deg, #3b82f6, #8b5cf6);
   color: white;
@@ -98,6 +131,8 @@
   font-size: 0.9rem;
   position: relative;
   overflow: hidden;
+  flex-shrink: 0;
+  margin-left: 1rem;
 }
 
 .cta-button a {
@@ -122,6 +157,7 @@
   left: 100%;
 }
 
+/* ===== MOBILE MENU BUTTON ===== */
 .mobile-menu-button {
   display: none;
   flex-direction: column;
@@ -131,6 +167,7 @@
   padding: 0.5rem;
   position: relative;
   z-index: 1001;
+  flex-shrink: 0;
 }
 
 .mobile-menu-button span {
@@ -154,6 +191,7 @@
   transform: rotate(-45deg) translate(7px, -6px);
 }
 
+/* ===== MOBILE NAVIGATION ===== */
 .mobile-nav {
   background: rgba(10, 10, 24, 0.98);
   backdrop-filter: blur(20px);
@@ -205,40 +243,12 @@
   box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
 }
 
-/* Header Loading Indicator */
-.header-loading-indicator {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: rgba(255, 255, 255, 0.1);
-  transform-origin: left;
-}
-
-.loading-bar {
-  height: 100%;
-  background: linear-gradient(90deg, #3b82f6, #8b5cf6);
-  width: 100%;
-  animation: loadingProgress 2s ease-in-out infinite;
-}
-
-@keyframes loadingProgress {
-  0% {
-    transform: translateX(-100%);
-  }
-  50% {
-    transform: translateX(0%);
-  }
-  100% {
-    transform: translateX(100%);
-  }
-}
-
-/* Mobile Responsive */
+/* ===== MOBILE RESPONSIVE ===== */
 @media (max-width: 768px) {
-  .desktop-nav, .cta-button {
-    display: none;
+  /* HIDE CTA BUTTON ON MOBILE */
+  .desktop-nav, 
+  .cta-button {
+    display: none !important;
   }
 
   .mobile-menu-button {
@@ -259,8 +269,9 @@
     padding: 0.5rem 0;
   }
   
+  /* IMPROVED MOBILE LOGO */
   .logo a {
-    font-size: 1.5rem;
+    font-size: 1.75rem; /* Larger on mobile */
   }
   
   .mobile-nav {
@@ -285,32 +296,44 @@
   }
 }
 
-/* Reduced motion support */
+/* ===== SMALLER MOBILE SCREENS ===== */
+@media (max-width: 480px) {
+  .header-container {
+    padding: 0 0.75rem;
+  }
+  
+  .logo a {
+    font-size: 1.6rem;
+  }
+}
+
+/* ===== TABLET RESPONSIVE ===== */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .logo a {
+    font-size: 1.9rem;
+  }
+  
+  .desktop-nav ul {
+    gap: 2rem;
+  }
+}
+
+/* ===== REDUCED MOTION SUPPORT ===== */
 @media (prefers-reduced-motion: reduce) {
-  .header {
+  .header,
+  .nav-link::after,
+  .cta-button,
+  .mobile-nav a,
+  .logo a {
     transition: none;
   }
   
-  .nav-link::after {
-    transition: none;
-  }
-  
-  .cta-button {
-    transition: none;
-  }
-  
-  .mobile-nav a {
-    transition: none;
-  }
-  
-  .loading-bar {
-    animation: none;
-    width: 100%;
+  .logo a:hover {
     transform: none;
   }
 }
 
-/* High contrast support */
+/* ===== HIGH CONTRAST SUPPORT ===== */
 @media (prefers-contrast: high) {
   .header {
     background: #0a0a18;

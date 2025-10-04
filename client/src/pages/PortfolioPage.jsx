@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import styles from './PortfolioPage.module.css';
+import SEO from '../components/SEO/SEO';
+
 
 const PortfolioPage = () => {
   const [activeFilter, setActiveFilter] = useState('all');
@@ -66,6 +68,14 @@ const PortfolioPage = () => {
     : projects.filter(project => project.category === activeFilter);
 
   return (
+    <>
+      <SEO
+        title="Our Work - Wexably Agency Portfolio | Toronto Web Design"
+        description="See our portfolio of secure, high-converting websites for Toronto businesses. Case studies and examples of our web design work for plumbers, roofers, and dentists across the GTA."
+        keywords="web design portfolio Toronto, GTA website examples, Toronto web development case studies, secure website portfolio, plumber website examples, roofer website design"
+        canonicalUrl="https://wexably.com/portfolio"
+        ogType="website"
+      />
     <div className={styles.container}>
       {/* Hero Section */}
       <section className={styles.hero}>
@@ -175,6 +185,7 @@ const PortfolioPage = () => {
         </div>
       </section>
     </div>
+    </>
   );
 };
 

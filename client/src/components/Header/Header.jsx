@@ -70,15 +70,25 @@ const Header = () => {
       transition={{ duration: 0.6, ease: "easeOut" }}
     >
       <div className="header-container">
-        <motion.div 
+        <motion.div
           className="logo"
           whileHover={{ scale: 1.05 }}
           transition={{ type: "spring", stiffness: 400, damping: 10 }}
         >
           <Link to="/" onClick={() => handleNavigation('/', 'home')}>
-            Wexably
+            <span style={{
+              fontSize: '32px',
+              fontWeight: '800',
+              background: 'linear-gradient(135deg, #3b82f6, #8b5cf6)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text'
+            }}>
+              Wexably
+            </span>
           </Link>
         </motion.div>
+
 
         {/* Desktop Navigation */}
         <nav className="desktop-nav">

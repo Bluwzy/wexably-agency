@@ -2,6 +2,8 @@ import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import styles from './ServicesPage.module.css';
+import SEO from '../components/SEO/SEO';
+
 
 // CountUp component for animated statistics
 const CountUp = ({ end, duration = 2 }) => {
@@ -207,6 +209,14 @@ const ServicesPage = () => {
   };
 
   return (
+    <>
+    <SEO
+        title="Web Design & Marketing Services - Wexably Agency Toronto"
+        description="Comprehensive web design, development, and digital marketing services for Toronto businesses. Secure websites, SEO optimization, and lead generation for plumbers, roofers, and dentists in the GTA."
+        keywords="web design services Toronto, GTA web development, Toronto SEO services, secure website development, digital marketing GTA, website maintenance Toronto"
+        canonicalUrl="https://wexably.com/services"
+        ogType="website"
+      />
     <div className={styles.container}>
       {/* Hero Section */}
       <section className={styles.hero}>
@@ -520,6 +530,7 @@ const ServicesPage = () => {
         </div>
       </section>
     </div>
+    </>
   );
 };
 

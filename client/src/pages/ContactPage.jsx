@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import axios from 'axios';
 import styles from './ContactPage.module.css';
+import SEO from '../components/SEO/SEO';
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -246,6 +247,14 @@ const ContactPage = () => {
   };
 
   return (
+    <>
+      <SEO
+        title="Contact Wexably Agency - Get Your Free Security Audit"
+        description="Ready to grow your Toronto business with a secure, high-converting website? Contact Wexably Agency for a free security audit and consultation. Serving plumbers, roofers, and dentists across the GTA."
+        keywords="contact web design Toronto, free security audit, GTA web development consultation, Toronto website security, plumber website consultation"
+        canonicalUrl="https://wexably.com/contact"
+        ogType="website"
+      />
     <div className={styles.container}>
       {/* Hero Section */}
       <section className={styles.hero}>
@@ -408,7 +417,7 @@ const ContactPage = () => {
             <div className={styles.contactMethod}>
               <div className={styles.methodIcon}>📞</div>
               <h3>Call Us</h3>
-              <p>+1 (416) 555-0123</p>
+              <p>+1 (289) 335-7376</p>
             </div>
             
             <div className={styles.contactMethod}>
@@ -446,6 +455,7 @@ const ContactPage = () => {
         </motion.section>
       </div>
     </div>
+    </>
   );
 };
 
