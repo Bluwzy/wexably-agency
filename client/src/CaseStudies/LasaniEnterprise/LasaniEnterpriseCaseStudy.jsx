@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import styles from './LasaniEnterpriseCaseStudy.module.css';
 
+
 const LasaniEnterpriseCaseStudy = () => {
   return (
     <div className={styles.container}>
@@ -37,7 +38,7 @@ const LasaniEnterpriseCaseStudy = () => {
           </motion.div>
         </div>
         <div className={styles.heroImage}>
-          <img src="/images/lasani-hero.jpg" alt="Lasani Enterprises Website Preview" />
+          <img src="/images/lasani-hero1.png" alt="Lasani Enterprises Website Preview" />
         </div>
       </section>
 

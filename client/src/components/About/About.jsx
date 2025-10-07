@@ -17,7 +17,7 @@ const About = () => {
   const teamMembers = [
     {
       id: 1,
-      name: "Ali",
+      name: "Ali Awad Elkareem",
       title: "Full-Stack Developer & Cybersecurity Specialist",
       description: "With 4 years of experience in web development and cybersecurity, I founded Wexably to provide small businesses with enterprise-grade security solutions at accessible prices. My expertise lies in building secure, high-performance websites that drive real business growth.",
       expertise: [

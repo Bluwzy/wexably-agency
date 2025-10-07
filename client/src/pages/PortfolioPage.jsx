@@ -15,7 +15,7 @@ const PortfolioPage = () => {
       description: "Complete digital transformation for an international trade and distribution company, resulting in a 40% increase in qualified leads and enhanced security for global operations.",
       category: "web-development",
       industry: "International Trade & Distribution",
-      image: "/images/portfolio/lasani-enterprise-thumbnail.jpg",
+      image: "/images/lasani-hero1.png",
       results: ["40% increase in qualified leads", "35% faster page load times", "100% security compliance", "25% reduced bounce rate"],
       tags: ["WordPress", "Custom Theme", "Security Hardening", "International SEO", "Multilingual Ready"],
       link: "/portfolio/lasani-enterprise"
@@ -26,7 +26,7 @@ const PortfolioPage = () => {
       description: "Revamped booking platform for luxury transportation services with focus on user experience and conversion optimization.",
       category: "web-application",
       industry: "Transportation",
-      image: "/api/placeholder/400/250",
+      image: "/images/Airport-Limo.jpg",
       results: ["25% higher conversion rate", "25% reduction in bounce rate", "25% faster booking process"],
       tags: ["Booking System", "Payment Integration", "Mobile Optimization", "Security"],
       link: "/portfolio/airport-limo-toronto"
@@ -37,7 +37,7 @@ const PortfolioPage = () => {
       description: "Corporate website and project management portal for a leading Saudi construction firm with bilingual support.",
       category: "international",
       industry: "Construction",
-      image: "/api/placeholder/400/250",
+      image: "/images/Riyadh-Construction-Group.jpg",
       results: ["Streamlined client communication", "30% reduction in inquiry response time", "Improved project visibility"],
       tags: ["Bilingual (Arabic/English)", "Project Portfolio", "Client Portal", "Security"],
       link: "/portfolio/riyadh-construction"
@@ -48,7 +48,7 @@ const PortfolioPage = () => {
       description: "Modern practice website with appointment booking and patient education resources for a dental group.",
       category: "healthcare",
       industry: "Healthcare",
-      image: "/api/placeholder/400/250",
+      image: "/images/Toronto-Dental-Specialists.jpg",
       results: ["50% more online bookings", "Reduced phone inquiries by 40%", "Improved patient education"],
       tags: ["Appointment Booking", "Patient Portal", "HIPAA Compliance", "Security"],
       link: "/portfolio/toronto-dental"
