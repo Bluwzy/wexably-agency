@@ -17,6 +17,9 @@ const PortfolioPage = lazy(() => import('./pages/PortfolioPage'));
 const ContactPage = lazy(() => import('./pages/ContactPage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 const LasaniEnterpriseCaseStudy = lazy(() => import('./CaseStudies/LasaniEnterprise/LasaniEnterpriseCaseStudy'));
+const AirportLimoTorontoCaseStudy = lazy(() => import('./CaseStudies/AirportLimoToronto/AirportLimoTorontoCaseStudy'));
+const RiyadhConstructionGroupCaseStudy = lazy(() => import('./CaseStudies/RiyadhConstructionGroup/RiyadhConstructionGroupCaseStudy'));
+const TorontoDentalSpecialistsCaseStudy = lazy(() => import('./CaseStudies/TorontoDentalSpecialists/TorontoDentalSpecialistsCaseStudy'));
 
 function App() {
   useEffect(() => {
@@ -86,6 +89,42 @@ function App() {
                   </div>
                 }>
                   <LasaniEnterpriseCaseStudy />
+                </Suspense>
+              </ErrorBoundary>
+            } />
+            
+            <Route path="/portfolio/airport-limo-toronto" element={
+              <ErrorBoundary>
+                <Suspense fallback={
+                  <div className="route-fallback">
+                    <LoadingSpinner />
+                  </div>
+                }>
+                  <AirportLimoTorontoCaseStudy />
+                </Suspense>
+              </ErrorBoundary>
+            } />
+
+            <Route path="/portfolio/riyadh-construction" element={
+              <ErrorBoundary>
+                <Suspense fallback={
+                  <div className="route-fallback">
+                    <LoadingSpinner />
+                  </div>
+                }>
+                  <RiyadhConstructionGroupCaseStudy />
+                </Suspense>
+              </ErrorBoundary>
+            } />
+
+            <Route path="/portfolio/toronto-dental" element={
+              <ErrorBoundary>
+                <Suspense fallback={
+                  <div className="route-fallback">
+                    <LoadingSpinner />
+                  </div>
+                }>
+                  <TorontoDentalSpecialistsCaseStudy />
                 </Suspense>
               </ErrorBoundary>
             } />
