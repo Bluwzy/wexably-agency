@@ -24,7 +24,7 @@ const Testimonials = () => {
       results: "100% secure customer data"
     },
     {
-      quote: "As a small business owner, I was overwhelmed by tech. Ali made it simple and delivered beyond our expectations.",
+      quote: "As a small business owner, I was overwhelmed by tech. Wexably made it simple and delivered beyond our expectations.",
       author: "Jennifer L.",
       company: "Mississauga Spa & Wellness",
       results: "3x ROI in first 6 months"

@@ -424,25 +424,39 @@ const ContactPage = () => {
         >
           <h2>Other Ways to Connect</h2>
           
-          <div className={styles.contactMethods}>
-            <div className={styles.contactMethod}>
-              <div className={styles.methodIcon}>📧</div>
-              <h3>Email Us</h3>
-              <p>info@wexably.com</p>
-            </div>
-            
-            <div className={styles.contactMethod}>
-              <div className={styles.methodIcon}>📞</div>
-              <h3>Call Us</h3>
-              <p>+1 (289) 335-7376</p>
-            </div>
-            
-            <div className={styles.contactMethod}>
-              <div className={styles.methodIcon}>📍</div>
-              <h3>Location</h3>
-              <p>Serving the Greater Toronto Area</p>
-            </div>
-          </div>
+        <div className={styles.contactMethods}>
+          <a 
+            href="mailto:info@wexably.com" 
+            className={styles.contactMethod}
+            aria-label="Send email to info@wexably.com"
+          >
+            <div className={styles.methodIcon}>📧</div>
+            <h3>Email Us</h3>
+            <p>info@wexably.com</p>
+          </a>
+          
+          <a 
+            href="tel:+12893357376" 
+            className={styles.contactMethod}
+            aria-label="Call +1 (289) 335-7376"
+          >
+            <div className={styles.methodIcon}>📞</div>
+            <h3>Call Us</h3>
+            <p>+1 (289) 335-7376</p>
+          </a>
+          
+          <a 
+            href="https://share.google/iLttHmdWeAqweCILU" 
+            className={styles.contactMethod}
+            target="_blank" 
+            rel="noopener noreferrer"
+            aria-label="View our location serving the Greater Toronto Area"
+          >
+            <div className={styles.methodIcon}>📍</div>
+            <h3>Location</h3>
+            <p>Serving the Greater Toronto Area</p>
+          </a>
+        </div>
 
           {/* FAQ Section */}
           <div className={styles.faq}>

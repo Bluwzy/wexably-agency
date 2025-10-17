@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { FaInstagram, FaLinkedin, FaTwitter } from 'react-icons/fa';
 import './Footer.css';
 
 const Footer = () => {
@@ -13,15 +14,15 @@ const Footer = () => {
       { name: 'E-commerce', path: '/services#ecommerce' }
     ],
     company: [
-      { name: 'About Us', path: '/about' },
+      { name: 'About Us', path: '/' },
       { name: 'Portfolio', path: '/portfolio' },
-      { name: 'Testimonials', path: '/testimonials' },
+      { name: 'Services', path: '/services' },
       { name: 'Contact', path: '/contact' }
     ],
     connect: [
-      { name: 'LinkedIn', path: 'https://linkedin.com', external: true },
+      { name: 'LinkedIn', path: 'https://www.linkedin.com/company/wexably', external: true },
       { name: 'Twitter', path: 'https://twitter.com', external: true },
-      { name: 'GitHub', path: 'https://github.com', external: true },
+      { name: 'Instagram', path: 'https://www.instagram.com/wexably/', external: true },
       { name: 'Email', path: 'mailto:hello@wexably.com' }
     ]
   };
@@ -66,14 +67,17 @@ const Footer = () => {
             <h3>Wexably</h3>
             <p>Transforming businesses through cutting-edge digital solutions and unparalleled security.</p>
             <div className="social-links">
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+              <a href="https://www.linkedin.com/company/wexably" target="_blank" rel="noopener noreferrer">
+                <FaLinkedin style={{ color: '#fff', width: '22px', height: '22px' }} />
                 <span>LinkedIn</span>
               </a>
               <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
+                <FaTwitter style={{ color: '#fff', width: '22px', height: '22px' }} />
                 <span>Twitter</span>
               </a>
-              <a href="https://github.com" target="_blank" rel="noopener noreferrer">
-                <span>GitHub</span>
+              <a href="https://www.instagram.com/wexably/" target="_blank" rel="noopener noreferrer">
+                <FaInstagram style={{ color: '#fff', width: '22px', height: '22px' }} />
+                <span>Instagram</span>
               </a>
             </div>
           </motion.div>

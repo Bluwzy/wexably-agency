@@ -306,16 +306,39 @@
   text-align: center;
   padding: 1.5rem 1rem;
   background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 0.75rem;
   transition: all 0.3s ease;
   display: flex;
   flex-direction: column;
   align-items: center;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+  overflow: hidden;
+}
+
+.contactMethod::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.contactMethod:hover::before {
+  left: 100%;
 }
 
 .contactMethod:hover {
   background: rgba(255, 255, 255, 0.07);
   transform: translateY(-3px);
+  border-color: rgba(59, 130, 246, 0.3);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
 .methodIcon {
@@ -328,6 +351,12 @@
   justify-content: center;
   background: rgba(255, 255, 255, 0.05);
   border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.contactMethod:hover .methodIcon {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(139, 92, 246, 0.2));
+  transform: scale(1.1);
 }
 
 .contactMethod h3 {
@@ -335,13 +364,24 @@
   font-weight: 600;
   margin-bottom: 0.5rem;
   color: white;
+  transition: color 0.3s ease;
+}
+
+.contactMethod:hover h3 {
+  color: #3b82f6;
 }
 
 .contactMethod p {
   color: #d1d5db;
   margin: 0;
   font-size: 0.95rem;
+  transition: color 0.3s ease;
 }
+
+.contactMethod:hover p {
+  color: #e5e7eb;
+}
+
 
 /* FAQ Section */
 .faq {
