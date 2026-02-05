@@ -9,9 +9,9 @@ const Footer = () => {
   const footerLinks = {
     services: [
       { name: 'Web Development', path: '/services#web-dev' },
-      { name: 'Security Solutions', path: '/services#security' },
+      { name: 'Content & Media', path: '/services#media' },
       { name: 'SEO Optimization', path: '/services#seo' },
-      { name: 'E-commerce', path: '/services#ecommerce' }
+      { name: 'Brand Strategy', path: '/services#branding' }
     ],
     company: [
       { name: 'About Us', path: '/' },
@@ -23,7 +23,7 @@ const Footer = () => {
       { name: 'LinkedIn', path: 'https://www.linkedin.com/company/wexably', external: true },
       { name: 'Twitter', path: 'https://twitter.com', external: true },
       { name: 'Instagram', path: 'https://www.instagram.com/wexably/', external: true },
-      { name: 'Email', path: 'mailto:hello@wexably.com' }
+      { name: 'Email', path: 'mailto:info@wexably.com' }
     ]
   };
 
@@ -65,7 +65,7 @@ const Footer = () => {
         >
           <motion.div className="footer-brand" variants={itemVariants}>
             <h3>Wexably</h3>
-            <p>Transforming businesses through cutting-edge digital solutions and unparalleled security.</p>
+            <p>Creating stunning digital experiences through innovative web design and compelling visual content.</p>
             <div className="social-links">
               <a href="https://www.linkedin.com/company/wexably" target="_blank" rel="noopener noreferrer">
                 <FaLinkedin style={{ color: '#fff', width: '22px', height: '22px' }} />

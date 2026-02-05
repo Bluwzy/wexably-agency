@@ -6,10 +6,10 @@ import './FinalCta.css';
 const FinalCta = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { 
-  once: true, 
-  amount: 0.1, // Reduced from 0.3 to 0.1 for mobile
-  rootMargin: '-50px 0px -50px 0px' // Added root margin
-});
+    once: true, 
+    amount: 0.1,
+    rootMargin: '-50px 0px -50px 0px'
+  });
 
   return (
     <section className="final-cta-section" ref={ref}>
@@ -23,35 +23,35 @@ const FinalCta = () => {
       
       <div className="container">
         <h2 className={`section-title fade-in-up ${isInView ? 'visible' : ''}`}>
-          Ready to <span className="gradient-text">Transform</span> Your Business?
+          Ready to <span className="gradient-text">upgrade</span> your visuals & website?
         </h2>
         
         <p className={`section-subtitle fade-in-up ${isInView ? 'visible' : ''}`}>
-          Let's build something amazing together. Get in touch today for a free consultation and project estimate.
+          Wexably creates experiences that are beautiful to watch and easy to use, cinematic content and high‑performing sites for modern GTA brands.
         </p>
 
         <div className={`cta-buttons fade-in-up ${isInView ? 'visible' : ''}`}>
           <Link to="/contact" className="cta-button primary" aria-label="Start Your Project">
-            Start Your Project
+            Start a web or media project
           </Link>
           
           <Link to="/portfolio" className="cta-button secondary" aria-label="View Our Work">
-            View Our Work
+            View web & media work
           </Link>
         </div>
 
         <div className={`cta-guarantee fade-in-up ${isInView ? 'visible' : ''}`}>
           <div className="guarantee-item">
-            <div className="guarantee-icon" aria-hidden="true">✅</div>
-            <span>No obligation, 30-minute consultation</span>
+            <div className="guarantee-icon" aria-hidden="true"></div>
+            <span>No-obligation 30-minute call</span>
           </div>
           <div className="guarantee-item">
-            <div className="guarantee-icon" aria-hidden="true">✅</div>
-            <span>Free website audit and competitive analysis</span>
+            <div className="guarantee-icon" aria-hidden="true"></div>
+            <span>Quick review of your current site or media</span>
           </div>
           <div className="guarantee-item">
-            <div className="guarantee-icon" aria-hidden="true">✅</div>
-            <span>Transparent, fixed-price quotes</span>
+            <div className="guarantee-icon" aria-hidden="true"></div>
+            <span>Clear, fixed-price next steps</span>
           </div>
         </div>
       </div>

@@ -10,26 +10,27 @@ const Process = () => {
   rootMargin: '-50px 0px -50px 0px' // Added root margin
 });
 
-  const steps = useMemo(() => [
-    {
-      number: "01",
-      title: "Discovery & Strategy",
-      description: "We analyze your business goals, target audience, and competitors to build a winning strategy.",
-      icon: "🔍"
-    },
-    {
-      number: "02",
-      title: "Design & Development",
-      description: "We create a stunning, fast, and secure website tailored to convert your visitors into customers.",
-      icon: "💻"
-    },
-    {
-      number: "03",
-      title: "Launch & Grow",
-      description: "We deploy your site and implement marketing strategies to drive traffic and generate leads.",
-      icon: "🚀"
-    }
-  ], []);
+    const steps = useMemo(() => [
+      {
+        number: "01",
+        title: "Discovery & Direction",
+        description: "We dig into your brand, audience, and goals to decide what you need in both visuals and web.",
+        icon: "🔍"
+      },
+      {
+        number: "02",
+        title: "Design, Shoot & Build",
+        description: "We create cinematic media and a fast, secure website that feel cohesive and easy to use.",
+        icon: "🎥"
+      },
+      {
+        number: "03",
+        title: "Launch, Measure & Refine",
+        description: "We launch, track performance, and refine your content and site to keep results growing.",
+        icon: "🚀"
+      }
+    ], []);
+
 
   return (
     <section className="process-section" ref={ref}>

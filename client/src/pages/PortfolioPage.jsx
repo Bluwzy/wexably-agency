@@ -4,20 +4,19 @@ import { Link } from 'react-router-dom';
 import styles from './PortfolioPage.module.css';
 import SEO from '../components/SEO/SEO';
 
-
 const PortfolioPage = () => {
-  const [activeFilter, setActiveFilter] = useState('all');
+  // const [activeFilter, setActiveFilter] = useState('all');
   
   const projects = [
     {
       id: 1,
       title: "Lasani Enterprise",
-      description: "Complete digital transformation for an international trade and distribution company, resulting in a 40% increase in qualified leads and enhanced security for global operations.",
+      description: "Complete digital transformation for an international trade and distribution company with modern web design and enhanced user experience.",
       category: "web-development",
       industry: "International Trade & Distribution",
       image: "/images/lasani-hero1.png",
-      results: ["40% increase in qualified leads", "35% faster page load times", "100% security compliance", "25% reduced bounce rate"],
-      tags: ["WordPress", "Custom Theme", "Security Hardening", "International SEO", "Multilingual Ready"],
+      results: ["40% increase in qualified leads", "35% faster page load times", "Modern, professional design", "25% reduced bounce rate"],
+      tags: ["WordPress", "Custom Design", "SEO Optimization", "International", "Multilingual Ready"],
       link: "/portfolio/lasani-enterprise"
     },
     {
@@ -28,7 +27,7 @@ const PortfolioPage = () => {
       industry: "Transportation",
       image: "/images/Airport-Limo.jpg",
       results: ["25% higher conversion rate", "25% reduction in bounce rate", "25% faster booking process"],
-      tags: ["Booking System", "Payment Integration", "Mobile Optimization", "Security"],
+      tags: ["Booking System", "Payment Integration", "Mobile Optimization", "UX Design"],
       link: "/portfolio/airport-limo-toronto"
     },
     {
@@ -39,7 +38,7 @@ const PortfolioPage = () => {
       industry: "Construction",
       image: "/images/Riyadh-Construction-Group.jpg",
       results: ["Streamlined client communication", "30% reduction in inquiry response time", "Improved project visibility"],
-      tags: ["Bilingual (Arabic/English)", "Project Portfolio", "Client Portal", "Security"],
+      tags: ["Bilingual (Arabic/English)", "Project Portfolio", "Client Portal", "Custom Design"],
       link: "/portfolio/riyadh-construction"
     },
     {
@@ -50,29 +49,31 @@ const PortfolioPage = () => {
       industry: "Healthcare",
       image: "/images/Toronto-Dental-Specialists.jpg",
       results: ["50% more online bookings", "Reduced phone inquiries by 40%", "Improved patient education"],
-      tags: ["Appointment Booking", "Patient Portal", "HIPAA Compliance", "Security"],
+      tags: ["Appointment Booking", "Patient Portal", "HIPAA Compliance", "Modern Design"],
       link: "/portfolio/toronto-dental"
     }
   ];
 
-  const filters = [
-    { id: 'all', name: 'All Projects' },
-    { id: 'web-development', name: 'Web Development' },
-    { id: 'web-application', name: 'Web Applications' },
-    { id: 'international', name: 'International' },
-    { id: 'healthcare', name: 'Healthcare' }
-  ];
+  // const filters = [
+  //   { id: 'all', name: 'All Projects' },
+  //   { id: 'web-development', name: 'Web Development' },
+  //   { id: 'web-application', name: 'Web Applications' },
+  //   { id: 'international', name: 'International' },
+  //   { id: 'healthcare', name: 'Healthcare' }
+  // ];
 
-  const filteredProjects = activeFilter === 'all' 
-    ? projects 
-    : projects.filter(project => project.category === activeFilter);
+  // const filteredProjects = activeFilter === 'all' 
+  //   ? projects 
+  //   : projects.filter(project => project.category === activeFilter);
+
+  const filteredProjects = projects; // Show all projects when filters are disabled
 
   return (
     <>
       <SEO
         title="Portfolio - Our Work & Case Studies | Wexably Agency"
-        description="See our portfolio of secure websites and successful digital marketing campaigns for GTA businesses. Case studies showing increased leads and improved security."
-        keywords="web design portfolio Toronto, security case studies, GTA website examples, digital marketing results"
+        description="See our portfolio of stunning content, media production, and web design projects for GTA businesses. Case studies showing real results and increased engagement."
+        keywords="web design portfolio Toronto, content production examples, media portfolio GTA, website design case studies"
         canonicalUrl="https://wexably.com/portfolio"
         breadcrumbs={{
           "@type": "BreadcrumbList",
@@ -102,7 +103,7 @@ const PortfolioPage = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
           >
-            Our <span className={styles.gradientText}>Portfolio</span>
+            Our <span className={styles.gradientText}>Work</span>
           </motion.h1>
           <motion.p 
             className={styles.subtitle}
@@ -110,13 +111,13 @@ const PortfolioPage = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
           >
-            Discover how we've helped businesses achieve secure growth through custom web solutions
+            Discover how we've helped GTA businesses stand out with stunning visuals and high-performance websites
           </motion.p>
         </div>
       </section>
 
-      {/* Filters */}
-      <section className={styles.filtersSection}>
+      {/* Filters - COMMENTED OUT */}
+      {/* <section className={styles.filtersSection}>
         <div className={styles.filtersContainer}>
           <h2>Filter Projects</h2>
           <div className={styles.filterButtons}>
@@ -131,7 +132,7 @@ const PortfolioPage = () => {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Projects Grid */}
       <section className={styles.projectsSection}>
@@ -190,7 +191,7 @@ const PortfolioPage = () => {
       <section className={styles.ctaSection}>
         <div className={styles.ctaContent}>
           <h2>Ready to create your success story?</h2>
-          <p>Let's discuss how we can help your business achieve remarkable results with our secure growth solutions.</p>
+          <p>Let's discuss how we can elevate your brand with compelling content and a high-performance website.</p>
           <div className={styles.ctaButtons}>
             <Link to="/contact" className={styles.primaryButton}>
               Start Your Project

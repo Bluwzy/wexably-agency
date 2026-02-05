@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import styles from './ServicesPage.module.css';
 import SEO from '../components/SEO/SEO';
 
-
 // CountUp component for animated statistics
 const CountUp = ({ end, duration = 2 }) => {
   const [count, setCount] = useState(0);
@@ -34,10 +33,9 @@ const CountUp = ({ end, duration = 2 }) => {
 
 const ServicesPage = () => {
   const ref = useRef(null);
-  // const isInView = useInView(ref, { once: true, amount: 0.1 });
   
-  const [billingCycle, setBillingCycle] = useState('monthly');
   const [scrollY, setScrollY] = useState(0);
+  const [expandedAddon, setExpandedAddon] = useState(null);
   
   // Throttle scroll events
   useEffect(() => {
@@ -57,106 +55,98 @@ const ServicesPage = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Calculate annual prices (15% discount)
-  const calculateAnnualPrice = (monthlyPrice) => {
-    const numericPrice = parseInt(monthlyPrice.replace(/[^0-9]/g, ''));
-    const annualPrice = numericPrice * 12 * 0.85;
-    return `$${Math.round(annualPrice)}/year`;
-  };
-
   // Featured services data
   const services = useMemo(() => [
     {
+      title: "Content & Media Production",
+      description: "Cinematic visuals for food, events, and brands. High-impact video and photography that stops the scroll and drives engagement.",
+      monthlyPrice: "$2,000–$2,400/mo",
+      billingType: "monthly",
+      features: [
+        "One planned monthly shoot (5–6 hours)",
+        "8–10 short-form videos",
+        "20 professional photos",
+        "Full editing included",
+        "Organic social usage only",
+        "Content scope adjusted per needs",
+        "Food, talent, or concept-driven content",
+        "Priority scheduling"
+      ],
+      cta: "Get Started",
+      popular: true,
+      icon: "🎥"
+    },
+    {
       title: "Secure Foundation Website",
-      description: "A custom, secure 5-page website designed to convert visitors into customers with enterprise-grade security built in from day one.",
-      price: "$2,997",
+      description: "A custom, secure 5-8 page website designed to convert visitors into customers with enterprise-grade security built in from day one.",
+      price: "$3,500–$4,500",
       billingType: "one-time",
       features: [
-        "5 custom-designed pages",
-        "Mobile-responsive design", 
-        "SEO optimization",
-        "SSL Security Certificate",
-        "Firewall Protection",
-        "Secure contact forms",
-        "3 months technical support",
-        "Basic on-page SEO setup"
+        "5–8 custom-designed pages",
+        "Advanced responsive design",
+        "Booking/appointment system",
+        "E-commerce integration (up to 20 products)",
+        "SEO & performance optimization",
+        "SSL, firewall & security hardening",
+        "Google Analytics & tracking",
+        "60-day post-launch support"
       ],
-      cta: "Get Secure Website",
-      popular: true,
-      icon: "🛡️"
-    },
-    {
-      title: "Growth Engine Pro", 
-      description: "Complete digital marketing solution with content creation, SEO, social media management, and performance tracking.",
-      monthlyPrice: "$1,997/mo",
-      annualPrice: calculateAnnualPrice("$1,997"),
-      billingType: "monthly",
-      features: [
-        "15 social media posts per month",
-        "Monthly professional content creation",
-        "Community engagement & management", 
-        "Monthly performance analytics reports",
-        "Google Analytics & Search Console setup",
-        "Monthly strategy consultation",
-        "Competitor analysis",
-        "Conversion rate optimization"
-      ],
-      cta: "Start Growing",
+      cta: "Build My Site",
       popular: false,
-      icon: "📈"
-    },
-    {
-      title: "Guardian Security & Maintenance",
-      description: "Comprehensive website maintenance, security monitoring, and performance optimization to keep your site safe and fast.",
-      monthlyPrice: "$399/mo", 
-      annualPrice: calculateAnnualPrice("$399"),
-      billingType: "monthly",
-      features: [
-        "24/7 security monitoring",
-        "Daily automated backups",
-        "Software & plugin updates",
-        "Priority technical support",
-        "Malware scanning & removal", 
-        "Uptime monitoring",
-        "Performance optimization",
-        "Monthly security reports"
-      ],
-      cta: "Get Protection",
-      popular: false,
-      icon: "🔒"
+      icon: "✨",
+      addon: {
+        title: "Guardian Security & Maintenance",
+        price: "$150–$200/mo",
+        description: "Keep your site fast, secure, and optimized",
+        features: [
+          "24/7 uptime monitoring",
+          "Weekly security scans",
+          "Monthly performance reports",
+          "Priority support",
+          "Automated backups"
+        ]
+      }
     }
   ], []);
 
   // All services data
   const allServices = useMemo(() => [
     {
-      category: "Web Development",
-      icon: "💻",
+      category: "Content & Media Production",
+      icon: "🎥",
       services: [
-        { name: "Small Business Website", price: "$2,997-$4,997", desc: "5-7 page custom website with security features" },
-        { name: "E-commerce Store", price: "$5,997-$9,997", desc: "Full online store with payment processing and inventory" },
-        { name: "Web Application", price: "Custom Quote", desc: "Custom web apps with database integration" },
-        { name: "Website Redesign", price: "$1,997-$3,997", desc: "Modernize and secure your existing website" }
+        { name: "Food-Based Short-Form Video", price: "$220–$260", desc: "Cinematic food content for social media" },
+        { name: "Talent / Concept-Driven Video", price: "$280–$320", desc: "People-focused or creative concept videos" },
+        { name: "Photography (per 10 images)", price: "$150–$180", desc: "Professional product or food photography" },
+        { name: "Monthly Content Package", price: "$2,000–$2,400/mo", desc: "8–10 videos + 20 photos, full editing included" }
       ]
     },
     {
-      category: "Digital Marketing",
-      icon: "🚀",
+      category: "Web Design & Development",
+      icon: "✨",
       services: [
-        { name: "SEO Package", price: "$997/mo", desc: "Comprehensive SEO strategy and implementation" },
-        { name: "Social Media Management", price: "$1,497/mo", desc: "Content creation and community engagement" },
-        { name: "Google Ads Management", price: "$697/mo + ad spend", desc: "PPC campaign setup and optimization" },
-        { name: "Email Marketing", price: "$797/mo", desc: "Newsletter creation and campaign management" }
+        { name: "Starter Site (3–5 pages)", price: "$1,800–$2,200", desc: "Perfect for new businesses and personal brands" },
+        { name: "Secure Foundation Website (5–8 pages)", price: "$3,500–$4,500", desc: "Advanced site with e-commerce and security" },
+        { name: "Custom Enterprise Solution", price: "From $6,000", desc: "Tailored solutions for complex needs" },
+        { name: "Website Redesign", price: "$1,997–$3,997", desc: "Modernize and secure your existing website" }
       ]
     },
     {
-      category: "Security & Maintenance",
+      category: "Maintenance & Support",
       icon: "🛡️",
       services: [
-        { name: "Essential Maintenance", price: "$249/mo", desc: "Basic updates, backups, and monitoring" },
-        { name: "Advanced Monitoring", price: "$499/mo", desc: "24/7 security monitoring and performance optimization" },
-        { name: "Enterprise Protection", price: "$699/mo", desc: "Comprehensive security and performance optimization" },
-        { name: "One-Time Security Audit", price: "$497", desc: "Comprehensive website security assessment" }
+        { name: "Guardian Security & Maintenance", price: "$150–$200/mo", desc: "24/7 monitoring, backups, and optimization" },
+        { name: "One-time Security Audit", price: "$400–$600", desc: "Comprehensive website security assessment" },
+        { name: "Emergency Support (per incident)", price: "$150–$300", desc: "Urgent fixes and troubleshooting" }
+      ]
+    },
+    {
+      category: "Design & Branding",
+      icon: "🎨",
+      services: [
+        { name: "Logo Design Package", price: "$500–$800", desc: "Custom logo with multiple concepts" },
+        { name: "Brand Identity Kit", price: "$1,200–$1,800", desc: "Complete brand guidelines and assets" },
+        { name: "Social Media Graphics (per set of 10)", price: "$200–$300", desc: "Custom graphics for your brand" }
       ]
     }
   ], []);
@@ -172,13 +162,11 @@ const ServicesPage = () => {
 
   // Process steps
   const processSteps = useMemo(() => [
-    { number: 1, title: "Discovery & Strategy", desc: "We learn about your business, goals, and security needs to create a customized plan." },
-    { number: 2, title: "Design & Development", desc: "We build your secure website with modern technologies and best practices." },
-    { number: 3, title: "Testing & Launch", desc: "We thoroughly test for security vulnerabilities before launching your site." },
-    { number: 4, title: "Growth & Maintenance", desc: "We continue to support, monitor, and optimize your digital presence." }
+    { number: 1, title: "Discovery & Strategy", desc: "We learn about your business, goals, and creative vision to create a customized plan." },
+    { number: 2, title: "Production & Development", desc: "We create stunning content and build secure websites with modern technologies." },
+    { number: 3, title: "Editing & Launch", desc: "We polish every detail and thoroughly test before launching your project." },
+    { number: 4, title: "Growth & Optimization", desc: "We continue to support, monitor, and optimize your digital presence." }
   ], []);
-
-  const hasMonthlyServices = services.some(service => service.billingType === "monthly");
 
   // Animation variants
   const containerVariants = {
@@ -211,9 +199,9 @@ const ServicesPage = () => {
   return (
     <>
     <SEO
-      title="Services - Website Security & Digital Marketing | Wexably Agency"
-      description="Professional website security, development, and digital marketing services for Toronto businesses. Secure hosting, SEO optimization, and lead generation solutions for the GTA."
-      keywords="website security services Toronto, web development GTA, digital marketing services, SEO Toronto, secure hosting"
+      title="Services - Content & Media Production + Web Design | Wexably Agency"
+      description="Premium content & media production and web design services for Toronto businesses. Cinematic visuals, secure websites, and digital solutions for the GTA."
+      keywords="content production Toronto, media production GTA, web development Toronto, food photography, event videography, secure websites"
       canonicalUrl="https://wexably.com/services"
       breadcrumbs={{
         "@type": "BreadcrumbList",
@@ -264,7 +252,7 @@ const ServicesPage = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
           >
-            Secure Growth Solutions <span className={styles.gradientText}>For GTA Businesses</span>
+            Premium Visuals & <span className={styles.gradientText}>High-Performance Sites</span>
           </motion.h1>
           <motion.p 
             className={styles.subtitle}
@@ -272,8 +260,7 @@ const ServicesPage = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.4 }}
           >
-            We provide Toronto-area businesses with secure, high-performing websites and marketing solutions. 
-            From plumbers to dentists, we understand your industry's unique needs and compliance requirements.
+            We create content that captivates and websites that convert. Built for GTA brands ready to stand out.
           </motion.p>
         </motion.div>
       </section>
@@ -318,7 +305,7 @@ const ServicesPage = () => {
             transition={{ duration: 0.7 }}
             viewport={{ once: true, amount: 0.3 }}
           >
-            Our <span className={styles.gradientText}>Featured Solutions</span>
+            Our <span className={styles.gradientText}>Core Services</span>
           </motion.h2>
           
           <motion.p 
@@ -328,37 +315,8 @@ const ServicesPage = () => {
             transition={{ duration: 0.7, delay: 0.2 }}
             viewport={{ once: true, amount: 0.3 }}
           >
-            Designed specifically for GTA businesses who value security and results
+            Professional content creation and web solutions designed for GTA brands
           </motion.p>
-
-          {hasMonthlyServices && (
-            <motion.div 
-              className={styles.billingToggle}
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              viewport={{ once: true, amount: 0.3 }}
-            >
-              <span 
-                className={billingCycle === 'monthly' ? styles.active : ''}
-                onClick={() => setBillingCycle('monthly')}
-              >
-                Monthly
-              </span>
-              <div 
-                className={styles.toggleSwitch} 
-                onClick={() => setBillingCycle(billingCycle === 'monthly' ? 'annual' : 'monthly')}
-              >
-                <div className={`${styles.toggleKnob} ${billingCycle === 'annual' ? styles.annual : ''}`}></div>
-              </div>
-              <span 
-                className={billingCycle === 'annual' ? styles.active : ''}
-                onClick={() => setBillingCycle('annual')}
-              >
-                Annual (Save 15%)
-              </span>
-            </motion.div>
-          )}
           
           <motion.div 
             className={styles.servicesGrid}
@@ -379,7 +337,7 @@ const ServicesPage = () => {
                 )}
                 
                 <div className={`${styles.billingBadge} ${service.billingType === "one-time" ? styles.oneTime : styles.monthly}`}>
-                  {service.billingType === "one-time" ? "One-Time Project" : "Ongoing Retainer"}
+                  {service.billingType === "one-time" ? "One-Time Project" : "Monthly Retainer"}
                 </div>
                 
                 <div className={styles.serviceIcon}>{service.icon}</div>
@@ -387,12 +345,7 @@ const ServicesPage = () => {
                 <p className={styles.description}>{service.description}</p>
                 
                 <p className={styles.price}>
-                  {service.billingType === "one-time" 
-                    ? service.price 
-                    : billingCycle === 'monthly' 
-                      ? service.monthlyPrice 
-                      : service.annualPrice
-                  }
+                  {service.billingType === "one-time" ? service.price : service.monthlyPrice}
                 </p>
                 
                 <ul className={styles.features}>
@@ -400,6 +353,34 @@ const ServicesPage = () => {
                     <li key={i}>{feature}</li>
                   ))}
                 </ul>
+
+                {service.addon && (
+                  <div className={styles.addonSection}>
+                    <button 
+                      className={styles.addonToggle}
+                      onClick={() => setExpandedAddon(expandedAddon === index ? null : index)}
+                    >
+                      <span className={styles.addonToggleIcon}>
+                        {expandedAddon === index ? '−' : '+'}
+                      </span>
+                      <span className={styles.addonToggleText}>
+                        💡 <strong>{service.addon.title}</strong>
+                      </span>
+                      <span className={styles.addonTogglePrice}>{service.addon.price}</span>
+                    </button>
+                    
+                    <div className={`${styles.addonContent} ${expandedAddon === index ? styles.addonExpanded : ''}`}>
+                      <div className={styles.addonCard}>
+                        <p className={styles.addonDescription}>{service.addon.description}</p>
+                        <ul className={styles.addonFeatures}>
+                          {service.addon.features.map((feature, i) => (
+                            <li key={i}>{feature}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                )}
                 
                 <motion.button 
                   className={styles.ctaButton}
@@ -410,6 +391,56 @@ const ServicesPage = () => {
                 </motion.button>
               </motion.div>
             ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Pricing Details Section */}
+      <section className={styles.pricingDetailsSection}>
+        <div className={styles.sectionContainer}>
+          <motion.h2 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.7 }}
+            viewport={{ once: true, amount: 0.5 }}
+          >
+            Content & Media <span className={styles.gradientText}>Pricing Breakdown</span>
+          </motion.h2>
+
+          <motion.div 
+            className={styles.pricingCard}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            viewport={{ once: true, amount: 0.3 }}
+          >
+            <h3>Monthly Pricing Application</h3>
+            <div className={styles.pricingTiers}>
+              <div className={styles.pricingTier}>
+                <span className={styles.tierType}>Food-focused content only</span>
+                <span className={styles.tierPrice}>~$2,000/mo</span>
+              </div>
+              <div className={styles.pricingTier}>
+                <span className={styles.tierType}>Mixed food + people content</span>
+                <span className={styles.tierPrice}>~$2,200/mo</span>
+              </div>
+              <div className={styles.pricingTier}>
+                <span className={styles.tierType}>Talent-led / skits / higher complexity</span>
+                <span className={styles.tierPrice}>~$2,400/mo</span>
+              </div>
+              <div className={styles.pricingTier}>
+                <span className={styles.tierType}>Heavy talent usage</span>
+                <span className={styles.tierPrice}>Custom quote</span>
+              </div>
+            </div>
+
+            <div className={styles.talentNotice}>
+              <h4>⚠️ Talent Rules</h4>
+              <ul>
+                <li>Talent fees are <strong>never included</strong> in monthly pricing</li>
+                <li>Talent paid directly by client or reimbursed if managed by Wexably</li>
+              </ul>
+            </div>
           </motion.div>
         </div>
       </section>
@@ -433,8 +464,7 @@ const ServicesPage = () => {
             transition={{ duration: 0.7, delay: 0.2 }}
             viewport={{ once: true, amount: 0.5 }}
           >
-            We offer a comprehensive range of services to meet all your digital needs. 
-            All plans include our signature security features.
+            We offer a comprehensive range of services to meet all your digital needs.
           </motion.p>
 
           <div className={styles.servicesTable}>
@@ -525,7 +555,7 @@ const ServicesPage = () => {
             transition={{ duration: 0.7 }}
             viewport={{ once: true, amount: 0.5 }}
           >
-            <h2>Ready to <span className={styles.gradientText}>Secure Your Growth</span>?</h2>
+            <h2>Ready to <span className={styles.gradientText}>Elevate Your Brand</span>?</h2>
             <p>Schedule a free consultation to discuss your project and get a customized quote.</p>
             <div className={styles.ctaButtons}>
               <motion.button 

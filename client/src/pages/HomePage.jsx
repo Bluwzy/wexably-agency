@@ -8,6 +8,7 @@ import PortfolioShowcase from '../components/PortfolioShowcase/PortfolioShowcase
 import Testimonials from '../components/Testimonials/Testimonials';
 import About from '../components/About/About';
 import FinalCta from '../components/FinalCta/FinalCta';
+import FeaturedMedia from '../components/FeaturedMedia/FeaturedMedia';
 import './HomePage.css';
 
 const HomePage = () => {
@@ -22,6 +23,7 @@ const HomePage = () => {
     <main className="homepage performance-optimized">
       <Hero />
       <Services />
+      <FeaturedMedia />
       <Process />
       <PortfolioShowcase />
       <Testimonials />

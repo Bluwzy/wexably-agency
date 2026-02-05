@@ -13,44 +13,44 @@ const About = () => {
   const [activeMember, setActiveMember] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
-  // Professional team data with 3-4 years experience
+  // Professional team data with updated titles and locations
   const teamMembers = [
     {
       id: 1,
       name: "Ali Awad Elkareem",
-      title: "Full-Stack Developer & Cybersecurity Specialist",
-      description: "With 4 years of experience in web development and cybersecurity, I founded Wexably to provide small businesses with enterprise-grade security solutions at accessible prices. My expertise lies in building secure, high-performance websites that drive real business growth.",
+      title: "Co-Founder & Lead Web Developer",
+      description: "With 4 years of experience in full-stack development and digital strategy, Ali leads Wexably's web development initiatives. His expertise in building high-performance, modern websites helps GTA businesses establish powerful online presences that drive real growth and engagement.",
       expertise: [
-        "Full-Stack Web Development",
-        "Cybersecurity & Data Protection", 
+        "Full-Stack Web Development (MERN)",
+        "UI/UX Design & Optimization", 
         "Search Engine Optimization (SEO)",
-        "Conversion Rate Optimization"
+        "E-commerce Solutions"
       ],
-      location: "Mississauga, Canada"
+      location: "Toronto, Canada"
     },
     {
       id: 2,
       name: "Ahmed Abdulrahim",
-      title: "Multimedia Specialist & Data Analyst",
-      description: "Bringing 3 years of expertise in visual storytelling and data analytics, Ahmed transforms complex data into compelling visual narratives. His background in photography and videography ensures our clients' brands are represented with professional quality across all digital platforms.",
+      title: "Co-Founder & Creative Director",
+      description: "Bringing 3 years of expertise in visual storytelling and brand development, Ahmed transforms business visions into compelling visual content. His background in photography, videography, and data-driven content strategy ensures every brand story is told with impact and authenticity.",
       expertise: [
-        "Photography & Videography",
-        "Social Media Content Strategy",
-        "Data Analysis & Visualization",
-        "Brand Identity Development"
+        "Content & Media Production",
+        "Brand Photography & Videography",
+        "Social Media Strategy",
+        "Visual Brand Identity"
       ],
-      location: "Mississauga, Canada"
+      location: "Toronto, Canada"
     },
     {
       id: 3, 
       name: "Omar Mahdi",
-      title: "Cybersecurity Consultant & Media Professional",
-      description: "With 4 years in cybersecurity and media, Omar brings a unique blend of technical security expertise and professional media presence. His experience working internationally ensures our security solutions meet global standards while maintaining brand excellence.",
+      title: "Co-Founder & Cybersecurity Specialist",
+      description: "With 4 years of experience in cybersecurity and digital protection, Omar ensures that every Wexably project is built with security at its core. His international experience and expertise in threat assessment and security architecture provide clients with enterprise-grade protection for their digital assets.",
       expertise: [
-        "Cybersecurity Risk Assessment",
+        "Cybersecurity & Threat Assessment",
         "Network Security Architecture", 
-        "Media Production & Branding",
-        "International Compliance Standards"
+        "Data Protection & Compliance",
+        "Security Audits & Penetration Testing"
       ],
       location: "Netherlands (Remote)"
     }
@@ -91,10 +91,10 @@ const About = () => {
       <div className="container">
         <div className="about-header">
           <h2 className={`section-title fade-in-up ${isInView ? 'visible' : ''}`}>
-            Meet Our <span className="gradient-text">Expert Team</span>
+            Meet Our <span className="gradient-text">Creative Team</span>
           </h2>
           <p className={`section-subtitle fade-in-up ${isInView ? 'visible' : ''}`}>
-            With combined expertise spanning cybersecurity, development, and multimedia, we deliver comprehensive digital solutions tailored to your business needs.
+            A passionate team combining web development excellence with creative media production to bring your brand vision to life.
           </p>
         </div>
 
@@ -111,7 +111,7 @@ const About = () => {
             ))}
           </div>
 
-          {/* Slideshow Container - SIMPLIFIED APPROACH */}
+          {/* Slideshow Container */}
           <div className="slideshow-container">
             {teamMembers.map((member, index) => (
               <div
@@ -177,10 +177,10 @@ const About = () => {
 
         {/* Company Description */}
         <div className={`company-description fade-in-up ${isInView ? 'visible' : ''}`}>
-          <h3>Our Collective Mission</h3>
+          <h3>Our Mission</h3>
           <p>
-            Founded in 2022, Wexably brings together diverse expertise to provide comprehensive digital solutions. 
-            We combine technical excellence with creative vision to help GTA businesses thrive in the digital landscape.
+            Founded in 2022, Wexably brings together web development expertise, creative media production, and cybersecurity to help GTA businesses shine online. 
+            We believe every business deserves a stunning digital presence—from high-performance websites to eye-catching content that tells your story, all protected with enterprise-grade security.
           </p>
           <div className="company-stats">
             <div className="stat">

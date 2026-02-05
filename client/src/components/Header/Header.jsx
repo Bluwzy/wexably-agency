@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import './Header.css';
+import WexablyLogo from '../../assets/Wexably-Logo.png';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -76,16 +77,8 @@ const Header = () => {
           transition={{ type: "spring", stiffness: 400, damping: 10 }}
         >
           <Link to="/" onClick={() => handleNavigation('/', 'home')}>
-            <span style={{
-              fontSize: '32px',
-              fontWeight: '800',
-              background: 'linear-gradient(135deg, #3b82f6, #8b5cf6)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text'
-            }}>
-              Wexably
-            </span>
+            <img src={WexablyLogo} alt="Wexably" className="logo-image" />
+
           </Link>
         </motion.div>
 

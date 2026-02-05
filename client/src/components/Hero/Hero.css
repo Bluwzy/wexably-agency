@@ -2,16 +2,20 @@
 @import '../../styles/animations.css';
 
 .hero {
-  min-height: 100vh;
+  /* Viewport handling */
+  height: 89vh;
+  max-height: 100dvh;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   position: relative;
   overflow: hidden;
-  background: linear-gradient(135deg, #0a0a18 0%, #1a1a2e 50%, #16213e 100%);
   isolation: isolate;
-  padding-top: 100px;
+  padding-top: 10px;
+  padding-left: 5%;
+  padding-right: 5%;
   box-sizing: border-box;
   backface-visibility: hidden;
   perspective: 1000px;
@@ -35,174 +39,64 @@
   backface-visibility: hidden;
   will-change: transform;
   overflow: hidden;
-}
-
-/* Particle effect - Optimized for performance */
-.particles {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
-}
-
-.particle {
-  position: absolute;
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 50%;
-  animation: float-particle linear infinite;
-  opacity: 0.6;
-  will-change: transform;
-  transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
-}
-
-@keyframes float-particle {
-  0% {
-    transform: translate3d(0, 100vh, 0) rotate(0deg);
-    opacity: 0;
-  }
-  10% {
-    opacity: 0.6;
-  }
-  90% {
-    opacity: 0.6;
-  }
-  100% {
-    transform: translate3d(0, -100px, 0) rotate(360deg);
-    opacity: 0;
-  }
-}
-
-/* Gradient orbs - Stable animations */
-.gradient-orbs {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  filter: blur(40px);
-  opacity: 0.5;
-  transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
-  will-change: transform;
-}
-
-.orb {
-  position: absolute;
-  border-radius: 50%;
-  transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
-  will-change: transform;
-}
-
-.orb-1 {
-  width: 300px;
-  height: 300px;
-  background: radial-gradient(circle, rgba(37, 99, 235, 0.4) 0%, transparent 70%);
-  top: 10%;
-  right: 10%;
-  animation: float-orb-1 15s ease-in-out infinite;
-}
-
-.orb-2 {
-  width: 400px;
-  height: 400px;
-  background: radial-gradient(circle, rgba(124, 58, 237, 0.3) 0%, transparent 70%);
-  bottom: 10%;
-  left: 15%;
-  animation: float-orb-2 20s ease-in-out infinite;
-}
-
-.orb-3 {
-  width: 250px;
-  height: 250px;
-  background: radial-gradient(circle, rgba(16, 185, 129, 0.25) 0%, transparent 70%);
-  top: 50%;
-  left: 50%;
-  animation: float-orb-3 25s ease-in-out infinite;
-}
-
-@keyframes float-orb-1 {
-  0%, 100% { 
-    transform: translate3d(0, 0, 0) scale(1); 
-  }
-  50% { 
-    transform: translate3d(30px, -40px, 0) scale(1.1); 
-  }
-}
-
-@keyframes float-orb-2 {
-  0%, 100% { 
-    transform: translate3d(0, 0, 0) scale(1); 
-  }
-  50% { 
-    transform: translate3d(-50px, 30px, 0) scale(1.05); 
-  }
-}
-
-@keyframes float-orb-3 {
-  0%, 100% { 
-    transform: translate3d(0, 0, 0) scale(1) rotate(0deg); 
-  }
-  33% { 
-    transform: translate3d(40px, 20px, 0) scale(1.2) rotate(120deg); 
-  }
-  66% { 
-    transform: translate3d(-20px, -40px, 0) scale(0.8) rotate(240deg); 
-  }
-}
-
-/* Grid overlay */
-.grid-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: 
-    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-  background-size: 40px 40px;
-  mask-image: radial-gradient(circle at 50% 50%, black 20%, transparent 60%);
-  -webkit-mask-image: radial-gradient(circle at 50% 50%, black 20%, transparent 60%);
-  transform: translate3d(0, 0, 0);
+  background-image: url('../../assets/Picture.png');
+  background-size: cover;
+  background-position: center right;
+  background-attachment: fixed;
 }
 
 .hero-content {
   position: relative;
   z-index: 2;
-  text-align: center;
-  max-width: 900px;
-  padding: 0 2rem;
-  margin-top: 0;
+  text-align: left;
+  max-width: 700px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
+
+  /* Content overflow handling */
+  max-height: 85vh;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
 }
 
 .hero-title {
-  font-size: clamp(2.5rem, 7vw, 5rem);
+  font-size: clamp(1.5rem, 4vw, 5rem);
   font-weight: 800;
   line-height: 1.1;
   margin-bottom: 1.5rem;
   color: white;
   transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
+  text-transform: uppercase;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #38bdf8, #8b5cf6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .hero-subtitle {
-  font-size: clamp(1.1rem, 2.8vw, 1.8rem);
-  color: #d1d5db;
-  margin-bottom: 3rem;
-  line-height: 1.6;
+  font-size: clamp(1rem, 2.8vw, 1.3rem);
+  color: #38bdf8;
+  margin-bottom: 2rem;
+  line-height: 1.5;
   transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
 .cta-container {
   display: flex;
   gap: 1.5rem;
-  justify-content: center;
   flex-wrap: wrap;
   margin-bottom: 2rem;
   transform: translate3d(0, 0, 0);
@@ -215,7 +109,7 @@
   padding: 1.2rem 2.5rem;
   border-radius: 50px;
   font-weight: 600;
-  font-size: 1.1rem;
+  font-size: 1rem;
   display: flex;
   align-items: center;
   gap: 0.75rem;
@@ -226,11 +120,18 @@
   transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
   transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .primary-cta .cta-icon {
   transition: transform 0.3s ease;
   transform: translate3d(0, 0, 0);
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .primary-cta:hover .cta-icon {
@@ -243,7 +144,12 @@
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
   transition: left 0.7s ease;
   z-index: -1;
   transform: translate3d(0, 0, 0);
@@ -260,7 +166,7 @@
   padding: 1.2rem 2.5rem;
   border-radius: 50px;
   font-weight: 600;
-  font-size: 1.1rem;
+  font-size: 1rem;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -270,6 +176,8 @@
   overflow: hidden;
   transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .secondary-cta::before {
@@ -279,7 +187,11 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
+  background: linear-gradient(
+    135deg,
+    rgba(59, 130, 246, 0.1),
+    rgba(139, 92, 246, 0.1)
+  );
   opacity: 0;
   transition: opacity 0.3s ease;
   z-index: -1;
@@ -293,6 +205,11 @@
 .secondary-cta .arrow-icon {
   transition: transform 0.3s ease;
   transform: translate3d(0, 0, 0);
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .secondary-cta:hover .arrow-icon {
@@ -306,117 +223,46 @@
   color: inherit;
   text-decoration: none;
   width: 100%;
-  height: 100%;
   justify-content: center;
   transform: translate3d(0, 0, 0);
-}
-
-/* Emoji row for horizontal alignment */
-.emoji-row {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 0.4em;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  font-size: 1.5rem;
 }
 
 .scroll-indicator {
-  position: relative;
+  position: absolute;
+  bottom: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-  transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
+  gap: 0.75rem;
+  opacity: 0.8;
+  z-index: 2;
 }
 
 .scroll-text {
   color: rgba(255, 255, 255, 0.7);
-  font-size: 0.9rem;
-  font-weight: 500;
+  font-size: 0.85rem;
+  font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  transform: translate3d(0, 0, 0);
 }
 
-/* JIGGLE-FREE SCROLL LINE - Static version */
-.scroll-line {
-  width: 2px;
-  height: 40px;
-  background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.8), transparent);
-  /* Removed animation that caused jiggle */
+.scroll-dot {
+  width: 8px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  animation: bounce 2s ease-in-out infinite;
 }
 
-.floating-elements {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  transform: translate3d(0, 0, 0);
-}
-
-.floating-element {
-  position: absolute;
-  font-size: 1.5rem;
-  opacity: 0.3;
-  filter: blur(0.5px);
-  will-change: transform;
-  transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
-}
-
-.element-1 {
-  top: 20%;
-  left: 15%;
-  animation: float-element-1 15s ease-in-out infinite;
-}
-
-.element-2 {
-  top: 60%;
-  right: 20%;
-  animation: float-element-2 20s ease-in-out infinite;
-}
-
-.element-3 {
-  bottom: 30%;
-  left: 25%;
-  animation: float-element-3 25s ease-in-out infinite;
-}
-
-@keyframes float-element-1 {
-  0%, 100% { 
-    transform: translate3d(0, 0, 0) rotate(0deg); 
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
   }
-  50% { 
-    transform: translate3d(30px, -40px, 0) rotate(180deg); 
-  }
-}
-
-@keyframes float-element-2 {
-  0%, 100% { 
-    transform: translate3d(0, 0, 0) rotate(0deg); 
-  }
-  50% { 
-    transform: translate3d(-40px, 30px, 0) rotate(-180deg); 
-  }
-}
-
-@keyframes float-element-3 {
-  0%, 100% { 
-    transform: translate3d(0, 0, 0) scale(1) rotate(0deg); 
-  }
-  33% { 
-    transform: translate3d(30px, 20px, 0) scale(1.2) rotate(120deg); 
-  }
-  66% { 
-    transform: translate3d(-20px, -30px, 0) scale(0.8) rotate(240deg); 
+  50% {
+    transform: translateY(8px);
   }
 }
 
@@ -424,62 +270,57 @@
 @media (max-width: 768px) {
   .hero {
     padding-top: 90px;
-    min-height: calc(100vh - 90px);
+    padding-left: 1rem;
+    padding-right: 1rem;
+    align-items: flex-start;
+    /* keep a bit taller but respect viewport */
+    min-height: 130vh;
+    max-height: 100dvh;
     transform: translate3d(0, 0, 0) !important;
   }
-  
-  .particle {
-    animation-duration: 20s !important;
-    transform: translate3d(0, 0, 0);
+
+  .hero-background {
+    background-position: 80% 60%; /* right + lower */
+    background-attachment: scroll;
   }
-  
-  .gradient-orbs {
-    filter: blur(20px);
+
+  .hero-content {
+    text-align: left;
+    max-width: 70%;
+    padding-right: 1rem;
+    align-items: flex-start;
+
+    /* ensure scrollable content still works well on mobile */
+    max-height: calc(100vh - 140px);
   }
-  
-  .orb-3 {
-    display: none;
-  }
-  
+
   .cta-container {
+    justify-content: flex-start;
     flex-direction: column;
-    align-items: center;
-    margin-bottom: 1.5rem;
     gap: 1rem;
   }
-  
-  .primary-cta, .secondary-cta {
+
+  .primary-cta,
+  .secondary-cta {
     width: 100%;
-    max-width: 280px;
+    max-width: 100%;
     justify-content: center;
     padding: 1rem 1.5rem;
-    font-size: 1rem;
+    font-size: 0.95rem;
     transform: translate3d(0, 0, 0);
   }
-  
+
   .hero-title {
-    font-size: clamp(2.2rem, 8vw, 3.5rem);
-    transform: translate3d(0, 0, 0);
+    font-size: clamp(2rem, 7vw, 2.6rem);
   }
-  
+
   .hero-subtitle {
-    font-size: clamp(1rem, 4vw, 1.4rem);
-    margin-bottom: 2.5rem;
-    transform: translate3d(0, 0, 0);
+    font-size: clamp(0.9rem, 3.5vw, 1.1rem);
+    margin-bottom: 1.6rem;
   }
-  
+
   .scroll-indicator {
-    margin-top: 1.5rem;
-    margin-bottom: 1.5rem;
-    transform: translate3d(0, 0, 0);
-  }
-  
-  .floating-element {
-    animation-duration: 30s !important;
-  }
-  
-  .element-3 {
-    display: none;
+    bottom: 2rem;
   }
 }
 
@@ -487,58 +328,52 @@
 @media (max-width: 480px) {
   .hero {
     padding-top: 80px;
+    padding-left: 1rem;
+    padding-right: 1rem;
     min-height: calc(100vh - 80px);
+    max-height: 100dvh;
   }
-  
-  .primary-cta, .secondary-cta {
+
+  .hero-content {
+    max-width: 65%;
+    max-height: calc(100vh - 120px);
+  }
+
+  .primary-cta,
+  .secondary-cta {
     padding: 0.9rem 1.25rem;
-    font-size: 0.95rem;
+    font-size: 0.85rem;
+    max-width: 100%;
   }
-  
+
   .scroll-indicator {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-  }
-  
-  .particle {
-    animation: none;
-    opacity: 0.2;
-  }
-  
-  .gradient-orbs {
-    opacity: 0.3;
+    bottom: 1.5rem;
   }
 }
 
 /* Desktop hover effects */
 @media (min-width: 769px) {
-  .primary-cta:hover, .secondary-cta:hover {
+  .primary-cta:hover,
+  .secondary-cta:hover {
     transform: translate3d(0, -2px, 0);
-    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: transform 0.3s
+      cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 }
 
 /* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
-  .particle,
-  .orb,
-  .floating-element {
+  .scroll-dot {
     animation: none !important;
   }
-  
+
   .primary-cta:hover .cta-hover-effect {
     animation: none;
     display: none;
   }
-  
-  .hero-content {
-    animation: none !important;
-  }
-  
+
   .hero,
-  .hero-background,
-  .particles,
-  .gradient-orbs {
+  .hero-background {
     transform: translate3d(0, 0, 0) !important;
   }
 }
@@ -550,38 +385,9 @@
     height: 100%;
     overflow-x: hidden;
   }
-  
+
   .hero-background {
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
   }
-  
-  .particle {
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-  }
-}
-
-/* Firefox scrolling optimizations */
-@-moz-document url-prefix() {
-  .hero {
-    scroll-behavior: smooth;
-  }
-  
-  .particle {
-    animation-timing-function: linear;
-  }
-}
-
-/* Emergency vibration fixes */
-.anti-vibration {
-  transform: translate3d(0, 0, 0) !important;
-  backface-visibility: hidden !important;
-  perspective: 1000px !important;
-  will-change: auto !important;
-}
-
-.no-vibration * {
-  animation-play-state: running !important;
-  transition: none !important;
 }

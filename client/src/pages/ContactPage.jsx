@@ -28,15 +28,19 @@ const ContactPage = () => {
   const faqItems = [
     {
       question: "How quickly do you respond to inquiries?",
-      answer: "We typically respond to all messages within 24 hours during business days."
+      answer: "We typically respond to all messages within 24 hours during business days. For urgent projects, feel free to call us directly."
     },
     {
       question: "Do you offer free consultations?",
-      answer: "Yes, we offer a free 30-minute consultation to discuss your project needs."
+      answer: "Yes! We offer a free 30-minute consultation to discuss your content, media, or web design needs and how we can help bring your vision to life."
     },
     {
-      question: "What industries do you specialize in?",
-      answer: "We specialize in serving GTA businesses including contractors, healthcare providers, professional services, and e-commerce."
+      question: "What types of projects do you work on?",
+      answer: "We specialize in content & media production (food photography, event videography, brand content) and web design & development for GTA businesses. From restaurants to professional services, we create visuals and websites that stand out."
+    },
+    {
+      question: "What's your typical project timeline?",
+      answer: "Content shoots are typically scheduled within 1-2 weeks. Website projects range from 3-8 weeks depending on complexity. We'll provide a detailed timeline during our initial consultation."
     }
   ];
 
@@ -249,9 +253,9 @@ const ContactPage = () => {
   return (
     <>
       <SEO
-        title="Contact - Get Your Free Security Audit | Wexably Agency"
-        description="Contact Wexably Agency for professional website security consultation and digital marketing services in Toronto. Free security audit for GTA businesses."
-        keywords="contact web security Toronto, free security audit, GTA web development consultation, website security contact"
+        title="Contact - Let's Create Something Amazing | Wexably Agency"
+        description="Contact Wexably Agency for content production, media services, and web design in Toronto. Free consultation for GTA businesses ready to elevate their brand."
+        keywords="contact media production Toronto, web design consultation GTA, content creation Toronto, videography contact"
         canonicalUrl="https://wexably.com/contact"
         breadcrumbs={{
           "@type": "BreadcrumbList",
@@ -281,15 +285,15 @@ const ContactPage = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
           >
-            Let's <span className={styles.gradientText}>Secure Your Growth</span>
+            Let's Create Something <span className={styles.gradientText}>Amazing</span>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
           >
-            Ready to transform your online presence? Get in touch for a free consultation 
-            and discover how we can help your GTA business thrive with secure, results-driven solutions.
+            Ready to elevate your brand with stunning content and a high-performance website? 
+            Get in touch for a free consultation and let's bring your vision to life.
           </motion.p>
         </div>
       </section>
@@ -375,7 +379,7 @@ const ContactPage = () => {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 required
-                placeholder="Tell us about your project and how we can help..."
+                placeholder="Tell us about your project—whether it's content creation, web design, or both!"
                 className={errors.message ? styles.errorInput : ''}
                 maxLength={2000}
               ></textarea>
@@ -422,41 +426,61 @@ const ContactPage = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.6 }}
         >
-          <h2>Other Ways to Connect</h2>
+          <h2>Connect With Us</h2>
           
-        <div className={styles.contactMethods}>
-          <a 
-            href="mailto:info@wexably.com" 
-            className={styles.contactMethod}
-            aria-label="Send email to info@wexably.com"
-          >
-            <div className={styles.methodIcon}>📧</div>
-            <h3>Email Us</h3>
-            <p>info@wexably.com</p>
-          </a>
-          
-          <a 
-            href="tel:+12893357376" 
-            className={styles.contactMethod}
-            aria-label="Call +1 (289) 335-7376"
-          >
-            <div className={styles.methodIcon}>📞</div>
-            <h3>Call Us</h3>
-            <p>+1 (289) 335-7376</p>
-          </a>
-          
-          <a 
-            href="https://share.google/iLttHmdWeAqweCILU" 
-            className={styles.contactMethod}
-            target="_blank" 
-            rel="noopener noreferrer"
-            aria-label="View our location serving the Greater Toronto Area"
-          >
-            <div className={styles.methodIcon}>📍</div>
-            <h3>Location</h3>
-            <p>Serving the Greater Toronto Area</p>
-          </a>
-        </div>
+          <div className={styles.contactMethods}>
+            <a 
+              href="mailto:info@wexably.com" 
+              className={styles.contactMethod}
+              aria-label="Send email to info@wexably.com"
+            >
+              <div className={styles.methodIcon}>📧</div>
+              <div className={styles.methodContent}>
+                <h3>Email</h3>
+                <p>info@wexably.com</p>
+              </div>
+            </a>
+            
+            <a 
+              href="tel:+12893357376" 
+              className={styles.contactMethod}
+              aria-label="Call +1 (289) 335-7376"
+            >
+              <div className={styles.methodIcon}>📞</div>
+              <div className={styles.methodContent}>
+                <h3>Phone</h3>
+                <p>+1 (289) 335-7376</p>
+              </div>
+            </a>
+            
+            <a 
+              href="https://www.instagram.com/wexably/"
+              className={styles.contactMethod}
+              target="_blank" 
+              rel="noopener noreferrer"
+              aria-label="Follow us on Instagram @wexably"
+            >
+              <div className={styles.methodIcon}>📸</div>
+              <div className={styles.methodContent}>
+                <h3>Instagram</h3>
+                <p>@wexably</p>
+              </div>
+            </a>
+            
+            <a 
+              href="https://share.google/iLttHmdWeAqweCILU" 
+              className={styles.contactMethod}
+              target="_blank" 
+              rel="noopener noreferrer"
+              aria-label="View our location serving the Greater Toronto Area"
+            >
+              <div className={styles.methodIcon}>📍</div>
+              <div className={styles.methodContent}>
+                <h3>Location</h3>
+                <p>Greater Toronto Area</p>
+              </div>
+            </a>
+          </div>
 
           {/* FAQ Section */}
           <div className={styles.faq}>

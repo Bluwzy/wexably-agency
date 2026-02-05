@@ -54,7 +54,7 @@
   font-size: 1.25rem;
   line-height: 1.6;
   color: #d1d5db;
-  max-width: 600px;
+  max-width: 650px;
   margin: 0 auto;
 }
 
@@ -73,6 +73,17 @@
   .contentWrapper {
     grid-template-columns: 1.5fr 1fr;
     padding: 3rem 2rem;
+  }
+}
+
+/* Mobile Reordering - Connect With Us appears first on mobile */
+@media (max-width: 991px) {
+  .formSection {
+    order: 2;
+  }
+  
+  .infoSection {
+    order: 1;
   }
 }
 
@@ -292,27 +303,26 @@
   font-weight: 700;
   margin-bottom: 1.5rem;
   color: white;
+  text-align: center;
 }
 
-/* Contact Methods */
+/* Contact Methods - Linktree Style */
 .contactMethods {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
   margin-bottom: 2.5rem;
 }
 
 .contactMethod {
-  text-align: center;
-  padding: 1.5rem 1rem;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 0.75rem;
-  transition: all 0.3s ease;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  cursor: pointer;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+  transition: all 0.3s ease;
   text-decoration: none;
   color: inherit;
   position: relative;
@@ -326,8 +336,8 @@
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
-  transition: left 0.5s ease;
+  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.15), transparent);
+  transition: left 0.6s ease;
 }
 
 .contactMethod:hover::before {
@@ -335,57 +345,62 @@
 }
 
 .contactMethod:hover {
-  background: rgba(255, 255, 255, 0.07);
-  transform: translateY(-3px);
-  border-color: rgba(59, 130, 246, 0.3);
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateX(5px);
+  border-color: rgba(59, 130, 246, 0.4);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
 .methodIcon {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  width: 60px;
-  height: 60px;
+  font-size: 1.75rem;
+  min-width: 50px;
+  height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(139, 92, 246, 0.15));
+  border-radius: 12px;
   transition: all 0.3s ease;
 }
 
 .contactMethod:hover .methodIcon {
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(139, 92, 246, 0.2));
-  transform: scale(1.1);
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.25), rgba(139, 92, 246, 0.25));
+  transform: scale(1.1) rotate(5deg);
 }
 
-.contactMethod h3 {
-  font-size: 1.2rem;
+.methodContent {
+  flex: 1;
+  text-align: left;
+}
+
+.methodContent h3 {
+  font-size: 1rem;
   font-weight: 600;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.25rem;
   color: white;
   transition: color 0.3s ease;
 }
 
-.contactMethod:hover h3 {
+.contactMethod:hover .methodContent h3 {
   color: #3b82f6;
 }
 
-.contactMethod p {
+.methodContent p {
   color: #d1d5db;
   margin: 0;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   transition: color 0.3s ease;
 }
 
-.contactMethod:hover p {
+.contactMethod:hover .methodContent p {
   color: #e5e7eb;
 }
-
 
 /* FAQ Section */
 .faq {
   margin-top: 2.5rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .faq h3 {
@@ -415,7 +430,7 @@
 }
 
 .faqQuestion h4 {
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   font-weight: 600;
   margin: 0;
   flex: 1;
@@ -483,13 +498,21 @@
   }
   
   .contactMethod {
-    padding: 1.2rem 0.8rem;
+    padding: 1rem 1.25rem;
   }
   
   .methodIcon {
-    width: 50px;
-    height: 50px;
+    min-width: 45px;
+    height: 45px;
     font-size: 1.5rem;
+  }
+
+  .methodContent h3 {
+    font-size: 0.95rem;
+  }
+
+  .methodContent p {
+    font-size: 0.85rem;
   }
 
   .faqQuestion h4 {
@@ -536,7 +559,8 @@
 /* Focus styles for accessibility */
 .formGroup input:focus-visible,
 .formGroup textarea:focus-visible,
-.submitButton:focus-visible {
+.submitButton:focus-visible,
+.contactMethod:focus-visible {
   outline: 2px solid #3b82f6;
   outline-offset: 2px;
 }

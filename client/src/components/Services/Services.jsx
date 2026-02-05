@@ -6,29 +6,32 @@ import './Services.css';
 const Services = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { 
-  once: true, 
-  amount: 0.1, // Reduced from 0.3 to 0.1 for mobile
-  rootMargin: '-50px 0px -50px 0px' // Added root margin
-});
+    once: true, 
+    amount: 0.1,
+    rootMargin: '-50px 0px -50px 0px'
+  });
 
   const services = useMemo(() => [
     {
-      icon: '🛡️',
-      title: 'Hacker-Proof Websites',
-      description: 'Beyond just great design. We build on secure, modern code with SSL, firewalls, and proactive monitoring to protect your business and customer data from day one.',
-      features: ['SSL Encryption', 'Firewall Protection', 'Proactive Monitoring', 'Secure Hosting']
+      icon: '🎥',
+      title: 'Content & Media Production',
+      description:
+        'Cinematic visuals for food, events, and brands. High-impact video and photography that stops the scroll and drives engagement.',
+      features: ['Food & product photography', 'Event & brand video', 'Social content creation', 'Reels & promo edits']
     },
     {
-      icon: '📈',
-      title: 'Lead-Generation Machines',
-      description: 'Websites that work 24/7. Optimized for local SEO and designed to convert visitors into calls, quotes, and bookings for your service business.',
-      features: ['Local SEO', 'Conversion Optimization', 'Contact Forms', 'Booking Systems']
+      icon: '✨',
+      title: 'Web Design & Development',
+      description:
+        'Beautiful, fast websites built to convert. From portfolios to full e-commerce, we design and code sites that work as hard as they look.',
+      features: ['Custom responsive design', 'E-commerce & booking systems', 'SEO & performance optimization', 'Secure hosting & SSL']
     },
     {
-      icon: '🔧',
-      title: 'Stress-Free Maintenance',
-      description: 'Sleep easy knowing your website is always online, always fast, and always secure with our monthly care plans. We handle the tech, you run your business.',
-      features: ['24/7 Monitoring', 'Regular Updates', 'Performance Optimization', 'Backups']
+      icon: '🚀',
+      title: 'Growth & Maintenance',
+      description:
+        'Ongoing support to keep your site fast, secure, and your content fresh. We handle updates so you can focus on your business.',
+      features: ['Monthly content updates', 'Security & performance monitoring', 'Analytics & optimization', 'Priority support']
     }
   ], []);
 
@@ -40,11 +43,11 @@ const Services = () => {
       
       <div className="container">
         <h2 className={`section-title fade-in-up ${isInView ? 'visible' : ''}`}>
-          How We Drive Your <span className="gradient-text">Digital Growth</span>
+          Premium Visuals & <span className="gradient-text">High-Performance Sites</span>
         </h2>
         
         <p className={`section-subtitle fade-in-up ${isInView ? 'visible' : ''}`}>
-          We combine cutting-edge technology with strategic marketing to deliver exceptional results
+          We create content that captivates and websites that convert—built for GTA brands ready to stand out.
         </p>
 
         <div className={`services-grid stagger-children ${isInView ? 'visible' : ''}`}>

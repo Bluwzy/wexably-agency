@@ -4,19 +4,23 @@
   transform: translateY(30px);
   transition: opacity 0.7s ease, transform 0.7s ease;
 }
+
 .fade-in-up.visible {
   opacity: 1;
   transform: translateY(0);
 }
+
 .stagger-children > * {
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.5s ease, transform 0.5s ease;
 }
+
 .stagger-children.visible > * {
   opacity: 1;
   transform: translateY(0);
 }
+
 .stagger-children.visible > *:nth-child(1) { transition-delay: 0.1s; }
 .stagger-children.visible > *:nth-child(2) { transition-delay: 0.2s; }
 .stagger-children.visible > *:nth-child(3) { transition-delay: 0.3s; }
@@ -31,39 +35,43 @@
   perspective: 1000px;
 }
 
-/* Reduced motion disables transitions */
+/* Keyframes */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-50px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(50px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.animate-float { animation: float 3s ease-in-out infinite; }
+.animate-fade-in { animation: fadeIn 0.8s ease-out forwards; }
+.animate-slide-left { animation: slideInLeft 0.8s ease-out forwards; }
+.animate-slide-right { animation: slideInRight 0.8s ease-out forwards; }
+
+/* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
   .fade-in-up,
   .stagger-children > * {
     transition: none !important;
     animation: none !important;
   }
+
   .fade-in-up.visible,
   .stagger-children.visible > * {
     opacity: 1;
     transform: none;
   }
 }
-
-/* Keyframes */
-@keyframes float {
-  0%, 100% { transform: translateY(0px);}
-  50% { transform: translateY(-10px);}
-}
-@keyframes fadeIn {
-  from { opacity: 0;}
-  to { opacity: 1;}
-}
-@keyframes slideInLeft {
-  from { opacity: 0; transform: translateX(-50px);}
-  to   { opacity: 1; transform: translateX(0);}
-}
-@keyframes slideInRight {
-  from { opacity: 0; transform: translateX(50px);}
-  to   { opacity: 1; transform: translateX(0);}
-}
-
-.animate-float      { animation: float 3s ease-in-out infinite;}
-.animate-fade-in    { animation: fadeIn 0.8s ease-out forwards;}
-.animate-slide-left { animation: slideInLeft 0.8s ease-out forwards;}
-.animate-slide-right{ animation: slideInRight 0.8s ease-out forwards;}

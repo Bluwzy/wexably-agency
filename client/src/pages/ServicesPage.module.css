@@ -47,10 +47,11 @@
   background: linear-gradient(135deg, #0a0a18 0%, #1a1a2e 50%, #16213e 100%);
   color: white;
   overflow: hidden;
-  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 89vh;
+  max-height: 100dvh;
 }
 
 .heroBackground {
@@ -234,69 +235,9 @@
   color: white;
 }
 
-/* For one-time projects, hide the billing toggle */
-.noToggle {
-  opacity: 0.5;
-  pointer-events: none;
-}
-
-/* Billing Toggle */
-.billingToggle {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  margin-bottom: 3rem;
-  color: #d1d5db;
-  font-weight: 500;
-}
-
-.billingToggle span {
-  cursor: pointer;
-  transition: color 0.3s ease;
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-}
-
-.billingToggle span.active {
-  color: white;
-  font-weight: 600;
-  background: rgba(59, 130, 246, 0.2);
-}
-
-.toggleSwitch {
-  width: 60px;
-  height: 30px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 15px;
-  position: relative;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.toggleSwitch:hover {
-  background: rgba(255, 255, 255, 0.15);
-}
-
-.toggleKnob {
-  width: 26px;
-  height: 26px;
-  background: #3b82f6;
-  border-radius: 50%;
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  transition: all 0.3s ease;
-}
-
-.toggleKnob.annual {
-  left: 32px;
-  background: #8b5cf6;
-}
-
 .servicesGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 2rem;
   max-width: 1200px;
   margin: 0 auto;
@@ -387,6 +328,107 @@
   font-weight: bold;
 }
 
+/* Add-on Section - Expandable */
+.addonSection {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.addonToggle {
+  width: 100%;
+  background: rgba(251, 191, 36, 0.15);
+  border: 1px solid rgba(251, 191, 36, 0.4);
+  border-radius: 0.75rem;
+  padding: 1rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: white;
+  font-size: 0.95rem;
+  text-align: left;
+}
+
+.addonToggle:hover {
+  background: rgba(251, 191, 36, 0.2);
+  border-color: rgba(251, 191, 36, 0.5);
+}
+
+.addonToggleIcon {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fbbf24;
+  min-width: 24px;
+  text-align: center;
+  line-height: 1;
+}
+
+.addonToggleText {
+  flex: 1;
+  color: #e5e7eb;
+}
+
+.addonToggleText strong {
+  color: #fbbf24;
+}
+
+.addonTogglePrice {
+  font-weight: 700;
+  color: #fbbf24;
+  font-size: 1.1rem;
+}
+
+.addonContent {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, opacity 0.3s ease, margin-top 0.3s ease;
+  opacity: 0;
+}
+
+.addonContent.addonExpanded {
+  max-height: 400px;
+  opacity: 1;
+  margin-top: 0.75rem;
+}
+
+.addonCard {
+  background: rgba(251, 191, 36, 0.1);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+}
+
+.addonDescription {
+  font-size: 0.9rem;
+  color: #d1d5db;
+  margin-bottom: 0.75rem;
+  line-height: 1.5;
+}
+
+.addonFeatures {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.addonFeatures li {
+  padding: 0.35rem 0;
+  padding-left: 1.25rem;
+  position: relative;
+  color: #e5e7eb;
+  font-size: 0.85rem;
+  border-bottom: none;
+}
+
+.addonFeatures li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #fbbf24;
+  font-weight: bold;
+}
+
 .ctaButton {
   background: linear-gradient(135deg, #3b82f6, #8b5cf6);
   color: white;
@@ -410,10 +452,96 @@
   display: block;
 }
 
+/* Pricing Details Section */
+.pricingDetailsSection {
+  padding: 6rem 0;
+  background: #0a0a18;
+  color: white;
+  position: relative;
+  z-index: 2;
+}
+
+.pricingDetailsSection h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 3rem;
+  color: white;
+}
+
+.pricingCard {
+  max-width: 800px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1.5rem;
+  padding: 2.5rem;
+}
+
+.pricingCard h3 {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  color: #3b82f6;
+}
+
+.pricingTiers {
+  margin-bottom: 2rem;
+}
+
+.pricingTier {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.pricingTier:last-child {
+  border-bottom: none;
+}
+
+.tierType {
+  color: #e5e7eb;
+  font-size: 1.05rem;
+}
+
+.tierPrice {
+  color: #10b981;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.talentNotice {
+  background: rgba(255, 59, 48, 0.1);
+  border: 1px solid rgba(255, 59, 48, 0.3);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  margin-top: 2rem;
+}
+
+.talentNotice h4 {
+  color: #ff6b6b;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.talentNotice ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.talentNotice li {
+  padding: 0.5rem 0;
+  color: #e5e7eb;
+  font-size: 1rem;
+}
+
 /* All Services Section */
 .allServices {
   padding: 6rem 0;
-  background: #0a0a18;
+  background: #0f172a;
   color: white;
   width: 100%;
   position: relative;
@@ -550,7 +678,7 @@
 /* Process Section */
 .processSection {
   padding: 6rem 0;
-  background: #0f172a;
+  background: #0a0a18;
   color: white;
   width: 100%;
   position: relative;
@@ -701,7 +829,7 @@ html {
     padding: 6rem 0 4rem;
   }
   
-  .statsSection, .featuredServices, .allServices, .processSection, .ctaSection {
+  .statsSection, .featuredServices, .pricingDetailsSection, .allServices, .processSection, .ctaSection {
     padding: 4rem 0;
   }
   
@@ -712,11 +840,6 @@ html {
   
   .servicesGrid, .processSteps {
     grid-template-columns: 1fr;
-  }
-  
-  .billingToggle {
-    flex-direction: column;
-    gap: 0.5rem;
   }
   
   .serviceItem {
@@ -741,6 +864,12 @@ html {
   .inquireButton {
     min-width: 90px;
     text-align: center;
+  }
+  
+  .pricingTier {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
   }
   
   .ctaButtons {
@@ -784,7 +913,7 @@ html {
     font-size: 2rem;
   }
   
-  .statsSection h2, .featuredServices h2, .allServices h2, .processSection h2, .ctaContent h2 {
+  .statsSection h2, .featuredServices h2, .pricingDetailsSection h2, .allServices h2, .processSection h2, .ctaContent h2 {
     font-size: 2rem;
   }
   
@@ -794,5 +923,9 @@ html {
   
   .statNumber {
     font-size: 2rem;
+  }
+  
+  .pricingCard {
+    padding: 1.5rem;
   }
 }
