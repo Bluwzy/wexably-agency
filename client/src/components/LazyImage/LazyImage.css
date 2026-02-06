@@ -1,0 +1,27 @@
+.lazy-load-image-background {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+}
+
+.lazy-load-image-background.blur {
+  filter: blur(10px);
+  transition: filter 0.3s;
+}
+
+.lazy-load-image-background.blur.lazy-load-image-loaded {
+  filter: blur(0);
+}
+
+.lazy-load-image-loaded {
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import food1 from '../../assets/FT02.jpg';
-import food2 from '../../assets/FT28.png';
-import food3 from '../../assets/GA18.png';
-import food4 from '../../assets/GA32.png';
-import event1 from '../../assets/GA40.png';
-import event2 from '../../assets/GA65.png';
-import event3 from '../../assets/H11.png';
-import event4 from '../../assets/HL35.jpg';
-import fashion1 from '../../assets/HL44.png';
-import fashion2 from '../../assets/L2.png';
-import fashion3 from '../../assets/M21.png';
-import fashion4 from '../../assets/MO2.png';
+import LazyImage from '../LazyImage/LazyImage';
+
+// Import optimized WebP images
+import food1 from '../../assets/optimized/FT02.webp';
+import food2 from '../../assets/optimized/FT28.webp';
+import food3 from '../../assets/optimized/GA18.webp';
+import food4 from '../../assets/optimized/GA32.webp';
+import event1 from '../../assets/optimized/GA40.webp';
+import event2 from '../../assets/optimized/GA65.webp';
+import event3 from '../../assets/optimized/H11.webp';
+import event4 from '../../assets/optimized/HL35.webp';
+import fashion1 from '../../assets/optimized/HL44.webp';
+import fashion2 from '../../assets/optimized/L2.webp';
+import fashion3 from '../../assets/optimized/M21.webp';
+import fashion4 from '../../assets/optimized/MO2.webp';
 import './FeaturedMedia.css';
 
 const FeaturedMedia = () => {
@@ -25,21 +28,21 @@ const FeaturedMedia = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setFoodIndex((prev) => (prev + 1) % foodImages.length);
-    }, 2000);
+    }, 3000);
     return () => clearInterval(interval);
   }, [foodImages.length]);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setEventIndex((prev) => (prev + 1) % eventImages.length);
-    }, 3000);
+    }, 3500);
     return () => clearInterval(interval);
   }, [eventImages.length]);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setFashionIndex((prev) => (prev + 1) % fashionImages.length);
-    }, 3000);
+    }, 4000);
     return () => clearInterval(interval);
   }, [fashionImages.length]);
 
@@ -55,26 +58,32 @@ const FeaturedMedia = () => {
 
         <div className="featured-media-grid">
           <div className="media-item">
-            <img
+            <LazyImage
               src={foodImages[foodIndex]}
-              alt="Food & Restaurants"
+              alt="Food & Restaurants Photography"
               className="media-image fade"
+              width={600}
+              height={400}
             />
             <span className="media-label">Food & Restaurants</span>
           </div>
           <div className="media-item">
-            <img
+            <LazyImage
               src={eventImages[eventIndex]}
-              alt="Events & Launches"
+              alt="Events & Launches Photography"
               className="media-image fade"
+              width={600}
+              height={400}
             />
             <span className="media-label">Events & Launches</span>
           </div>
           <div className="media-item">
-            <img
+            <LazyImage
               src={fashionImages[fashionIndex]}
-              alt="Fashion & Products"
+              alt="Fashion & Products Photography"
               className="media-image fade"
+              width={600}
+              height={400}
             />
             <span className="media-label">Fashion & Products</span>
           </div>

@@ -434,13 +434,13 @@ const ServicesPage = () => {
               </div>
             </div>
 
-            <div className={styles.talentNotice}>
+            {/* <div className={styles.talentNotice}>
               <h4>⚠️ Talent Rules</h4>
               <ul>
                 <li>Talent fees are <strong>never included</strong> in monthly pricing</li>
                 <li>Talent paid directly by client or reimbursed if managed by Wexably</li>
               </ul>
-            </div>
+            </div> */}
           </motion.div>
         </div>
       </section>

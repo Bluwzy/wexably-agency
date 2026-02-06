@@ -18,6 +18,7 @@
     "react-dom": "^19.1.1",
     "react-helmet": "^6.1.0",
     "react-icons": "^5.5.0",
+    "react-lazy-load-image-component": "^1.6.3",
     "react-router-dom": "^7.8.2",
     "react-scripts": "5.0.1",
     "stream-browserify": "^3.0.0",
@@ -30,6 +31,8 @@
     "start": "craco start",
     "build": "craco build && npm run post-build",
     "test": "craco test",
+    "eject": "react-scripts eject",
+    "optimize-images": "node scripts/compress-images.js",
     "post-build": "npm run generate-sitemap",
     "generate-sitemap": "node scripts/generate-sitemap.js"
   },
@@ -52,6 +55,11 @@
     ]
   },
   "devDependencies": {
-    "@craco/craco": "^7.1.0"
+    "@craco/craco": "^7.1.0",
+    "imagemin": "^9.0.1",
+    "imagemin-mozjpeg": "^10.0.0",
+    "imagemin-pngquant": "^10.0.0",
+    "imagemin-webp": "^8.0.0",
+    "sharp": "^0.34.5"
   }
 }

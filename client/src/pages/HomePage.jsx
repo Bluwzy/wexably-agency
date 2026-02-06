@@ -1,4 +1,3 @@
-// pages/HomePage.js
 import React from 'react';
 import Hero from '../components/Hero/Hero';
 import SEO from '../components/SEO/SEO';
@@ -15,21 +14,21 @@ const HomePage = () => {
   return (
     <>
       <SEO
-        title="Wexably Agency - Secure Growth Partner for GTA Businesses"
-        description="Professional website security and digital marketing for Toronto businesses. We build secure, fast websites that generate leads for plumbers, roofers, dentists, and service companies across the GTA."
-        keywords="website security Toronto, GTA web development, secure websites, digital marketing Toronto, cybersecurity services, web design GTA"
+        title="Wexably Agency - Web Design & Media Production | Toronto"
+        description="Professional web design, content creation, and media production for Toronto businesses. We build stunning websites and create compelling visual content that drives growth for restaurants, retailers, and service companies across the GTA."
+        keywords="web design Toronto, media production GTA, content creation, photography Toronto, videography services, website development Toronto"
         canonicalUrl="https://wexably.com/"
       />
-    <main className="homepage performance-optimized">
-      <Hero />
-      <Services />
-      <FeaturedMedia />
-      <Process />
-      <PortfolioShowcase />
-      <Testimonials />
-      <About />
-      <FinalCta />
-    </main>
+      <main className="homepage performance-optimized">
+        <Hero />
+        <Services />
+        <FeaturedMedia />
+        <Process />
+        <PortfolioShowcase />
+        <Testimonials />
+        <About />
+        <FinalCta />
+      </main>
     </>
   );
 };
