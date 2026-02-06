@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import LazyImage from '../LazyImage/LazyImage';
 
 // Import optimized WebP images
 import food1 from '../../assets/optimized/FT02.webp';
@@ -58,32 +57,29 @@ const FeaturedMedia = () => {
 
         <div className="featured-media-grid">
           <div className="media-item">
-            <LazyImage
+            <img
               src={foodImages[foodIndex]}
               alt="Food & Restaurants Photography"
-              className="media-image fade"
-              width={600}
-              height={400}
+              className="media-image"
+              loading="lazy"
             />
             <span className="media-label">Food & Restaurants</span>
           </div>
           <div className="media-item">
-            <LazyImage
+            <img
               src={eventImages[eventIndex]}
               alt="Events & Launches Photography"
-              className="media-image fade"
-              width={600}
-              height={400}
+              className="media-image"
+              loading="lazy"
             />
             <span className="media-label">Events & Launches</span>
           </div>
           <div className="media-item">
-            <LazyImage
+            <img
               src={fashionImages[fashionIndex]}
               alt="Fashion & Products Photography"
-              className="media-image fade"
-              width={600}
-              height={400}
+              className="media-image"
+              loading="lazy"
             />
             <span className="media-label">Fashion & Products</span>
           </div>

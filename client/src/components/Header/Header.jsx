@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import './Header.css';
 import WexablyLogo from '../../assets/optimized/Wexably-Logo.webp';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,6 +18,11 @@ const Header = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Scroll to top when route changes
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [location.pathname]);
 
   // Efficient preloading map
   const preloadMap = {
@@ -36,6 +43,27 @@ const Header = () => {
   const handleNavigation = (path, name) => {
     setIsMobileMenuOpen(false);
     preloadComponent(name.toLowerCase().replace(' ', '-'));
+    
+    // If already on the page, scroll to top
+    if (location.pathname === path) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  const handleLogoClick = (e) => {
+    e.preventDefault();
+    setIsMobileMenuOpen(false);
+    
+    if (location.pathname === '/') {
+      // Already on home, just scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      // Navigate to home and scroll to top
+      navigate('/');
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 100);
+    }
   };
 
   const menuItems = [
@@ -76,7 +104,7 @@ const Header = () => {
           whileHover={{ scale: 1.05 }}
           transition={{ type: "spring", stiffness: 400, damping: 10 }}
         >
-          <Link to="/" onClick={() => handleNavigation('/', 'home')}>
+          <Link to="/" onClick={handleLogoClick}>
             <img 
               src={WexablyLogo} 
               alt="Wexably Agency - Web Design & Media Production" 
@@ -100,7 +128,7 @@ const Header = () => {
               >
                 <Link 
                   to={item.path}
-                  className="nav-link"
+                  className={`nav-link ${location.pathname === item.path ? 'active' : ''}`}
                   onMouseEnter={() => preloadComponent(item.preloadKey)}
                   onClick={() => handleNavigation(item.path, item.name)}
                 >
@@ -157,6 +185,7 @@ const Header = () => {
                 >
                   <Link 
                     to={item.path}
+                    className={location.pathname === item.path ? 'active' : ''}
                     onClick={() => handleNavigation(item.path, item.name)}
                   >
                     {item.name}
