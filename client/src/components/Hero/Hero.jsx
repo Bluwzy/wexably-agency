@@ -75,7 +75,7 @@ const Hero = () => {
           className="hero-title"
           variants={itemVariants}
         >
-          Premium visuals & high‑performance websites for modern brands
+          Premium visuals & high performance websites for modern brands
         </motion.h1>
         
         <motion.p 
