@@ -3,6 +3,12 @@ import { useInView } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import './PortfolioShowcase.css';
 
+// Import logos
+import lasaniLogo from '../../assets/optimized/Client-Logo_0003_lasani-hero1.webp';
+import airportLimoLogo from '../../assets/optimized/Client-Logo_0000_Layer-1.webp';
+import riyadhLogo from '../../assets/optimized/Client-Logo_0001_Layer-2.webp';
+import torontoDentalLogo from '../../assets/optimized/Client-Logo_0002_Toronto-Dental-Specialists.webp';
+
 const PortfolioShowcase = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { 
@@ -15,34 +21,34 @@ const PortfolioShowcase = () => {
     {
       id: 1,
       name: "Lasani Enterprise",
-      industry: "E‑commerce & Product Media",
-      result: "40% lift in product inquiries",
-      logo: "LE",
-      color: "#3B82F6"
+      industry: "International Trade & Distribution",
+      result: "40% increase in qualified leads",
+      logo: lasaniLogo,
+      hasImage: true
     },
     {
       id: 2,
       name: "Airport Limo Toronto",
-      industry: "Luxury Transport & Brand Site",
-      result: "25% higher booking conversion",
-      logo: "ALT",
-      color: "#8B5CF6"
+      industry: "Transportation",
+      result: "25% higher conversion rate",
+      logo: airportLimoLogo,
+      hasImage: true
     },
     {
       id: 3,
-      name: "Riyadh Construction",
-      industry: "Construction Web Presence",
-      result: "30% faster lead responses",
-      logo: "RCG",
-      color: "#10B981"
+      name: "Riyadh Construction Group",
+      industry: "Construction",
+      result: "30% reduction in inquiry response time",
+      logo: riyadhLogo,
+      hasImage: true
     },
     {
       id: 4,
-      name: "Jeddah Properties",
-      industry: "Real Estate Visuals & Site",
-      result: "28% more qualified leads",
-      logo: "JLP",
-      color: "#F59E0B"
+      name: "Toronto Dental Specialists",
+      industry: "Healthcare",
+      result: "50% more online bookings",
+      logo: torontoDentalLogo,
+      hasImage: true
     }
   ], []);
 
@@ -68,8 +74,12 @@ const PortfolioShowcase = () => {
         <div className={`clients-grid stagger-children ${isInView ? 'visible' : ''}`}>
           {featuredClients.map((client) => (
             <div key={client.id} className="client-item">
-              <div className="client-logo" style={{ background: client.color }}>
-                {client.logo}
+              <div className={`client-logo ${client.hasImage ? 'with-image' : ''}`}>
+                {client.hasImage ? (
+                  <img src={client.logo} alt={`${client.name} logo`} />
+                ) : (
+                  <span>{client.logo}</span>
+                )}
               </div>
               <div className="client-info">
                 <h4>{client.name}</h4>

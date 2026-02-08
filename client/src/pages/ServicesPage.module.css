@@ -452,8 +452,8 @@
   display: block;
 }
 
-/* Pricing Details Section */
-.pricingDetailsSection {
+/* Build Your Own Plan Section */
+.buildYourOwnSection {
   padding: 6rem 0;
   background: #0a0a18;
   color: white;
@@ -461,15 +461,56 @@
   z-index: 2;
 }
 
-.pricingDetailsSection h2 {
+.buildYourOwnSection h2 {
   text-align: center;
   font-size: 2.5rem;
   font-weight: 700;
-  margin-bottom: 3rem;
+  margin-bottom: 1rem;
   color: white;
 }
 
-.pricingCard {
+.sectionSubtitle {
+  text-align: center;
+  color: #d1d5db;
+  font-size: 1.1rem;
+  margin-bottom: 3rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.buildToggle {
+  display: block;
+  margin: 0 auto 2rem;
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.buildToggle:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
+}
+
+.buildContent {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease, opacity 0.4s ease;
+  opacity: 0;
+}
+
+.buildContent.buildExpanded {
+  max-height: 1200px;
+  opacity: 1;
+}
+
+.buildCalculator {
   max-width: 800px;
   margin: 0 auto;
   background: rgba(255, 255, 255, 0.05);
@@ -478,64 +519,91 @@
   padding: 2.5rem;
 }
 
-.pricingCard h3 {
-  font-size: 1.5rem;
-  margin-bottom: 2rem;
+.calculatorSection {
+  margin-bottom: 2.5rem;
+}
+
+.calculatorSection h3 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
   color: #3b82f6;
 }
 
-.pricingTiers {
-  margin-bottom: 2rem;
+.pricingOption {
+  margin-bottom: 1.5rem;
 }
 
-.pricingTier {
+.pricingOption label {
+  display: block;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #e5e7eb;
+  margin-bottom: 0.5rem;
+}
+
+.dropdown {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.5rem;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dropdown:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.dropdown:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.dropdown option {
+  background: #1a1a2e;
+  color: white;
+}
+
+.totalSection {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.totalPrice {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.25rem 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 1rem;
 }
 
-.pricingTier:last-child {
-  border-bottom: none;
-}
-
-.tierType {
+.totalLabel {
+  font-size: 1.3rem;
+  font-weight: 600;
   color: #e5e7eb;
-  font-size: 1.05rem;
 }
 
-.tierPrice {
+.totalAmount {
+  font-size: 2.5rem;
+  font-weight: 800;
   color: #10b981;
-  font-weight: 700;
-  font-size: 1.1rem;
 }
 
-.talentNotice {
+.minimumWarning {
   background: rgba(255, 59, 48, 0.1);
   border: 1px solid rgba(255, 59, 48, 0.3);
-  border-radius: 1rem;
-  padding: 1.5rem;
-  margin-top: 2rem;
-}
-
-.talentNotice h4 {
   color: #ff6b6b;
-  margin-top: 0;
-  margin-bottom: 1rem;
-  font-size: 1.1rem;
-}
-
-.talentNotice ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.talentNotice li {
-  padding: 0.5rem 0;
-  color: #e5e7eb;
-  font-size: 1rem;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  text-align: center;
+  font-weight: 600;
+  margin-top: 1rem;
 }
 
 /* All Services Section */
@@ -829,7 +897,7 @@ html {
     padding: 6rem 0 4rem;
   }
   
-  .statsSection, .featuredServices, .pricingDetailsSection, .allServices, .processSection, .ctaSection {
+  .statsSection, .featuredServices, .buildYourOwnSection, .allServices, .processSection, .ctaSection {
     padding: 4rem 0;
   }
   
@@ -866,7 +934,11 @@ html {
     text-align: center;
   }
   
-  .pricingTier {
+  .buildCalculator {
+    padding: 1.5rem;
+  }
+  
+  .totalPrice {
     flex-direction: column;
     align-items: flex-start;
     gap: 0.5rem;
@@ -913,7 +985,7 @@ html {
     font-size: 2rem;
   }
   
-  .statsSection h2, .featuredServices h2, .pricingDetailsSection h2, .allServices h2, .processSection h2, .ctaContent h2 {
+  .statsSection h2, .featuredServices h2, .buildYourOwnSection h2, .allServices h2, .processSection h2, .ctaContent h2 {
     font-size: 2rem;
   }
   
@@ -925,7 +997,53 @@ html {
     font-size: 2rem;
   }
   
-  .pricingCard {
-    padding: 1.5rem;
+  .buildCalculator {
+    padding: 1.25rem;
   }
+  
+  .totalAmount {
+    font-size: 2rem;
+  }
+}
+
+/* Guardian Add-on Checkbox */
+.addonCheckbox {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(251, 191, 36, 0.2);
+}
+
+.addonCheckbox label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  padding: 0.75rem;
+  background: rgba(251, 191, 36, 0.05);
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.addonCheckbox label:hover {
+  background: rgba(251, 191, 36, 0.1);
+}
+
+.addonCheckbox input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color: #fbbf24;
+  border-radius: 4px;
+}
+
+.addonCheckbox span {
+  color: #e5e7eb;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+/* Checkbox focus state for accessibility */
+.addonCheckbox input[type="checkbox"]:focus {
+  outline: 2px solid #fbbf24;
+  outline-offset: 2px;
 }

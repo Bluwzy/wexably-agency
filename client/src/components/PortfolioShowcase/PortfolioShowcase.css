@@ -69,16 +69,36 @@
 }
 
 .client-logo {
-  width: 80px;
-  height: 80px;
+  width: 120px;
+  height: 120px;
   border-radius: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Dark background for white logos */
+.client-logo.with-image {
+  background: #1a1a2e;
+  padding: 1rem;
+}
+
+.client-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: brightness(1.1);
+}
+
+/* Fallback for text logos */
+.client-logo span {
   font-size: 1.8rem;
   font-weight: 700;
   color: white;
-  margin-bottom: 1.5rem;
 }
 
 .client-info h4 {
@@ -178,6 +198,7 @@
 
 .cta-button:hover {
   box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+  transform: translateY(-2px);
 }
 
 /* Responsive Design */
@@ -189,6 +210,11 @@
   .clients-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
+  }
+  
+  .client-logo {
+    width: 100px;
+    height: 100px;
   }
   
   .stats-grid {
@@ -204,6 +230,11 @@
 @media (max-width: 480px) {
   .clients-grid {
     grid-template-columns: 1fr;
+  }
+  
+  .client-logo {
+    width: 120px;
+    height: 120px;
   }
   
   .stats-grid {

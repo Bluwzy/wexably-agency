@@ -1,16 +1,81 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import styles from './ContactPage.module.css';
 import SEO from '../components/SEO/SEO';
 
 const ContactPage = () => {
+  const location = useLocation();
+  
+  // Parse URL parameters and generate initial message
+  const getInitialMessage = () => {
+    const params = new URLSearchParams(location.search);
+    const plan = params.get('plan');
+    const service = params.get('service');
+    const serviceName = params.get('name');
+    const servicePrice = params.get('price');
+    const addon = params.get('addon');
+    const addonName = params.get('addonName');
+    const addonPrice = params.get('addonPrice');
+    
+    // Custom Build Your Own Plan
+    if (plan === 'custom') {
+      const simpleVideos = params.get('simpleVideos') || '0';
+      const talentVideos = params.get('talentVideos') || '0';
+      const photos = params.get('photos') || '0';
+      const total = params.get('total') || '0';
+      
+      let message = "Hi! I'm interested in a custom monthly content plan:\n\n";
+      
+      if (simpleVideos !== '0') {
+        message += `• ${simpleVideos} Food-Based Simple Video${simpleVideos > 1 ? 's' : ''}\n`;
+      }
+      
+      if (talentVideos !== '0') {
+        message += `• ${talentVideos} Talent/Concept-Driven Video${talentVideos > 1 ? 's' : ''}\n`;
+      }
+      
+      if (photos !== '0') {
+        message += `• ${photos} Professional Photo${photos > 1 ? 's' : ''}\n`;
+      }
+      
+      message += `\nEstimated Monthly Total: $${total}\n\n`;
+      message += "I'd love to discuss this plan further and learn more about your services.";
+      
+      return message;
+    }
+    
+    // Specific Service Inquiry
+    if (service && serviceName) {
+      let message = `Hi! I'm interested in: ${serviceName}\n`;
+      
+      if (servicePrice) {
+        message += `Price Range: ${servicePrice}\n`;
+      }
+      
+      // Add Guardian Add-on if checked
+      if (addon === 'true' && addonName && addonPrice) {
+        message += `\n✅ Including: ${addonName}\n`;
+        message += `Add-on Price: ${addonPrice}\n`;
+        message += `\n📦 Complete Package: Website + Ongoing Maintenance & Security\n`;
+      }
+      
+      message += `\nI'd like to learn more about this service and discuss how it can help my business.`;
+      
+      return message;
+    }
+    
+    return '';
+  };
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     company: '',
-    message: ''
+    message: getInitialMessage()
   });
+  
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState('');
   const [submitStatus, setSubmitStatus] = useState('');
@@ -102,19 +167,15 @@ const ContactPage = () => {
     
     switch(fieldName) {
       case 'name':
-        // Only allow letters, spaces, and basic punctuation
         sanitized = value.replace(/[^a-zA-Z\s\-'.]/g, '');
         break;
       case 'email':
-        // Convert to lowercase and trim
         sanitized = value.toLowerCase().trim();
         break;
       case 'company':
-        // Allow alphanumeric and basic punctuation
         sanitized = value.replace(/[^a-zA-Z0-9\s\-&.,]/g, '');
         break;
       case 'message':
-        // Basic XSS prevention - remove script tags and event handlers
         sanitized = value
           .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
           .replace(/on\w+=/gi, '');
@@ -129,7 +190,6 @@ const ContactPage = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     
-    // 🛡️ SANITIZE INPUT AS USER TYPES
     const sanitizedValue = sanitizeInput(value, name);
     
     setFormData(prev => ({
@@ -137,7 +197,6 @@ const ContactPage = () => {
       [name]: sanitizedValue
     }));
     
-    // Clear error when user starts typing
     if (errors[name]) {
       setErrors(prev => ({
         ...prev,
@@ -163,7 +222,6 @@ const ContactPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    // Mark all fields as touched
     const allTouched = Object.keys(formData).reduce((acc, key) => {
       acc[key] = true;
       return acc;
@@ -174,7 +232,6 @@ const ContactPage = () => {
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       
-      // Scroll to first error
       const firstErrorField = Object.keys(newErrors)[0];
       const errorElement = document.querySelector(`[name="${firstErrorField}"]`);
       if (errorElement) {
@@ -185,7 +242,6 @@ const ContactPage = () => {
       return;
     }
     
-    // 🛡️ FINAL SANITIZATION BEFORE SUBMISSION
     const finalFormData = {
       name: sanitizeInput(formData.name, 'name'),
       email: sanitizeInput(formData.email, 'email'),
@@ -193,13 +249,11 @@ const ContactPage = () => {
       message: sanitizeInput(formData.message, 'message')
     };
     
-    // If validation passes, proceed with submission
     setIsSubmitting(true);
     setSubmitMessage('');
     setSubmitStatus('');
     
     try {
-      // 🚀 FIXED: Use the correct API_BASE_URL
       const response = await axios.post(`${API_BASE_URL}/api/contact`, finalFormData, {
         timeout: 15000,
         headers: {
@@ -220,11 +274,9 @@ const ContactPage = () => {
     } catch (error) {
       console.error('Form submission error:', error);
       
-      // 🛡️ USER-FRIENDLY ERROR MESSAGES
       if (error.code === 'ECONNABORTED') {
         setSubmitMessage('Request timeout. Please check your connection and try again.');
       } else if (error.response) {
-        // Server responded with error status
         if (error.response.status === 429) {
           setSubmitMessage('Too many submission attempts. Please try again in 15 minutes.');
         } else if (error.response.data && error.response.data.error) {
@@ -233,10 +285,8 @@ const ContactPage = () => {
           setSubmitMessage('Server error. Please try again later.');
         }
       } else if (error.request) {
-        // Network error
         setSubmitMessage(`Cannot connect to server. Please check if ${API_BASE_URL} is accessible.`);
       } else {
-        // Other errors
         setSubmitMessage('An unexpected error occurred. Please try again.');
       }
       
